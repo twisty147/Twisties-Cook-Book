@@ -17,26 +17,39 @@
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="blue-grey darken-4">
-        <div class="nav-wrapper container">
+    <header>
+        <!-- Navbar -->
+        <nav class="blue-grey darken-4">
+            <div class="nav-wrapper container">
 
-            <a href="/" class="brand-logo">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Twisties Cookbook Logo"
-                    style="height: 50px;">
-                Twisties Cookbook
-            </a>
-            <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
-            </ul>
-        </div>
-    </nav>
+                <a href="/" class="brand-logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Twisties Cookbook Logo"
+                        style="height: 50px;">
+                    <span class="brand-text">Twisties Cookbook</span>
+                </a>
+                <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="{{ url_for('get_index') }}">Home</a></li>
+                    <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
+                    <li><a href="">Contact</a></li>
+                    <li><a href="">Register</a></li>
+                    <li><a href="">Log in</a></li>
+                </ul>
+            </div>
+        </nav>
 
-    <!-- Mobile Sidebar -->
-    <ul class="sidenav" id="mobile-menu">
-        <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
-    </ul>
+        <!-- Mobile Sidebar -->
+        <ul class="sidenav center-align" id="mobile-menu">
+            <li>
+                <h4>Menu</h4>
+            </li>
+            <li><a href="{{ url_for('get_index') }}">Home</a></li>
+            <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
+            <li><a href="">Contact</a></li>
+            <li><a href="">Register</a></li>
+            <li><a href="">Log in</a></li>
+        </ul>
+    </header>
 
     <!-- Main Content -->
     <main class="container">
@@ -47,42 +60,42 @@
         </div>
     </main>
 
-<!-- Footer -->
-<footer class="page-footer blue-grey darken-4">
-    <div class="container">
-        <div class="row">
-            <!-- Company Info -->
-            <div class="col l6 s12">
-                <h5 class="white-text">Twisties Cookbook</h5>
-                <p class="grey-text text-lighten-4">Your ultimate destination for discovering and sharing recipes.
-                </p>
-            </div>
-            <!-- Quick Links -->
-            <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Quick Links</h5>
-                <ul>
-                    <li><a class="grey-text text-lighten-3" href="{{ url_for('get_recipes') }}">Recipes</a></li>
-                    <li><a class="grey-text text-lighten-3" href="">Contact</a></li>
-                    <li><a class="grey-text text-lighten-3" href="">Register</a></li>
-                    <li><a class="grey-text text-lighten-3" href="">Log in</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- Footer Bottom -->
-    <div class="footer-copyright blue-grey darken-3">
+    <!-- Footer -->
+    <footer class="page-footer blue-grey darken-4">
         <div class="container">
-            <span>© 2024 Twisties Cookbook</span>
-            <a class="grey-text text-lighten-4 right" href="#!">Terms & Conditions</a>
+            <div class="row">
+                <!-- Company Info -->
+                <div class="col l6 s12">
+                    <h5 class="white-text">Twisties Cookbook</h5>
+                    <p class="grey-text text-lighten-4">Your ultimate destination for discovering and sharing recipes.
+                    </p>
+                </div>
+                <!-- Quick Links -->
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Quick Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="{{ url_for('get_recipes') }}">Recipes</a></li>
+                        <li><a class="grey-text text-lighten-3" href="">Contact</a></li>
+                        <li><a class="grey-text text-lighten-3" href="">Register</a></li>
+                        <li><a class="grey-text text-lighten-3" href="">Log in</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-</footer>
+        <!-- Footer Bottom -->
+        <div class="footer-copyright blue-grey darken-3">
+            <div class="container">
+                <span>© 2024 Twisties Cookbook</span>
+                <a class="grey-text text-lighten-4 right" href="#!">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
 
     <!-- Materialize JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- Initialize Materialize Components -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('.sidenav');
             var instances = M.Sidenav.init(elems);
         });

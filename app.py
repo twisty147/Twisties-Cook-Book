@@ -22,11 +22,37 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
-@app.route("/")
+@app.route('/')
+def get_index():
+       return render_template('index.html')
+
+@app.route('/recipe/<recipe_id>')
+def get_recipe(recipe_id):
+   return render_template('recipe_detail.html')
+
+
+
 @app.route('/recipes', methods=['GET'])
 def get_recipes():
     recipes = mongo.db.recipesCollection.find()
     return render_template("recipes.html", recipes=recipes)
+
+
+@app.route('/contact')
+def get_contact():
+    return render_template('contact.html')
+
+
+@app.route('/register')
+def get_register():
+    return render_template('register.html')
+
+
+@app.route('/login')
+def get_login():
+    return render_template('login.html')
+
+
 
 
 if __name__ == "__main__":
