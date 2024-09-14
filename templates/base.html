@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ title }} - Twisties Cookbook</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <!-- Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <!-- Custom Styles (Optional) -->
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    <!-- Favicon (Optional) -->
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="blue-grey darken-4">
+        <div class="nav-wrapper container">
+
+            <a href="/" class="brand-logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Twisties Cookbook Logo"
+                    style="height: 50px;">
+                Twisties Cookbook
+            </a>
+            <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar -->
+    <ul class="sidenav" id="mobile-menu">
+        <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
+    </ul>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="section">
+            {% block content %}
+            <!-- Page-specific content will be injected here -->
+            {% endblock %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="page-footer blue-grey darken-4">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Twisties Cookbook</h5>
+                    <p class="grey-text text-lighten-4">Your ultimate destination for discovering and sharing recipes.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Quick Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="{{ url_for('get_recipes') }}">Recipes</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2024 Twisties Cookbook
+                <a class="grey-text text-lighten-4 right" href="#!">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Initialize Materialize Components -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+        });
+    </script>
+</body>
+
+</html>
