@@ -10,9 +10,9 @@
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <!-- Materialize CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-    <!-- Custom Styles (Optional) -->
+    <!-- Custom Styles  -->
     <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
-    <!-- Favicon (Optional) -->
+    <!-- Favicon  -->
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
 </head>
 
@@ -47,30 +47,36 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="page-footer blue-grey darken-4">
+<!-- Footer -->
+<footer class="page-footer blue-grey darken-4">
+    <div class="container">
+        <div class="row">
+            <!-- Company Info -->
+            <div class="col l6 s12">
+                <h5 class="white-text">Twisties Cookbook</h5>
+                <p class="grey-text text-lighten-4">Your ultimate destination for discovering and sharing recipes.
+                </p>
+            </div>
+            <!-- Quick Links -->
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Quick Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="{{ url_for('get_recipes') }}">Recipes</a></li>
+                    <li><a class="grey-text text-lighten-3" href="">Contact</a></li>
+                    <li><a class="grey-text text-lighten-3" href="">Register</a></li>
+                    <li><a class="grey-text text-lighten-3" href="">Log in</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Bottom -->
+    <div class="footer-copyright blue-grey darken-3">
         <div class="container">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="white-text">Twisties Cookbook</h5>
-                    <p class="grey-text text-lighten-4">Your ultimate destination for discovering and sharing recipes.</p>
-                </div>
-                <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Quick Links</h5>
-                    <ul>
-                        <li><a class="grey-text text-lighten-3" href="{{ url_for('get_recipes') }}">Recipes</a></li>
-                        
-                    </ul>
-                </div>
-            </div>
+            <span>© 2024 Twisties Cookbook</span>
+            <a class="grey-text text-lighten-4 right" href="#!">Terms & Conditions</a>
         </div>
-        <div class="footer-copyright">
-            <div class="container">
-                © 2024 Twisties Cookbook
-                <a class="grey-text text-lighten-4 right" href="#!">Terms & Conditions</a>
-            </div>
-        </div>
-    </footer>
+    </div>
+</footer>
 
     <!-- Materialize JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
