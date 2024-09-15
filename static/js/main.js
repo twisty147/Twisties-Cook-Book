@@ -17,4 +17,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize Materialize sidenav
     var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems);
+
+    // Auto-hide flash messages after 5 seconds
+    setTimeout(function () {
+        let messages = document.querySelectorAll('.card-panel');
+        messages.forEach(function (message) {
+            message.style.display = 'none';
+        });
+    }, 5000); // 5000 milliseconds = 5 seconds
 });
