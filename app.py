@@ -24,7 +24,11 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def get_index():
-       return render_template('index.html')
+    # Reference the collection from the database
+    recipesCollection = mongo.db.recipesCollection 
+    # Query to get the last 9 inserted recipes, sorted by _id in descending order
+    recipes = recipesCollection.find().sort('_id', -1).limit(9)
+    return render_template('index.html', recipes=recipes)
 
 @app.route('/recipe/<recipe_id>')
 def get_recipe(recipe_id):

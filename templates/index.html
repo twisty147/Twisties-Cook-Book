@@ -16,4 +16,37 @@
         </div>
     </div>
 </div>
+
+<!-- Featured Recipes Section -->
+<div class="section">
+    <div class="container">
+        <h4 class="center-align">Featured Recipes</h4>
+        <div class="row">
+            {% for recipe in recipes %}
+            <div class="col s12 m6 l4"> <!-- m6 for 2 columns on medium screens, l4 for 3 columns on large screens -->
+                <a href="{{ url_for('get_recipe', recipe_id=recipe['_id']) }}" class="card-link">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ recipe['image_url'] }}" alt="{{ recipe['title'] }}">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">{{ recipe['title'] }}</span>
+                            <p>{{ recipe['prep_time'] }} | {{ recipe['cook_time'] }} | Serves: {{ recipe['servings'] }}</p>
+                        </div>
+                        <div class="card-action">
+                            <span class="teal-text">View Recipe</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Add a new row every 3rd recipe -->
+            {% if loop.index % 3 == 0 and not loop.last %}
+            </div>
+            <div class="row">
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}
