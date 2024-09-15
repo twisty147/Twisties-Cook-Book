@@ -5,6 +5,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
+
 if os.path.exists("env.py"):
     import env
 
@@ -17,9 +18,6 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 
-
-
-
 mongo = PyMongo(app)
 
 @app.route('/')
@@ -29,6 +27,7 @@ def get_index():
     # Query to get the last 9 inserted recipes, sorted by _id in descending order
     recipes = recipesCollection.find().sort('_id', -1).limit(9)
     return render_template('index.html', recipes=recipes)
+
 
 @app.route('/recipe/<recipe_id>')
 def get_recipe(recipe_id):
@@ -47,6 +46,7 @@ def get_recipe(recipe_id):
     recipe = recipesCollection.find_one_or_404({'_id': recipe_id})
     # Pass the recipe and from_page parameter to the template
     return render_template('recipe_detail.html', recipe=recipe, from_page=from_page)
+
 
 @app.route('/recipes/tag/<tag>')
 def get_recipes_by_tag(tag):
@@ -87,10 +87,31 @@ def get_recipes():
     return render_template('recipes.html', recipes=recipes, page=page, total_pages=total_pages, search_term=search_term)
 
 
-
-
-@app.route('/contact')
+@app.route('/contact', methods=['GET', 'POST'])
 def get_contact():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        message = request.form.get('message')
+        
+        # Validation check for empty fields
+        if not name or not email or not message:
+            flash('All fields are required!', 'error')  # Error message for empty fields
+            return redirect(url_for('get_contact'))
+        
+        # Insert the form data into MongoDB
+        contact_message = {
+            'name': name,
+            'email': email,
+            'message': message
+        }
+        mongo.db.contactMessages.insert_one(contact_message)  # Insert into 'contactMessages' collection
+        
+        # Success feedback message
+        flash('Your message has been sent successfully!', 'success')
+        return redirect(url_for('get_contact'))
+
+    # Render the contact page on GET request
     return render_template('contact.html')
 
 
@@ -102,9 +123,6 @@ def get_register():
 @app.route('/login')
 def get_login():
     return render_template('login.html')
-
-
-
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
