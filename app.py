@@ -32,7 +32,19 @@ def get_index():
 
 @app.route('/recipe/<recipe_id>')
 def get_recipe(recipe_id):
-   return render_template('recipe_detail.html')
+    # Reference the collection from the database
+    recipesCollection = mongo.db.recipesCollection
+    try:
+        # Convert recipe_id to ObjectId
+        recipe_id = ObjectId(recipe_id)
+    except Exception as e:
+        # Handle invalid ObjectId format
+        return f"Invalid recipe ID format: {e}", 400
+
+    # Query to find the recipe by its ID
+    recipe = recipesCollection.find_one_or_404({'_id': recipe_id})
+    return render_template('recipe_detail.html', recipe=recipe)
+
 
 
 
