@@ -57,15 +57,33 @@ def get_recipes_by_tag(tag):
     return render_template('recipes_by_tag.html', recipes=recipes, tag=tag)
 
 
-@app.route('/recipes')
+@app.route('/recipes', methods=['GET'])
 def get_recipes():
     page = request.args.get('page', 1, type=int)  # Get the current page number
     per_page = 6  # Show 6 recipes per page (2 rows of 3 cards each)
-    recipes = mongo.db.recipesCollection.find().skip((page - 1) * per_page).limit(per_page)
-    total_recipes = mongo.db.recipesCollection.count_documents({})
-    total_pages = (total_recipes + per_page - 1) // per_page  # Calculate total number of pages
-    return render_template('recipes.html', recipes=recipes, page=page, total_pages=total_pages)
 
+    # Get search term from the request
+    search_term = request.args.get('search', '')
+
+    # Create a query that matches the search term in various fields
+    query = {
+        '$or': [
+            {'title': {'$regex': search_term, '$options': 'i'}},
+            {'ingredients': {'$regex': search_term, '$options': 'i'}},
+            {'cuisine': {'$regex': search_term, '$options': 'i'}},
+            {'tags': {'$regex': search_term, '$options': 'i'}},
+            {'required_tools': {'$regex': search_term, '$options': 'i'}}
+        ]
+    }
+
+    # Get the total number of matching recipes for pagination
+    total_recipes = mongo.db.recipesCollection.count_documents(query)
+    total_pages = (total_recipes + per_page - 1) // per_page  # Calculate total number of pages
+
+    # Get the filtered and paginated recipes
+    recipes = mongo.db.recipesCollection.find(query).skip((page - 1) * per_page).limit(per_page)
+
+    return render_template('recipes.html', recipes=recipes, page=page, total_pages=total_pages, search_term=search_term)
 
 
 
