@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Recipe Detail Section -->
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <!-- Recipe Title and Image -->
+            <div class="col s12 m6 l5">
+                <h1 class="center-align">{{ recipe.title }}</h1>
+                <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}" class="responsive-img z-depth-2">
+            </div>
+            <!-- Recipe Details -->
+            <div class="col s12 m6 l7">
+                <div class="card-panel teal lighten-4">
+                    <h5>Recipe Details</h5>
+                    <p><strong>Prep Time:</strong> {{ recipe.prep_time }}</p>
+                    <p><strong>Cook Time:</strong> {{ recipe.cook_time }}</p>
+                    <p><strong>Servings:</strong> {{ recipe.servings }}</p>
+                    <p><strong>Cuisine:</strong> {{ recipe.cuisine }}</p>
+                </div>
+                <div class="card-panel grey lighten-4">
+                    <h5>Ingredients</h5>
+                    <ul class="collection">
+                        {% for ingredient in recipe.ingredients %}
+                        <li class="collection-item">{{ ingredient }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="card-panel grey lighten-4">
+                    <h5>Preparation Steps</h5>
+                    <ul class="browser-default">
+                        {% for step in recipe.preparation_steps %}
+                        <li>{{ step }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="card-panel grey lighten-4">
+                    <h5>Required Tools</h5>
+                    <ul class="collection">
+                        {% for tool in recipe.required_tools %}
+                        <li class="collection-item">{{ tool }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="card-panel teal lighten-4">
+                    <h5>Tags</h5>
+                    <div>
+                        {% for tag in recipe.tags %}
+                        <a class="">{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align">
+                <a href="{{ url_for('get_index') }}" class="btn-large waves-effect waves-light teal darken-1">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
