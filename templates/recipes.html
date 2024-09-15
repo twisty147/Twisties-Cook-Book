@@ -1,16 +1,54 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="section">
     <div class="container">
-        <h1>Recipes</h1>
-        <ul class="collection">
+        <h4 class="center-align">All Recipes</h4>
+        <div class="row">
             {% for recipe in recipes %}
-            <li class="collection-item">
-                <h5>{{ recipe.title }}</h5>
-                <p>Preparation Time: {{ recipe.prep_time }}</p>
-                <p>Cooking Time: {{ recipe.cook_time }}</p>
-                <p>Servings: {{ recipe.servings }}</p>
+            <div class="col s12 m6 l4">
+                <a href="{{ url_for('get_recipe', recipe_id=recipe['_id'], from_page='recipes') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ recipe['image_url'] }}" alt="{{ recipe['title'] }}">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">{{ recipe['title'] }}</span>
+                            <p>{{ recipe['cook_time'] }} | Serves: {{ recipe['servings'] }}</p>
+                        </div>
+                        <div class="card-action">
+                            <span class="teal-text">View Recipe</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Add a new row every 3rd recipe -->
+            {% if loop.index % 3 == 0 and not loop.last %}
+        </div>
+        <div class="row">
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Pagination Controls -->
+        <ul class="pagination center-align">
+            <!-- Previous Page Link -->
+            <li class="{% if page == 1 %}disabled{% endif %}">
+                <a href="{{ url_for('get_recipes', page=page-1) }}"><i class="material-icons">chevron_left</i></a>
+            </li>
+
+            <!-- Page Number Links -->
+            {% for i in range(1, total_pages + 1) %}
+            <li class="{% if i == page %}active teal{% endif %}">
+                <a href="{{ url_for('get_recipes', page=i) }}">{{ i }}</a>
             </li>
             {% endfor %}
+
+            <!-- Next Page Link -->
+            <li class="{% if page == total_pages %}disabled{% endif %}">
+                <a href="{{ url_for('get_recipes', page=page+1) }}"><i class="material-icons">chevron_right</i></a>
+            </li>
         </ul>
     </div>
-      {% endblock %}
+</div>
+{% endblock %}

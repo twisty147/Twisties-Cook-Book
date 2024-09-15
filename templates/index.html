@@ -24,7 +24,7 @@
         <div class="row">
             {% for recipe in recipes %}
             <div class="col s12 m6 l4"> <!-- m6 for 2 columns on medium screens, l4 for 3 columns on large screens -->
-                <a href="{{ url_for('get_recipe', recipe_id=recipe['_id']) }}" class="card-link">
+                <a href="{{ url_for('get_recipe', recipe_id=recipe['_id'], from_page='home') }}" class="card-link">
                     <div class="card">
                         <div class="card-image">
                             <img src="{{ recipe['image_url'] }}" alt="{{ recipe['title'] }}">

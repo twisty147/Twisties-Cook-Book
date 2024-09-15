@@ -34,6 +34,8 @@ def get_index():
 def get_recipe(recipe_id):
     # Reference the collection from the database
     recipesCollection = mongo.db.recipesCollection
+    # Get the "from_page" query parameter
+    from_page = request.args.get('from_page', 'home')  # Default is 'home' if not specified
     try:
         # Convert recipe_id to ObjectId
         recipe_id = ObjectId(recipe_id)
@@ -43,7 +45,8 @@ def get_recipe(recipe_id):
 
     # Query to find the recipe by its ID
     recipe = recipesCollection.find_one_or_404({'_id': recipe_id})
-    return render_template('recipe_detail.html', recipe=recipe)
+    # Pass the recipe and from_page parameter to the template
+    return render_template('recipe_detail.html', recipe=recipe, from_page=from_page)
 
 @app.route('/recipes/tag/<tag>')
 def get_recipes_by_tag(tag):
@@ -54,11 +57,16 @@ def get_recipes_by_tag(tag):
     return render_template('recipes_by_tag.html', recipes=recipes, tag=tag)
 
 
-
-@app.route('/recipes', methods=['GET'])
+@app.route('/recipes')
 def get_recipes():
-    recipes = mongo.db.recipesCollection.find()
-    return render_template("recipes.html", recipes=recipes)
+    page = request.args.get('page', 1, type=int)  # Get the current page number
+    per_page = 6  # Show 6 recipes per page (2 rows of 3 cards each)
+    recipes = mongo.db.recipesCollection.find().skip((page - 1) * per_page).limit(per_page)
+    total_recipes = mongo.db.recipesCollection.count_documents({})
+    total_pages = (total_recipes + per_page - 1) // per_page  # Calculate total number of pages
+    return render_template('recipes.html', recipes=recipes, page=page, total_pages=total_pages)
+
+
 
 
 @app.route('/contact')

@@ -52,13 +52,16 @@
                         {% endfor %}
                     </div>
                 </div>
-                
-
             </div>
         </div>
         <div class="row">
             <div class="col s12 center-align">
-                <a href="{{ url_for('get_index') }}" class="btn-large waves-effect waves-light teal darken-1">Back to Home</a>
+                <!-- Dynamic Back Button -->
+                {% if from_page == 'home' %}
+                    <a href="{{ url_for('get_index') }}" class="btn-large waves-effect waves-light teal darken-1">Back to Home</a>
+                {% elif from_page == 'recipes' %}
+                    <a href="{{ url_for('get_recipes') }}" class="btn-large waves-effect waves-light teal darken-1">Back to Recipes</a>
+                {% endif %}
             </div>
         </div>
     </div>
