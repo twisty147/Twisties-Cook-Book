@@ -43,14 +43,17 @@
                         {% endfor %}
                     </ul>
                 </div>
+                
                 <div class="card-panel teal lighten-4">
                     <h5>Tags</h5>
                     <div>
                         {% for tag in recipe.tags %}
-                        <a class="btn-small teal darken-1 waves-effect waves-light">{{ tag }}</a>
+                        <a href="{{ url_for('get_recipes_by_tag', tag=tag) }}" class="btn-small teal darken-1 waves-effect waves-light">{{ tag }}</a>
                         {% endfor %}
                     </div>
                 </div>
+                
+
             </div>
         </div>
         <div class="row">

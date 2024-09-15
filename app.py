@@ -45,6 +45,13 @@ def get_recipe(recipe_id):
     recipe = recipesCollection.find_one_or_404({'_id': recipe_id})
     return render_template('recipe_detail.html', recipe=recipe)
 
+@app.route('/recipes/tag/<tag>')
+def get_recipes_by_tag(tag):
+    # Reference the collection from the database
+    recipesCollection = mongo.db.recipesCollection
+    # Query to find recipes with the selected tag
+    recipes = recipesCollection.find({'tags': tag})
+    return render_template('recipes_by_tag.html', recipes=recipes, tag=tag)
 
 
 
