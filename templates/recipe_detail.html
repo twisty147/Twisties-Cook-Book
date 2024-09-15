@@ -43,12 +43,13 @@
                         {% endfor %}
                     </ul>
                 </div>
-                
+
                 <div class="card-panel teal lighten-4">
                     <h5>Tags</h5>
                     <div>
                         {% for tag in recipe.tags %}
-                        <a href="{{ url_for('get_recipes_by_tag', tag=tag) }}" class="btn-small teal darken-1 waves-effect waves-light">{{ tag }}</a>
+                        <a href="{{ url_for('get_recipes_by_tag', tag=tag) }}"
+                            class="btn-small teal darken-1 waves-effect waves-light">{{ tag }}</a>
                         {% endfor %}
                     </div>
                 </div>
@@ -58,9 +59,11 @@
             <div class="col s12 center-align">
                 <!-- Dynamic Back Button -->
                 {% if from_page == 'home' %}
-                    <a href="{{ url_for('get_index') }}" class="btn-large waves-effect waves-light teal darken-1">Back to Home</a>
+                <a href="{{ url_for('get_index') }}" class="btn-large waves-effect waves-light teal darken-1">Back to
+                    Home</a>
                 {% elif from_page == 'recipes' %}
-                    <a href="{{ url_for('get_recipes') }}" class="btn-large waves-effect waves-light teal darken-1">Back to Recipes</a>
+                <a href="{{ url_for('get_recipes') }}" class="btn-large waves-effect waves-light teal darken-1">Back to
+                    Recipes</a>
                 {% endif %}
             </div>
         </div>

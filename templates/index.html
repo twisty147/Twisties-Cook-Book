@@ -7,7 +7,8 @@
         <div class="header-background">
             <h1 class="header center teal-text text-darken-4">Welcome to Twisties Cookbook</h1>
             <div class="row center">
-                <h5 class="header col s12 light"><i>Your ultimate destination for discovering and sharing recipes.</i></h5>
+                <h5 class="header col s12 light"><i>Your ultimate destination for discovering and sharing recipes.</i>
+                </h5>
                 <div class="row center">
                     <a href="{{ url_for('get_recipes') }}"
                         class="btn-large waves-effect waves-light teal darken-1">Explore Recipes</a>
@@ -42,8 +43,8 @@
 
             <!-- Add a new row every 3rd recipe -->
             {% if loop.index % 3 == 0 and not loop.last %}
-            </div>
-            <div class="row">
+        </div>
+        <div class="row">
             {% endif %}
             {% endfor %}
         </div>

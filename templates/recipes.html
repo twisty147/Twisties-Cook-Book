@@ -7,11 +7,10 @@
         <!-- Hidden element to store the URL -->
         <div id="urls" data-recipes-url="{{ url_for('get_recipes') }}" style="display: none;"></div>
 
-
         <!-- Search Form -->
         <form id="search-form" method="get" action="{{ url_for('get_recipes') }}" class="row" style="display: block;">
             <div class="input-field col s12">
-                <input id="search" name="search" type="text" value="{{ request.args.get('search', '') }}">
+                <input id="search" name="search" type="text" value="{{ search_term }}">
                 <label for="search">Search by Tag, Ingredient, Cuisine, or Tool</label>
             </div>
             <div class="input-field col s12">
@@ -22,6 +21,9 @@
 
         <!-- Display Recipes -->
         <div class="row">
+            {% if recipes | length == 0 %}
+            <p class="center-align">No records found.</p> <!-- Message displayed when no recipes are found -->
+            {% else %}
             {% for recipe in recipes %}
             <div class="col s12 m6 l4">
                 <a href="{{ url_for('get_recipe', recipe_id=recipe['_id'], from_page='recipes') }}" class="card-link">
@@ -46,30 +48,27 @@
         <div class="row">
             {% endif %}
             {% endfor %}
+            {% endif %}
         </div>
 
         <!-- Pagination Controls -->
         <ul class="pagination center-align">
             <!-- Previous Page Link -->
             <li class="{% if page == 1 %}disabled{% endif %}">
-                <a
-                    href="{{ url_for('get_recipes', page=page-1, search=request.args.get('search', ''), ingredients=request.args.get('ingredients', ''), cuisine=request.args.get('cuisine', ''), tags=request.args.get('tags', ''), required_tools=request.args.get('required_tools', '')) }}"><i
+                <a href="{{ url_for('get_recipes', page=page-1, search=search_term) }}"><i
                         class="material-icons">chevron_left</i></a>
             </li>
 
             <!-- Page Number Links -->
             {% for i in range(1, total_pages + 1) %}
             <li class="{% if i == page %}active teal{% endif %}">
-                <a
-                    href="{{ url_for('get_recipes', page=i, search=request.args.get('search', ''), ingredients=request.args.get('ingredients', ''), cuisine=request.args.get('cuisine', ''), tags=request.args.get('tags', ''), required_tools=request.args.get('required_tools', '')) }}">{{
-                    i }}</a>
+                <a href="{{ url_for('get_recipes', page=i, search=search_term) }}">{{ i }}</a>
             </li>
             {% endfor %}
 
             <!-- Next Page Link -->
             <li class="{% if page == total_pages %}disabled{% endif %}">
-                <a
-                    href="{{ url_for('get_recipes', page=page+1, search=request.args.get('search', ''), ingredients=request.args.get('ingredients', ''), cuisine=request.args.get('cuisine', ''), tags=request.args.get('tags', ''), required_tools=request.args.get('required_tools', '')) }}"><i
+                <a href="{{ url_for('get_recipes', page=page+1, search=search_term) }}"><i
                         class="material-icons">chevron_right</i></a>
             </li>
         </ul>

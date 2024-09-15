@@ -81,9 +81,11 @@ def get_recipes():
     total_pages = (total_recipes + per_page - 1) // per_page  # Calculate total number of pages
 
     # Get the filtered and paginated recipes
-    recipes = mongo.db.recipesCollection.find(query).skip((page - 1) * per_page).limit(per_page)
+    recipes_cursor = mongo.db.recipesCollection.find(query).skip((page - 1) * per_page).limit(per_page)
+    recipes = list(recipes_cursor)  # Convert cursor to list for rendering
 
     return render_template('recipes.html', recipes=recipes, page=page, total_pages=total_pages, search_term=search_term)
+
 
 
 
