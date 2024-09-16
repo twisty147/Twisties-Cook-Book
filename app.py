@@ -4,6 +4,7 @@ from flask import (
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 if os.path.exists("env.py"):
@@ -14,11 +15,11 @@ app = Flask(__name__)
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
-#app.config["MONGO_URI"] = os.getenv("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 
 mongo = PyMongo(app)
+
 
 @app.route('/')
 def get_index():
@@ -115,14 +116,53 @@ def get_contact():
     return render_template('contact.html')
 
 
-@app.route('/register')
-def get_register():
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        # Get form data
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        
+        password_hash = generate_password_hash(password)
+        
+        # Create a dictionary for the new user
+        user_data = {
+            'username': username,
+            'email': email,
+            'password_hash': password_hash,
+            'role': 'User'  # Hard-coded role
+        }
+        
+        # Insert the new user into the usersCollection
+        mongo.db.usersCollection.insert_one(user_data)
+
+        flash('Registration successful! You can now log in.', 'success')
+        return redirect(url_for('login'))
+    
     return render_template('register.html')
 
 
-@app.route('/login')
-def get_login():
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        user = mongo.db.usersCollection.find_one({"email": email})
+        if user:
+            if check_password_hash(user['password_hash'], password):  
+                session['user'] = user['username']
+                flash('Login successful!', 'success')
+                return redirect(url_for('get_index'))
+            else:
+                flash('Incorrect password, please try again.', 'error')
+        else:
+            flash('Email not found, please register first.', 'error')
+
     return render_template('login.html')
+
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
