@@ -38,8 +38,8 @@
                     <li><a href="{{ url_for('get_index') }}">Home</a></li>
                     <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
                     <li><a href="{{ url_for('get_contact') }}">Contact</a></li>
-                    <li><a href="">Register</a></li>
-                    <li><a href="">Log in</a></li>
+                    <li><a href="{{ url_for('register') }}">Register</a></li>
+                    <li><a href="{{ url_for('login') }}">Log in</a></li>
                 </ul>
             </div>
         </nav>
@@ -51,9 +51,9 @@
             </li>
             <li><a href="{{ url_for('get_index') }}">Home</a></li>
             <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
-            <li><a href="">Contact</a></li>
-            <li><a href="">Register</a></li>
-            <li><a href="">Log in</a></li>
+            <li><a href="{{ url_for('get_contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+            <li><a href="{{ url_for('login') }}">Log in</a></li>
         </ul>
     </header>
 
