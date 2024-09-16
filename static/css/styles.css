@@ -1,3 +1,16 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    margin-top: 20px; /* Adds space between the content and footer */
+}
 /* styling for the brand logo */
 .brand-logo {
     display: flex;
@@ -49,7 +62,64 @@
 .card-link .card:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+/* Styles specific to the registration card */
+.registration-card {
+    width: 100%;
+    max-width: 600px; 
+    margin: 20px auto; 
+}
 
+.registration-card .card-content {
+    height: auto; 
+}
+
+.registration-card .input-field {
+    margin-bottom: 20px; 
+}
+
+.registration-card .btn {
+    width: 100%; 
+}
+
+/* Mobile specific styles */
+@media (max-width: 600px) {
+    .registration-card {
+        max-width: 100%; /* Full width on smaller screens */
+    }
+}
+/* Styles specific to the login card */
+.login-card {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.login-card .card-content {
+    height: auto;
+}
+
+.login-card .input-field {
+    margin-bottom: 20px;
+}
+
+.login-card .btn {
+    width: 100%;
+}
+.success {
+    background-color: green;
+    color: white; /* Make sure the text remains visible */
+}
+
+.error {
+    background-color: red;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .login-card {
+        max-width: 100%;
+    }
+}
 /* Hide brand text on mobile screens */
 @media (max-width: 600px) {
     .brand-text {
