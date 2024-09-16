@@ -1,4 +1,8 @@
+
+
 document.addEventListener('DOMContentLoaded', function () {
+     // Initialize Materialize
+     M.AutoInit();
     // Reset filter functionality
     var resetFilter = document.getElementById('reset-filter');
     var urls = document.getElementById('urls');
@@ -18,11 +22,14 @@ document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems);
 
+   
+
     // Auto-hide flash messages after 5 seconds
-    setTimeout(function () {
-        let messages = document.querySelectorAll('.card-panel');
-        messages.forEach(function (message) {
+        setTimeout(function () {
+        let message = document.getElementById('flashMessage');
+        if (message) {
             message.style.display = 'none';
-        });
+        }
     }, 5000); // 5000 milliseconds = 5 seconds
+    
 });
