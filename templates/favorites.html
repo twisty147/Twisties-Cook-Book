@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="section">
+    <div class="container">
+        <h3 class="center-align">My Favorite Recipes</h3>
+        <div class="row">
+            {% if favorite_recipes %}
+                {% for recipe in favorite_recipes %}
+                <div class="col s12 m6 l4">
+                    <div class="card medium">
+                        <div class="card-image">
+                            <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}">
+                            
+                        </div>
+                        <div class="card-content">
+                            <p><strong>Cuisine:</strong> {{ recipe.cuisine }}</p>
+                           
+                            <p><strong>Cook Time:</strong> {{ recipe.cook_time }}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="{{ url_for('get_recipe', recipe_id=recipe._id) }}" class="btn waves-effect waves-light">View Recipe</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="center-align">You have no favorite recipes yet.</p><br/>
+                <p class="center-align"><a href="{{ url_for('get_index') }}" > <i class="fas fa-arrow-left center teal-text">&nbspBack</i></a></p>
+
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
