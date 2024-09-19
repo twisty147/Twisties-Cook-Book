@@ -1,27 +1,86 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Hero Section -->
+<!-- Dashboard-style Hero Section for Logged-in Users -->
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
         <div class="header-background">
+            {% if session.get('user') %}
+            <!-- Hero Section for Logged-in Users -->
+            <h1 class="header center teal-text text-darken-4">Welcome, {{ session.get('user') }}!</h1>
+            <div class="row center">
+                <h5 class="header col s12 light">Here is a quick look at your dashboard</h5>
+                <div class="row center dashboard-statistics">
+                    <div class="col s12 m4">
+                        <a href="" class="card-link">
+                            <div class="card-panel teal">
+                                <h5 class="largewhite-text">{{ total_recipes }}</h5>
+                                <h6 class="white-text">Total Recipes</h6>
+                                
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col s12 m4">
+                        <a href="" class="card-link">
+                            <div class="card-panel teal">
+                                <h5 class="large white-text">{{ user_recipes_count }}</h5>
+                                <h6 class="white-text">Recipes Added By Me</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col s12 m4">
+                        <a href="" class="card-link">
+                            <div class="card-panel teal">
+                                <h5 class="large white-text">{{ favorited_recipes_count }}</h5>
+                                <h6 class="white-text">Your Favorited Recipes</h6>
+                                
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="row center dashboard-statistics">
+                    <div class="col s12 m4">
+                        <a href="" class="card-link">
+                            <div class="card-panel teal">
+                                <i class="large material-icons white-text">edit</i>
+                                <h6 class="white-text">Manage My Recipes</h6>
+                                <h5 class="white-text"></h5>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col s12 m4">
+                        <a href="{{ url_for('get_recipes') }}" class="card-link">
+                            <div class="card-panel teal">
+                                <i class="large material-icons white-text">visibility</i>
+                                <h6 class="white-text">View All Recipes</h6>
+                                <h5 class="white-text"></h5>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col s12 m4">
+                        <a href="" class="card-link">
+                            <div class="card-panel teal">
+                                <i class="large material-icons white-text">account_circle</i>
+                                <h6 class="white-text">Manage Profile</h6>
+                                <h5 class="white-text"></h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {% else %}
+            <!-- Hero Section for Guests -->
             <h1 class="header center teal-text text-darken-4">Welcome to Twisties Cookbook</h1>
             <div class="row center">
-                <h5 class="header col s12 light"><i>Your ultimate destination for discovering and sharing recipes.</i>
-                </h5>
+                <h5 class="header col s12 light">Your ultimate destination for discovering and sharing recipes.</h5>
                 <div class="row center">
-                    {% if session.get('user') %}
-                    <a href="{{ url_for('get_recipes') }}" class="btn-large waves-effect waves-light teal darken-1">
-                        Explore Recipes
-                    </a>
-                    {% else %}
                     <a href="{{ url_for('login') }}" class="btn-large waves-effect waves-light teal darken-1">
                         Log In to Explore Recipes
                     </a>
-                    {% endif %}
                 </div>
-                
             </div>
+            {% endif %}
         </div>
     </div>
 </div>
