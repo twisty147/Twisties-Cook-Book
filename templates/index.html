@@ -10,9 +10,17 @@
                 <h5 class="header col s12 light"><i>Your ultimate destination for discovering and sharing recipes.</i>
                 </h5>
                 <div class="row center">
-                    <a href="{{ url_for('get_recipes') }}"
-                        class="btn-large waves-effect waves-light teal darken-1">Explore Recipes</a>
+                    {% if session.get('user') %}
+                    <a href="{{ url_for('get_recipes') }}" class="btn-large waves-effect waves-light teal darken-1">
+                        Explore Recipes
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('login') }}" class="btn-large waves-effect waves-light teal darken-1">
+                        Log In to Explore Recipes
+                    </a>
+                    {% endif %}
                 </div>
+                
             </div>
         </div>
     </div>

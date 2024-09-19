@@ -68,6 +68,11 @@ def get_recipes_by_tag(tag):
 
 @app.route('/recipes', methods=['GET'])
 def get_recipes():
+    # Check if the user is logged in
+    if not session.get('user'):
+        flash('You need to log in to explore recipes.', 'error')
+        return redirect(url_for('login'))
+
     page = request.args.get('page', 1, type=int)  # Get the current page number
     per_page = 6  # Show 6 recipes per page (2 rows of 3 cards each)
 
@@ -94,6 +99,7 @@ def get_recipes():
     recipes = list(recipes_cursor)  # Convert cursor to list for rendering
 
     return render_template('recipes.html', recipes=recipes, page=page, total_pages=total_pages, search_term=search_term)
+
 
 
 @app.route('/contact', methods=['GET', 'POST'])
