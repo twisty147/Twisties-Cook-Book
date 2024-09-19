@@ -24,10 +24,33 @@ mongo = PyMongo(app)
 @app.route('/')
 def get_index():
     # Reference the collection from the database
-    recipesCollection = mongo.db.recipesCollection 
+    recipesCollection = mongo.db.recipesCollection
+    usersCollection = mongo.db.usersCollection
+    
     # Query to get the last 9 inserted recipes, sorted by _id in descending order
     recipes = recipesCollection.find().sort('_id', -1).limit(9)
-    return render_template('index.html', recipes=recipes)
+    
+    # Initialize statistics variables
+    total_recipes = recipesCollection.count_documents({})
+    user_recipes_count = 0
+    favorited_recipes_count = 0
+    
+    if 'user' in session:
+        user = usersCollection.find_one({"username": session['user']})
+        
+        # Get the count of recipes added by the logged-in user
+        user_recipes_count = recipesCollection.count_documents({"added_by": session['user']})
+        
+        # Assuming you store user's favorite recipes in the user's collection
+        favorited_recipes_count = len(user.get('favorited_recipes', []))
+    
+    return render_template(
+        'index.html',
+        recipes=recipes,
+        total_recipes=total_recipes,
+        user_recipes_count=user_recipes_count,
+        favorited_recipes_count=favorited_recipes_count
+    )
 
 
 
