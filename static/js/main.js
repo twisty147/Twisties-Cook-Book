@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', function () {
      // Initialize Materialize
      M.AutoInit();
