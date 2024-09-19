@@ -41,7 +41,6 @@ def get_index():
         # Get the count of recipes added by the logged-in user
         user_recipes_count = recipesCollection.count_documents({"added_by": session['user']})
         
-        # Assuming you store user's favorite recipes in the user's collection
         favorited_recipes_count = len(user.get('favorited_recipes', []))
     
     return render_template(
@@ -235,6 +234,29 @@ def toggle_favorite(recipe_id):
         )
     
     return redirect(url_for('get_recipe', recipe_id=recipe_id, from_page=request.args.get('from_page')))
+
+@app.route('/favorites')
+def get_favorites():
+    # Check if the user is logged in
+    if not session.get('user'):
+        flash('You need to log in to view your favorite recipes.', 'error')
+        return redirect(url_for('login'))
+
+    # Get the logged-in user's information
+    user = mongo.db.usersCollection.find_one({"username": session['user']})
+    
+    # Get the list of favorite recipe IDs from the user document
+    favorite_recipe_ids = user.get('favorited_recipes', [])
+
+    # If the user has favorited recipes, query the recipes collection to get them
+    favorite_recipes = []
+    if favorite_recipe_ids:
+        # Convert the list of ObjectIds to a list of recipe documents
+        favorite_recipes = list(mongo.db.recipesCollection.find({"_id": {"$in": favorite_recipe_ids}}))
+
+    # Render the 'favorites.html' template, passing the favorite recipes
+    return render_template('favorites.html', favorite_recipes=favorite_recipes)
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
