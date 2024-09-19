@@ -35,11 +35,19 @@
 
                 <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
                 <ul class="right hide-on-med-and-down">
+                    <!-- Visible links if user is NOT logged in -->
+                    {% if not session.get('user') %}
+                    <li><a href="{{ url_for('get_index') }}">Home</a></li>
+                    <li><a href="{{ url_for('register') }}">Register</a></li>
+                    <li><a href="{{ url_for('get_contact') }}">Contact</a></li>
+                    <li><a href="{{ url_for('login') }}">Log In</a></li>
+                    {% else %}
+                    <!-- Visible links if user IS logged in -->
                     <li><a href="{{ url_for('get_index') }}">Home</a></li>
                     <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
                     <li><a href="{{ url_for('get_contact') }}">Contact</a></li>
-                    <li><a href="{{ url_for('register') }}">Register</a></li>
-                    <li><a href="{{ url_for('login') }}">Log in</a></li>
+                    <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
@@ -49,11 +57,19 @@
             <li>
                 <h4>Menu</h4>
             </li>
-            <li><a href="{{ url_for('get_index') }}">Home</a></li>
-            <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
-            <li><a href="{{ url_for('get_contact') }}">Contact</a></li>
-            <li><a href="{{ url_for('register') }}">Register</a></li>
-            <li><a href="{{ url_for('login') }}">Log in</a></li>
+           <!-- Visible links if user is NOT logged in -->
+           {% if not session.get('user') %}
+           <li><a href="{{ url_for('get_index') }}">Home</a></li>
+           <li><a href="{{ url_for('register') }}">Register</a></li>
+           <li><a href="{{ url_for('get_contact') }}">Contact</a></li>
+           <li><a href="{{ url_for('login') }}">Log In</a></li>
+           {% else %}
+           <!-- Visible links if user IS logged in -->
+           <li><a href="{{ url_for('get_index') }}">Home</a></li>
+           <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
+           <li><a href="{{ url_for('get_contact') }}">Contact</a></li>
+           <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+           {% endif %}
         </ul>
     </header>
 

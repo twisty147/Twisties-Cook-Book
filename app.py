@@ -30,12 +30,19 @@ def get_index():
     return render_template('index.html', recipes=recipes)
 
 
+
 @app.route('/recipe/<recipe_id>')
 def get_recipe(recipe_id):
     # Reference the collection from the database
     recipesCollection = mongo.db.recipesCollection
     # Get the "from_page" query parameter
     from_page = request.args.get('from_page', 'home')  # Default is 'home' if not specified
+
+    # Check if the user is logged in
+    if not session.get('user'):
+        flash('You need to log in to view recipe details.', 'error')
+        return redirect(url_for('login'))
+
     try:
         # Convert recipe_id to ObjectId
         recipe_id = ObjectId(recipe_id)
@@ -45,6 +52,7 @@ def get_recipe(recipe_id):
 
     # Query to find the recipe by its ID
     recipe = recipesCollection.find_one_or_404({'_id': recipe_id})
+    
     # Pass the recipe and from_page parameter to the template
     return render_template('recipe_detail.html', recipe=recipe, from_page=from_page)
 
@@ -162,7 +170,11 @@ def login():
 
     return render_template('login.html')
 
-
+@app.route('/logout')
+def logout():
+    session.clear()  # Clears all session data
+    flash('You have been logged out successfully', 'success')
+    return redirect(url_for('login'))
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
