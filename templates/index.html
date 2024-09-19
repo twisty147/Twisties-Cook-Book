@@ -5,6 +5,18 @@
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
         <div class="header-background">
+             <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="col s12">
+        {% for category, message in messages %}
+        <div id="flashMessage" class="card-panel {{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
             {% if session.get('user') %}
             <!-- Hero Section for Logged-in Users -->
             <h1 class="header center teal-text text-darken-4">Welcome, {{ session.get('user') }}!</h1>
@@ -57,10 +69,10 @@
                         </a>
                     </div>
                     <div class="col s12 m4">
-                        <a href="" class="card-link">
+                        <a href="{{url_for('update_profile')}}" class="card-link">
                             <div class="card-panel teal">
                                 <i class="large material-icons white-text">account_circle</i>
-                                <h6 class="white-text">Manage Profile</h6>
+                                <h6 class="white-text">Update Account</h6>
                                 <h5 class="white-text"></h5>
                             </div>
                         </a>
