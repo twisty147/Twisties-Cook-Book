@@ -76,8 +76,15 @@ def get_recipe(recipe_id):
     # Query to find the recipe by its ID
     recipe = recipesCollection.find_one_or_404({'_id': recipe_id})
     
-    # Pass the recipe and from_page parameter to the template
-    return render_template('recipe_detail.html', recipe=recipe, from_page=from_page)
+    is_favorite = False
+    if 'user' in session:
+        user = mongo.db.usersCollection.find_one({"username": session['user']})
+        # Check if the recipe is in the user's favorited recipes list
+        if recipe_id in user.get("favorited_recipes", []):
+            is_favorite = True
+
+    # Pass the recipe, is_favorite, and from_page parameters to the template
+    return render_template('recipe_detail.html', recipe=recipe, is_favorite=is_favorite, from_page=from_page)
 
 
 @app.route('/recipes/tag/<tag>')
@@ -204,6 +211,30 @@ def logout():
     session.clear()  # Clears all session data
     flash('You have been logged out successfully', 'success')
     return redirect(url_for('login'))
+
+@app.route('/toggle_favorite/<recipe_id>', methods=['POST'])
+def toggle_favorite(recipe_id):
+
+    usersCollection = mongo.db.usersCollection
+    user = usersCollection.find_one({"username": session['user']})
+    
+    # Check if the recipe is already in the user's favorites
+    favorited_recipes = user.get("favorited_recipes", [])
+    
+    if ObjectId(recipe_id) in favorited_recipes:
+        # If it is already a favorite, remove it
+        usersCollection.update_one(
+            {"username": session['user']},
+            {"$pull": {"favorited_recipes": ObjectId(recipe_id)}}
+        )
+    else:
+        # If it is not a favorite, add it
+        usersCollection.update_one(
+            {"username": session['user']},
+            {"$push": {"favorited_recipes": ObjectId(recipe_id)}}
+        )
+    
+    return redirect(url_for('get_recipe', recipe_id=recipe_id, from_page=request.args.get('from_page')))
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
