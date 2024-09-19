@@ -225,6 +225,7 @@ def toggle_favorite(recipe_id):
         usersCollection.update_one(
             {"username": session['user']},
             {"$pull": {"favorited_recipes": ObjectId(recipe_id)}}
+            
         )
     else:
         # If it is not a favorite, add it
@@ -266,6 +267,51 @@ def get_my_recipes():
     
     user_recipes = mongo.db.recipesCollection.find({"added_by": session['user']})
     return render_template('my_recipes.html', recipes=user_recipes)
+
+@app.route('/update_profile', methods=['GET', 'POST'])
+def update_profile():
+    # Check if the user is logged in
+    if 'user' not in session:
+        flash('You need to log in to update your profile.', 'error')
+        return redirect(url_for('login'))
+
+    usersCollection = mongo.db.usersCollection
+    user = usersCollection.find_one({"username": session['user']})
+
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        # Check if the username or email already exists
+        if usersCollection.find_one({"username": username, "_id": {"$ne": user["_id"]}}):
+            flash('Username already exists.', 'error')
+            return redirect(url_for('update_profile'))
+
+        if usersCollection.find_one({"email": email, "_id": {"$ne": user["_id"]}}):
+            flash('Email already in use.', 'error')
+            return redirect(url_for('update_profile'))
+
+        # Update the user details
+        update_data = {
+            'username': username,
+            'email': email
+        }
+
+        # Update the password if a new one is provided
+        if password:
+            update_data['password_hash'] = generate_password_hash(password)
+
+        usersCollection.update_one({"_id": user["_id"]}, {"$set": update_data})
+        flash('Profile updated successfully!', 'success')
+
+        # Update the session username if it has changed
+        if username != session['user']:
+            session['user'] = username
+
+        return redirect(url_for('get_index'))
+
+    return render_template('update_profile.html', user=user)
 
 
 if __name__ == "__main__":
