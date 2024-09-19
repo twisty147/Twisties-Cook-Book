@@ -258,6 +258,16 @@ def get_favorites():
     return render_template('favorites.html', favorite_recipes=favorite_recipes)
 
 
+@app.route('/my_recipes')
+def get_my_recipes():
+    if 'user' not in session:
+        flash('You need to log in to view your recipes.', 'error')
+        return redirect(url_for('login'))
+    
+    user_recipes = mongo.db.recipesCollection.find({"added_by": session['user']})
+    return render_template('my_recipes.html', recipes=user_recipes)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
