@@ -2,6 +2,9 @@
 {% block content %}
 <div class="section">
     <div class="container">
+        <button onclick="goBack()" style="background:none; border:none; cursor:pointer;">
+            <i class="fas fa-arrow-left" style="font-size:24px;"></i>
+        </button>
         <h4 class="center-align">All Recipes</h4>
 
         <!-- Hidden element to store the URL -->
@@ -33,7 +36,7 @@
                         </div>
                         <div class="card-content">
                             <span class="card-title">{{ recipe['title'] }}</span>
-                            <p>{{ recipe['cook_time'] }} | Serves: {{ recipe['servings'] }}</p>
+                            <p>{{ recipe['cook_time'] }} Minutes | Serves: {{ recipe['servings'] }}</p>
                         </div>
                         <div class="card-action">
                             <span class="teal-text">View Recipe</span>
@@ -74,4 +77,5 @@
         </ul>
     </div>
 </div>
+
 {% endblock %}
