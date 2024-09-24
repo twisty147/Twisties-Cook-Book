@@ -365,6 +365,43 @@ def create_recipe():
 
     return render_template('create_recipe.html') 
 
+
+@app.route('/recipe/edit/<recipe_id>', methods=['GET', 'POST'])
+def edit_recipe(recipe_id):
+    if 'user' not in session:
+        flash('You need to log in to edit a recipe.', 'error')
+        return redirect(url_for('login'))
+
+    recipe = mongo.db.recipesCollection.find_one({"_id": ObjectId(recipe_id)})
+   
+    if not recipe or recipe['added_by'] != session['user']:
+        flash('You do not have permission to edit this recipe.', 'error')
+        return redirect(url_for('manage_recipes'))
+
+    if request.method == 'POST':
+        # Update the recipe data
+        update_data = {
+            'title': request.form.get('title'),
+            'ingredients': request.form.getlist('ingredients[]'),
+            'preparation_steps': request.form.getlist('preparation_steps[]'),
+            'required_tools': request.form.get('required_tools []'),
+            'cuisine': request.form.get('cuisine'),
+            'prep_time': request.form.get('prep_time'),
+            'cook_time': request.form.get('cook_time'),
+            'servings': request.form.get('servings'),
+            'required_tools': request.form.getlist('required_tools[]') or [],
+            'image_url': request.form.get('image_url'),
+            'tags': request.form.get('tags').split(","),
+            'date_time_edited': datetime.now()
+            
+        }
+        mongo.db.recipesCollection.update_one({"_id": ObjectId(recipe_id)}, {"$set": update_data})
+        flash('Recipe updated successfully!.', 'success')
+        
+        return redirect(url_for('manage_recipes'))
+  
+    return render_template('edit_recipe.html', recipe=recipe, enumerate=enumerate)
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
