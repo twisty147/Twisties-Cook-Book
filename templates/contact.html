@@ -3,23 +3,27 @@
 {% block content %}
 <div class="section">
     <div class="container">
+        <button onclick="goBack()" style="background:none; border:none; cursor:pointer;">
+            <i class="fas fa-arrow-left" style="font-size:24px;"></i>
+        </button>
         <h4 class="center-align">Contact Us</h4>
 
         <!-- Flash Messages -->
         {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            <div class="row">
-              <div class="col s12">
+        {% if messages %}
+        <div class="row">
+            <div class="col s12">
                 {% for category, message in messages %}
-                  <div id="flashMessage" class="card-panel {{ 'red lighten-4' if category == 'error' else 'green lighten-4' }}">
+                <div id="flashMessage"
+                    class="card-panel {{ 'red lighten-4' if category == 'error' else 'green lighten-4' }}">
                     <span class="{{ 'red-text' if category == 'error' else 'green-text' }}">
-                      {{ message }}
+                        {{ message }}
                     </span>
-                  </div>
+                </div>
                 {% endfor %}
-              </div>
             </div>
-          {% endif %}
+        </div>
+        {% endif %}
         {% endwith %}
 
         <div class="row">
