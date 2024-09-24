@@ -39,7 +39,7 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title">{{ recipe['title'] }}</span>
-                    <p>{{ recipe['cook_time'] }} | Serves: {{ recipe['servings'] }}</p>
+                    <p>{{ recipe['cook_time'] }} Minutes | Serves: {{ recipe['servings'] }}</p>
                 </div>
                 <div class="card-action">
                     <a href="{{ url_for('get_recipe', recipe_id=recipe['_id'], from_page='home') }}">View</a>
