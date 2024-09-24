@@ -4,6 +4,9 @@
 <!-- Recipes by Tag Section -->
 <div class="section">
     <div class="container">
+        <button onclick="goBack()" style="background:none; border:none; cursor:pointer;">
+            <i class="fas fa-arrow-left" style="font-size:24px;"></i>
+        </button>
         <h4 class="center-align">Recipes with Tag: {{ tag }}</h4>
         <div class="row">
             {% for recipe in recipes %}
@@ -15,7 +18,7 @@
                         </div>
                         <div class="card-content">
                             <span class="card-title">{{ recipe['title'] }}</span>
-                            <p> {{ recipe['cook_time'] }} | Serves: {{ recipe['servings'] }}</p>
+                            <p>{{ recipe['cook_time'] }} Minutes | Serves: {{ recipe['servings'] }}</p>
                         </div>
                         <div class="card-action">
                             <span class="teal-text">View Recipe</span>
