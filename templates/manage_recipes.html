@@ -15,9 +15,12 @@
 {% endwith %}
 
 <div class="container">
-    <button onclick="goBack()" style="background:none; border:none; cursor:pointer;">
-        <i class="fas fa-arrow-left" style="font-size:24px;"></i>
-    </button>
+    <a href="{{ url_for('get_index') }}"  >
+        <button onclick="" style="background:none; border:none; cursor:pointer;">
+            <i class="fas fa-arrow-left" style="font-size:24px;"></i>
+        </button>
+    </a>
+
     <h4>Manage My Recipes</h4>
     <!-- Add New Recipe Button -->
     <div class="row">
