@@ -307,6 +307,7 @@ def update_profile():
 
     return render_template('update_profile.html', user=user)
 
+
 @app.route('/manage_recipes')
 def manage_recipes():
     if 'user' not in session:
@@ -317,6 +318,52 @@ def manage_recipes():
     return render_template('manage_recipes.html', recipes=user_recipes)
 
 
+@app.route('/recipe/create', methods=['GET', 'POST'])
+@app.route('/create_recipe', methods=['POST'])
+def create_recipe():
+   
+    usersCollection = mongo.db.usersCollection
+    user = usersCollection.find_one({"username": session['user']})
+    username = session['user']
+   
+    if request.method == 'POST':
+    # Extract form data
+        title = request.form.get('title')
+        ingredients = request.form.getlist('ingredients[]')
+        preparation_steps = request.form.getlist('preparation_steps[]')
+        cuisine = request.form.get('cuisine')
+        prep_time = int(request.form.get('prep_time'))
+        cook_time = int(request.form.get('cook_time'))
+        servings = int(request.form.get('servings'))
+        image_url = request.form.get('image_url')
+        tags = request.form.get('tags')
+
+    # Create a recipe dictionary
+        recipe = {
+            'title': title,
+            'ingredients': ingredients,
+            'preparation_steps': preparation_steps,
+            'cuisine': cuisine,
+            'prep_time': prep_time,
+            'cook_time': cook_time,
+            'servings': servings,
+            'image_url': image_url,
+            'required_tools': request.form.getlist('required_tools[]') or [],  
+            'tags': tags.split(',') if tags else [],  
+            'added_by': username,
+            'date_time_added': datetime.now()
+        }
+
+        # Insert the recipe into the MongoDB collection
+        try:
+            mongo.db.recipesCollection.insert_one(recipe)
+            flash('Recipe created successfully!', 'success')
+        except Exception as e:
+            flash(f'An error occurred: {str(e)}', 'error')
+
+        return redirect(url_for('manage_recipes')) 
+
+    return render_template('create_recipe.html') 
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
