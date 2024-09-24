@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h3>Edit Recipe</h3>
+    <form method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
+        <div class="input-field">
+            <input type="text" id="title" name="title" value="{{ recipe.title }}" required>
+            <label class="active" for="title">Recipe Title</label>
+        </div>
+        <div class="input-field">
+            <textarea id="ingredients" name="ingredients" class="materialize-textarea"
+                required>{{ recipe.ingredients }}</textarea>
+            <label class="active" for="ingredients">Ingredients (comma-separated)</label>
+        </div>
+        <div class="input-field">
+            <textarea id="preparation_steps" name="preparation_steps" class="materialize-textarea"
+                required>{{ recipe.preparation_steps }}</textarea>
+            <label class="active" for="preparation_steps">Preparation Steps</label>
+        </div>
+        <div class="input-field">
+            <input type="text" id="required_tools" name="required_tools" value="{{ recipe.required_tools }}">
+            <label class="active" for="required_tools">Required Tools</label>
+        </div>
+        <div class="input-field">
+            <input type="text" id="cuisine" name="cuisine" value="{{ recipe.cuisine }}" required>
+            <label class="active" for="cuisine">Cuisine Type</label>
+        </div>
+        <div class="input-field">
+            <input type="number" id="prep_time" name="prep_time" value="{{ recipe.prep_time }}" required>
+            <label class="active" for="prep_time">Preparation Time (minutes)</label>
+        </div>
+        <div class="input-field">
+            <input type="number" id="cook_time" name="cook_time" value="{{ recipe.cook_time }}" required>
+            <label class="active" for="cook_time">Cook Time (minutes)</label>
+        </div>
+        <div class="input-field">
+            <input type="number" id="servings" name="servings" value="{{ recipe.servings }}" required>
+            <label class="active" for="servings">Servings</label>
+        </div>
+        <div class="input-field">
+            <input type="text" id="image_url" name="image_url" value="{{ recipe.image_url }}">
+            <label class="active" for="image_url">Image URL</label>
+        </div>
+        <div class="input-field">
+            <input type="text" id="tags" name="tags" value="{{ recipe.tags | join(',') }}">
+            <label class="active" for="tags">Tags (comma-separated)</label>
+        </div>
+        <button type="submit" class="btn teal">Update Recipe</button>
+    </form>
+</div>
+{% endblock %}
