@@ -1,0 +1,351 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <button onclick="goBack()" style="background:none; border:none; cursor:pointer;">
+        <i class="fas fa-arrow-left" style="font-size:24px;"></i>
+    </button>
+    <h3 class="center-align">Create a New Recipe</h3>
+    <form method="POST" action="{{ url_for('create_recipe') }}">
+        <div class="row">
+            <!-- Recipe Title -->
+            <div class="input-field col s12">
+                <input type="text" id="title" name="title" required>
+                <label for="title">Recipe Title</label>
+            </div>
+
+            <!-- Ingredients Section -->
+            <div class="col s12">
+                <h5>Ingredients</h5>
+                <div id="ingredients-section">
+                    <div class="input-field" id="ingredient-1" style="display: flex;">
+                        <input type="text" id="ingredient_input_1" name="ingredients[]" required>
+                        <label for="ingredient_input_1">Ingredient 1</label>
+                        <i class="material-icons red-text delete-ingredient" style="cursor: pointer;">delete</i>
+                    </div>
+                </div>
+                <button type="button" id="add-ingredient-btn" class="btn-small blue">Add Ingredient</button>
+            </div>
+
+            <!-- Preparation Steps Section -->
+            <div class="col s12">
+                <h5>Preparation Steps</h5>
+                <div id="preparation-steps-section">
+                    <div class="input-field" id="step-1" style="display: flex;">
+                        <textarea id="preparation_step_1" name="preparation_steps[]" class="materialize-textarea"
+                            required></textarea>
+                        <label for="preparation_step_1">Step 1</label>
+                        <i class="material-icons red-text delete-step" style="cursor: pointer;">delete</i>
+                    </div>
+                </div>
+                <button type="button" id="add-step-btn" class="btn-small blue">Add Preparation Step</button>
+            </div>
+
+            <!-- Required Tools Section -->
+            <div class="col s12">
+                <h5>Required Tools</h5>
+                <div id="tools-section">
+                    <div class="input-field" id="tool-1" style="display: flex;">
+                        <input type="text" id="tool_input_1" name="required_tools[]" required>
+                        <label for="tool_input_1">Tool 1</label>
+                        <i class="material-icons red-text delete-tool" style="cursor: pointer;">delete</i>
+                    </div>
+                </div>
+                <button type="button" id="add-tool-btn" class="btn-small blue">Add Tool</button>
+            </div>
+
+            <!-- Cuisine Type Dropdown -->
+            <div class="input-field col s12">
+                <select id="cuisine" name="cuisine" class="browser-default" required>
+                    <option value="">Cuisine Type</option>
+                    <option value="Afghan">Afghan</option>
+                    <option value="Albanian">Albanian</option>
+                    <option value="Algerian">Algerian</option>
+                    <option value="American">American</option>
+                    <option value="Andorran">Andorran</option>
+                    <option value="Angolan">Angolan</option>
+                    <option value="Antiguans">Antiguans</option>
+                    <option value="Argentinean">Argentinean</option>
+                    <option value="Armenian">Armenian</option>
+                    <option value="Australian">Australian</option>
+                    <option value="Austrian">Austrian</option>
+                    <option value="Azerbaijani">Azerbaijani</option>
+                    <option value="Bahamian">Bahamian</option>
+                    <option value="Bahraini">Bahraini</option>
+                    <option value="Bangladeshi">Bangladeshi</option>
+                    <option value="Barbadian">Barbadian</option>
+                    <option value="Barbudans">Barbudans</option>
+                    <option value="Batswana">Batswana</option>
+                    <option value="Belarusian">Belarusian</option>
+                    <option value="Belgian">Belgian</option>
+                    <option value="Belizean">Belizean</option>
+                    <option value="Beninese">Beninese</option>
+                    <option value="Bhutanese">Bhutanese</option>
+                    <option value="Bolivian">Bolivian</option>
+                    <option value="Bosnian">Bosnian</option>
+                    <option value="Brazilian">Brazilian</option>
+                    <option value="British">British</option>
+                    <option value="Bruneian">Bruneian</option>
+                    <option value="Bulgarian">Bulgarian</option>
+                    <option value="Burkinabe">Burkinabe</option>
+                    <option value="Burmese">Burmese</option>
+                    <option value="Burundian">Burundian</option>
+                    <option value="Cambodian">Cambodian</option>
+                    <option value="Cameroonian">Cameroonian</option>
+                    <option value="Canadian">Canadian</option>
+                    <option value="Cape Verdean">Cape Verdean</option>
+                    <option value="Central African">Central African</option>
+                    <option value="Chadian">Chadian</option>
+                    <option value="Chilean">Chilean</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Colombian">Colombian</option>
+                    <option value="Comoran">Comoran</option>
+                    <option value="Congolese">Congolese</option>
+                    <option value="Costa Rican">Costa Rican</option>
+                    <option value="Croatian">Croatian</option>
+                    <option value="Cuban">Cuban</option>
+                    <option value="Cypriot">Cypriot</option>
+                    <option value="Czech">Czech</option>
+                    <option value="Danish">Danish</option>
+                    <option value="Djibouti">Djibouti</option>
+                    <option value="Dominican">Dominican</option>
+                    <option value="Dutch">Dutch</option>
+                    <option value="East Timorese">East Timorese</option>
+                    <option value="Ecuadorean">Ecuadorean</option>
+                    <option value="Egyptian">Egyptian</option>
+                    <option value="Emirian">Emirian</option>
+                    <option value="Equatorial Guinean">Equatorial Guinean</option>
+                    <option value="Eritrean">Eritrean</option>
+                    <option value="Estonian">Estonian</option>
+                    <option value="Ethiopian">Ethiopian</option>
+                    <option value="Fijian">Fijian</option>
+                    <option value="Filipino">Filipino</option>
+                    <option value="Finnish">Finnish</option>
+                    <option value="French">French</option>
+                    <option value="Gabonese">Gabonese</option>
+                    <option value="Gambian">Gambian</option>
+                    <option value="Georgian">Georgian</option>
+                    <option value="German">German</option>
+                    <option value="Ghanaian">Ghanaian</option>
+                    <option value="Greek">Greek</option>
+                    <option value="Grenadian">Grenadian</option>
+                    <option value="Guatemalan">Guatemalan</option>
+                    <option value="Guinea-Bissauan">Guinea-Bissauan</option>
+                    <option value="Guinean">Guinean</option>
+                    <option value="Guyanese">Guyanese</option>
+                    <option value="Haitian">Haitian</option>
+                    <option value="Herzegovinian">Herzegovinian</option>
+                    <option value="Honduran">Honduran</option>
+                    <option value="Hungarian">Hungarian</option>
+                    <option value="Icelander">Icelander</option>
+                    <option value="Indian">Indian</option>
+                    <option value="Indonesian">Indonesian</option>
+                    <option value="Iranian">Iranian</option>
+                    <option value="Iraqi">Iraqi</option>
+                    <option value="Irish">Irish</option>
+                    <option value="Israeli">Israeli</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Ivorian">Ivorian</option>
+                    <option value="Jamaican">Jamaican</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="Jordanian">Jordanian</option>
+                    <option value="Kazakhstani">Kazakhstani</option>
+                    <option value="Kenyan">Kenyan</option>
+                    <option value="Kittian and Nevisian">Kittian and Nevisian</option>
+                    <option value="Kuwaiti">Kuwaiti</option>
+                    <option value="Kyrgyz">Kyrgyz</option>
+                    <option value="Laotian">Laotian</option>
+                    <option value="Latvian">Latvian</option>
+                    <option value="Lebanese">Lebanese</option>
+                    <option value="Liberian">Liberian</option>
+                    <option value="Libyan">Libyan</option>
+                    <option value="Liechtensteiner">Liechtensteiner</option>
+                    <option value="Lithuanian">Lithuanian</option>
+                    <option value="Luxembourger">Luxembourger</option>
+                    <option value="Macedonian">Macedonian</option>
+                    <option value="Malagasy">Malagasy</option>
+                    <option value="Malawian">Malawian</option>
+                    <option value="Malaysian">Malaysian</option>
+                    <option value="Maldivan">Maldivan</option>
+                    <option value="Malian">Malian</option>
+                    <option value="Maltese">Maltese</option>
+                    <option value="Marshallese">Marshallese</option>
+                    <option value="Mauritanian">Mauritanian</option>
+                    <option value="Mauritian">Mauritian</option>
+                    <option value="Mexican">Mexican</option>
+                    <option value="Micronesian">Micronesian</option>
+                    <option value="Moldovan">Moldovan</option>
+                    <option value="Monacan">Monacan</option>
+                    <option value="Mongolian">Mongolian</option>
+                    <option value="Moroccan">Moroccan</option>
+                    <option value="Mosotho">Mosotho</option>
+                    <option value="Motswana">Motswana</option>
+                    <option value="Mozambican">Mozambican</option>
+                    <option value="Namibian">Namibian</option>
+                    <option value="Nauruan">Nauruan</option>
+                    <option value="Nepalese">Nepalese</option>
+                    <option value="New Zealander">New Zealander</option>
+                    <option value="Ni-Vanuatu">Ni-Vanuatu</option>
+                    <option value="Nicaraguan">Nicaraguan</option>
+                    <option value="Nigerien">Nigerien</option>
+                    <option value="North Korean">North Korean</option>
+                    <option value="Northern Irish">Northern Irish</option>
+                    <option value="Norwegian">Norwegian</option>
+                    <option value="Omani">Omani</option>
+                    <option value="Pakistani">Pakistani</option>
+                    <option value="Palauan">Palauan</option>
+                    <option value="Panamanian">Panamanian</option>
+                    <option value="Papua New Guinean">Papua New Guinean</option>
+                    <option value="Paraguayan">Paraguayan</option>
+                    <option value="Peruvian">Peruvian</option>
+                    <option value="Polish">Polish</option>
+                    <option value="Portuguese">Portuguese</option>
+                    <option value="Qatari">Qatari</option>
+                    <option value="Romanian">Romanian</option>
+                    <option value="Russian">Russian</option>
+                    <option value="Rwandan">Rwandan</option>
+                    <option value="Saint Lucian">Saint Lucian</option>
+                    <option value="Salvadoran">Salvadoran</option>
+                    <option value="Samoan">Samoan</option>
+                    <option value="San Marinese">San Marinese</option>
+                    <option value="Sao Tomean">Sao Tomean</option>
+                    <option value="Saudi">Saudi</option>
+                    <option value="Scottish">Scottish</option>
+                    <option value="Senegalese">Senegalese</option>
+                    <option value="Serbian">Serbian</option>
+                    <option value="Seychellois">Seychellois</option>
+                    <option value="Sierra Leonean">Sierra Leonean</option>
+                    <option value="Singaporean">Singaporean</option>
+                    <option value="Slovakian">Slovakian</option>
+                    <option value="Slovenian">Slovenian</option>
+                    <option value="Solomon Islander">Solomon Islander</option>
+                    <option value="Somali">Somali</option>
+                    <option value="South African">South African</option>
+                    <option value="South Korean">South Korean</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="Sri Lankan">Sri Lankan</option>
+                    <option value="Sudanese">Sudanese</option>
+                    <option value="Surinamer">Surinamer</option>
+                    <option value="Swazi">Swazi</option>
+                    <option value="Swedish">Swedish</option>
+                    <option value="Swiss">Swiss</option>
+                    <option value="Syrian">Syrian</option>
+                    <option value="Taiwanese">Taiwanese</option>
+                    <option value="Tajik">Tajik</option>
+                    <option value="Tanzanian">Tanzanian</option>
+                    <option value="Thai">Thai</option>
+                    <option value="Togolese">Togolese</option>
+                    <option value="Tongan">Tongan</option>
+                    <option value="Trinidadian or Tobagonian">Trinidadian or Tobagonian</option>
+                    <option value="Tunisian">Tunisian</option>
+                    <option value="Turkish">Turkish</option>
+                    <option value="Tuvaluan">Tuvaluan</option>
+                    <option value="Ugandan">Ugandan</option>
+                    <option value="Ukrainian">Ukrainian</option>
+                    <option value="Uruguayan">Uruguayan</option>
+                    <option value="Uzbekistani">Uzbekistani</option>
+                    <option value="Venezuelan">Venezuelan</option>
+                    <option value="Vietnamese">Vietnamese</option>
+                    <option value="Welsh">Welsh</option>
+                    <option value="Yemenite">Yemenite</option>
+                    <option value="Zambian">Zambian</option>
+                    <option value="Zimbabwean">Zimbabwean</option>
+                </select>
+            </div>
+
+            <!-- Other Input Fields -->
+            <div class="input-field col s12 m6">
+                <input type="number" id="prep_time" name="prep_time" required>
+                <label for="prep_time">Preparation Time (minutes)</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <input type="number" id="cook_time" name="cook_time" required>
+                <label for="cook_time">Cook Time (minutes)</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <input type="number" id="servings" name="servings" required>
+                <label for="servings">Servings</label>
+            </div>
+            <div class="input-field col s12">
+                <input type="url" id="image_url" name="image_url">
+                <label for="image_url">Image URL</label>
+            </div>
+            <div class="input-field col s12">
+                <input type="text" id="tags" name="tags">
+                <label for="tags">Tags (comma-separated)</label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="col s12">
+                <button type="submit" class="btn-large teal waves-effect waves-light">Create Recipe</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- JavaScript for adding and removing ingredients and preparation steps -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let ingredientCount = 1;
+        let stepCount = 1;
+        let toolCount = 1;
+        // Add Ingredient
+        document.getElementById('add-ingredient-btn').addEventListener('click', function () {
+            ingredientCount++;
+            const newIngredient = `
+                <div class="input-field" id="ingredient-${ingredientCount}" style="display: flex;">
+                    <input type="text" id="ingredient_input_${ingredientCount}" name="ingredients[]" required>
+                    <label for="ingredient_input_${ingredientCount}">Ingredient ${ingredientCount}</label>
+                    <i class="material-icons red-text delete-ingredient" style="cursor: pointer;">delete</i>
+                </div>`;
+            document.getElementById('ingredients-section').insertAdjacentHTML('beforeend', newIngredient);
+        });
+
+        // Add Preparation Step
+        document.getElementById('add-step-btn').addEventListener('click', function () {
+            stepCount++;
+            const newStep = `
+                <div class="input-field" id="step-${stepCount}" style="display: flex;">
+                    <textarea id="preparation_step_${stepCount}" name="preparation_steps[]" class="materialize-textarea" required></textarea>
+                    <label for="preparation_step_${stepCount}">Step ${stepCount}</label>
+                    <i class="material-icons red-text delete-step" style="cursor: pointer;">delete</i>
+                </div>`;
+            document.getElementById('preparation-steps-section').insertAdjacentHTML('beforeend', newStep);
+        });
+
+        // Delete Ingredient
+        document.getElementById('ingredients-section').addEventListener('click', function (e) {
+            if (e.target.classList.contains('delete-ingredient')) {
+                e.target.parentElement.remove();
+            }
+        });
+
+        // Delete Preparation Step
+        document.getElementById('preparation-steps-section').addEventListener('click', function (e) {
+            if (e.target.classList.contains('delete-step')) {
+                e.target.parentElement.remove();
+            }
+        });
+
+
+        // Add Required Tool
+        document.getElementById('add-tool-btn').addEventListener('click', function () {
+            toolCount++;
+            const newTool = `
+        <div class="input-field" id="tool-${toolCount}" style="display: flex;">
+            <input type="text" id="tool_input_${toolCount}" name="required_tools[]" required>
+            <label for="tool_input_${toolCount}">Tool ${toolCount}</label>
+            <i class="material-icons red-text delete-tool" style="cursor: pointer;">delete</i>
+        </div>`;
+            document.getElementById('tools-section').insertAdjacentHTML('beforeend', newTool);
+        });
+
+        // Delete Required Tool
+        document.getElementById('tools-section').addEventListener('click', function (e) {
+            if (e.target.classList.contains('delete-tool')) {
+                e.target.parentElement.remove();
+            }
+        });
+    });
+</script>
+{% endblock %}
