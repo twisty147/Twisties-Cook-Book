@@ -5,7 +5,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from datetime import datetime 
 
 if os.path.exists("env.py"):
     import env
@@ -225,14 +225,15 @@ def toggle_favorite(recipe_id):
         usersCollection.update_one(
             {"username": session['user']},
             {"$pull": {"favorited_recipes": ObjectId(recipe_id)}}
-            
         )
+        flash('Recipe removed from your favorites.', 'success')
     else:
         # If it is not a favorite, add it
         usersCollection.update_one(
             {"username": session['user']},
             {"$push": {"favorited_recipes": ObjectId(recipe_id)}}
         )
+        flash('Recipe added to your favorites!', 'success')
     
     return redirect(url_for('get_recipe', recipe_id=recipe_id, from_page=request.args.get('from_page')))
 
@@ -259,14 +260,7 @@ def get_favorites():
     return render_template('favorites.html', favorite_recipes=favorite_recipes)
 
 
-@app.route('/my_recipes')
-def get_my_recipes():
-    if 'user' not in session:
-        flash('You need to log in to view your recipes.', 'error')
-        return redirect(url_for('login'))
-    
-    user_recipes = mongo.db.recipesCollection.find({"added_by": session['user']})
-    return render_template('my_recipes.html', recipes=user_recipes)
+
 
 @app.route('/update_profile', methods=['GET', 'POST'])
 def update_profile():
@@ -312,6 +306,16 @@ def update_profile():
         return redirect(url_for('get_index'))
 
     return render_template('update_profile.html', user=user)
+
+@app.route('/manage_recipes')
+def manage_recipes():
+    if 'user' not in session:
+        flash('You need to log in to manage your recipes.', 'error')
+        return redirect(url_for('login'))
+    
+    user_recipes = mongo.db.recipesCollection.find({"added_by": session['user']})
+    return render_template('manage_recipes.html', recipes=user_recipes)
+
 
 
 if __name__ == "__main__":
