@@ -1,0 +1,413 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <button onclick="goBack()" style="background:none; border:none; cursor:pointer;">
+        <i class="fas fa-arrow-left" style="font-size:24px;"></i>
+    </button>
+    <h3 class="center-align">Edit Recipe</h3>
+    <form method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe['_id']) }}">
+
+        <!-- <form method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe.id) }}"> -->
+        <div class="row">
+            <!-- Recipe Title -->
+            <div class="input-field col s12">
+                <input type="text" id="title" name="title" value="{{ recipe.title }}" required>
+                <label for="title" class="active">Recipe Title</label>
+            </div>
+
+            <!-- Ingredients Section -->
+            <div class="col s12">
+                <h5>Ingredients</h5>
+                <div id="ingredients-section">
+                    <!-- Loop through existing ingredients and pre-fill the fields -->
+                    {% for i, ingredient in enumerate(recipe.ingredients) %}
+                    <div class="input-field" style="display: flex;" id="ingredient-{{ i + 1 }}">
+                        <input type="text" id="ingredient_input_{{ i + 1 }}" name="ingredients[]"
+                            value="{{ ingredient }}" required>
+                        <label for="ingredient_input_{{ i + 1 }}" class="active">Ingredient {{ i + 1 }}</label>
+                        <i class="material-icons red-text delete-ingredient" style="cursor: pointer;">delete</i>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button type="button" id="add-ingredient-btn" class="btn-small blue">Add Ingredient</button>
+            </div>
+
+            <!-- Preparation Steps Section -->
+            <div class="col s12">
+                <h5>Preparation Steps</h5>
+                <div id="preparation-steps-section">
+                    <!-- Loop through existing preparation steps and pre-fill the fields -->
+                    {% for i, step in enumerate(recipe.preparation_steps) %}
+                    <div class="input-field" style="display: flex;" id="step-{{ i + 1 }}">
+                        <textarea id="preparation_step_{{ i + 1 }}" name="preparation_steps[]"
+                            class="materialize-textarea" required>{{ step }}</textarea>
+                        <label for="preparation_step_{{ i + 1 }}" class="active">Step {{ i + 1 }}</label>
+                        <i class="material-icons red-text delete-step" style="cursor: pointer;">delete</i>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button type="button" id="add-step-btn" class="btn-small blue">Add Preparation Step</button>
+            </div>
+
+            <!-- Required Tools Section -->
+            <div class="col s12">
+                <h5>Required Tools</h5>
+                <div id="required-tools-section">
+                    <!-- Loop through existing required tools and pre-fill the fields -->
+                    {% for i, tool in enumerate(recipe.required_tools) %}
+                    <div class="input-field" style="display: flex;" id="tool-{{ i + 1 }}">
+                        <input type="text" id="required_tool_{{ i + 1 }}" name="required_tools[]" required
+                            value="{{ tool }}">
+                        <label for="required_tool_{{ i + 1 }}" class="active">Tool {{ i + 1 }}</label>
+                        <i class="material-icons red-text delete-tool" style="cursor: pointer;">delete</i>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button type="button" id="add-tool-btn" class="btn-small blue">Add Required Tool</button>
+            </div>
+
+            <!-- Cuisine Type Dropdown -->
+            <div class="input-field col s12">
+                <select id="cuisine" name="cuisine" class="browser-default" required>
+                    <option value="">-- --</option>
+                    <option value="Afghan" {% if recipe.cuisine=='Afghan' %}selected{% endif %}>Afghan</option>
+                    <option value="Albanian" {% if recipe.cuisine=='Albanian' %}selected{% endif %}>Albanian</option>
+                    <option value="Algerian" {% if recipe.cuisine=='Algerian' %}selected{% endif %}>Algerian</option>
+                    <option value="American" {% if recipe.cuisine=='American' %}selected{% endif %}>American</option>
+                    <option value="Andorran" {% if recipe.cuisine=='Andorran' %}selected{% endif %}>Andorran</option>
+                    <option value="Angolan" {% if recipe.cuisine=='Angolan' %}selected{% endif %}>Angolan</option>
+                    <option value="Antiguans" {% if recipe.cuisine=='Antiguans' %}selected{% endif %}>Antiguans</option>
+                    <option value="Argentinean" {% if recipe.cuisine=='Argentinean' %}selected{% endif %}>Argentinean
+                    </option>
+                    <option value="Armenian" {% if recipe.cuisine=='Armenian' %}selected{% endif %}>Armenian</option>
+                    <option value="Australian" {% if recipe.cuisine=='Australian' %}selected{% endif %}>Australian
+                    </option>
+                    <option value="Austrian" {% if recipe.cuisine=='Austrian' %}selected{% endif %}>Austrian</option>
+                    <option value="Azerbaijani" {% if recipe.cuisine=='Azerbaijani' %}selected{% endif %}>Azerbaijani
+                    </option>
+                    <option value="Bahamian" {% if recipe.cuisine=='Bahamian' %}selected{% endif %}>Bahamian</option>
+                    <option value="Bahraini" {% if recipe.cuisine=='Bahraini' %}selected{% endif %}>Bahraini</option>
+                    <option value="Bangladeshi" {% if recipe.cuisine=='Bangladeshi' %}selected{% endif %}>Bangladeshi
+                    </option>
+                    <option value="Barbadian" {% if recipe.cuisine=='Barbadian' %}selected{% endif %}>Barbadian</option>
+                    <option value="Barbudans" {% if recipe.cuisine=='Barbudans' %}selected{% endif %}>Barbudans</option>
+                    <option value="Batswana" {% if recipe.cuisine=='Batswana' %}selected{% endif %}>Batswana</option>
+                    <option value="Belarusian" {% if recipe.cuisine=='Belarusian' %}selected{% endif %}>Belarusian
+                    </option>
+                    <option value="Belgian" {% if recipe.cuisine=='Belgian' %}selected{% endif %}>Belgian</option>
+                    <option value="Belizean" {% if recipe.cuisine=='Belizean' %}selected{% endif %}>Belizean</option>
+                    <option value="Beninese" {% if recipe.cuisine=='Beninese' %}selected{% endif %}>Beninese</option>
+                    <option value="Bhutanese" {% if recipe.cuisine=='Bhutanese' %}selected{% endif %}>Bhutanese</option>
+                    <option value="Bolivian" {% if recipe.cuisine=='Bolivian' %}selected{% endif %}>Bolivian</option>
+                    <option value="Bosnian" {% if recipe.cuisine=='Bosnian' %}selected{% endif %}>Bosnian</option>
+                    <option value="Brazilian" {% if recipe.cuisine=='Brazilian' %}selected{% endif %}>Brazilian</option>
+                    <option value="British" {% if recipe.cuisine=='British' %}selected{% endif %}>British</option>
+                    <option value="Bruneian" {% if recipe.cuisine=='Bruneian' %}selected{% endif %}>Bruneian</option>
+                    <option value="Bulgarian" {% if recipe.cuisine=='Bulgarian' %}selected{% endif %}>Bulgarian</option>
+                    <option value="Burkinabe" {% if recipe.cuisine=='Burkinabe' %}selected{% endif %}>Burkinabe</option>
+                    <option value="Burmese" {% if recipe.cuisine=='Burmese' %}selected{% endif %}>Burmese</option>
+                    <option value="Burundian" {% if recipe.cuisine=='Burundian' %}selected{% endif %}>Burundian</option>
+                    <option value="Cambodian" {% if recipe.cuisine=='Cambodian' %}selected{% endif %}>Cambodian</option>
+                    <option value="Cameroonian" {% if recipe.cuisine=='Cameroonian' %}selected{% endif %}>Cameroonian
+                    </option>
+                    <option value="Canadian" {% if recipe.cuisine=='Canadian' %}selected{% endif %}>Canadian</option>
+                    <option value="Cape Verdean" {% if recipe.cuisine=='Cape Verdean' %}selected{% endif %}>Cape Verdean
+                    </option>
+                    <option value="Central African" {% if recipe.cuisine=='Central African' %}selected{% endif %}>
+                        Central African</option>
+                    <option value="Chadian" {% if recipe.cuisine=='Chadian' %}selected{% endif %}>Chadian</option>
+                    <option value="Chilean" {% if recipe.cuisine=='Chilean' %}selected{% endif %}>Chilean</option>
+                    <option value="Chinese" {% if recipe.cuisine=='Chinese' %}selected{% endif %}>Chinese</option>
+                    <option value="Colombian" {% if recipe.cuisine=='Colombian' %}selected{% endif %}>Colombian</option>
+                    <option value="Comoran" {% if recipe.cuisine=='Comoran' %}selected{% endif %}>Comoran</option>
+                    <option value="Congolese" {% if recipe.cuisine=='Congolese' %}selected{% endif %}>Congolese</option>
+                    <option value="Costa Rican" {% if recipe.cuisine=='Costa Rican' %}selected{% endif %}>Costa Rican
+                    </option>
+                    <option value="Croatian" {% if recipe.cuisine=='Croatian' %}selected{% endif %}>Croatian</option>
+                    <option value="Cuban" {% if recipe.cuisine=='Cuban' %}selected{% endif %}>Cuban</option>
+                    <option value="Cypriot" {% if recipe.cuisine=='Cypriot' %}selected{% endif %}>Cypriot</option>
+                    <option value="Czech" {% if recipe.cuisine=='Czech' %}selected{% endif %}>Czech</option>
+                    <option value="Danish" {% if recipe.cuisine=='Danish' %}selected{% endif %}>Danish</option>
+                    <option value="Djibouti" {% if recipe.cuisine=='Djibouti' %}selected{% endif %}>Djibouti</option>
+                    <option value="Dominican" {% if recipe.cuisine=='Dominican' %}selected{% endif %}>Dominican</option>
+                    <option value="Dutch" {% if recipe.cuisine=='Dutch' %}selected{% endif %}>Dutch</option>
+                    <option value="East Timorese" {% if recipe.cuisine=='East Timorese' %}selected{% endif %}>East
+                        Timorese</option>
+                    <option value="Ecuadorean" {% if recipe.cuisine=='Ecuadorean' %}selected{% endif %}>Ecuadorean
+                    </option>
+                    <option value="Egyptian" {% if recipe.cuisine=='Egyptian' %}selected{% endif %}>Egyptian</option>
+                    <option value="Emirian" {% if recipe.cuisine=='Emirian' %}selected{% endif %}>Emirian</option>
+                    <option value="Equatorial Guinean" {% if recipe.cuisine=='Equatorial Guinean' %}selected{% endif %}>
+                        Equatorial Guinean</option>
+                    <option value="Eritrean" {% if recipe.cuisine=='Eritrean' %}selected{% endif %}>Eritrean</option>
+                    <option value="Estonian" {% if recipe.cuisine=='Estonian' %}selected{% endif %}>Estonian</option>
+                    <option value="Ethiopian" {% if recipe.cuisine=='Ethiopian' %}selected{% endif %}>Ethiopian</option>
+                    <option value="Fijian" {% if recipe.cuisine=='Fijian' %}selected{% endif %}>Fijian</option>
+                    <option value="Filipino" {% if recipe.cuisine=='Filipino' %}selected{% endif %}>Filipino</option>
+                    <option value="Finnish" {% if recipe.cuisine=='Finnish' %}selected{% endif %}>Finnish</option>
+                    <option value="French" {% if recipe.cuisine=='French' %}selected{% endif %}>French</option>
+                    <option value="Gabonese" {% if recipe.cuisine=='Gabonese' %}selected{% endif %}>Gabonese</option>
+                    <option value="Gambian" {% if recipe.cuisine=='Gambian' %}selected{% endif %}>Gambian</option>
+                    <option value="Georgian" {% if recipe.cuisine=='Georgian' %}selected{% endif %}>Georgian</option>
+                    <option value="German" {% if recipe.cuisine=='German' %}selected{% endif %}>German</option>
+                    <option value="Ghanaian" {% if recipe.cuisine=='Ghanaian' %}selected{% endif %}>Ghanaian</option>
+                    <option value="Greek" {% if recipe.cuisine=='Greek' %}selected{% endif %}>Greek</option>
+                    <option value="Grenadian" {% if recipe.cuisine=='Grenadian' %}selected{% endif %}>Grenadian</option>
+                    <option value="Guatemalan" {% if recipe.cuisine=='Guatemalan' %}selected{% endif %}>Guatemalan
+                    </option>
+                    <option value="Guinea-Bissauan" {% if recipe.cuisine=='Guinea-Bissauan' %}selected{% endif %}>
+                        Guinea-Bissauan</option>
+                    <option value="Guinean" {% if recipe.cuisine=='Guinean' %}selected{% endif %}>Guinean</option>
+                    <option value="Guyanese" {% if recipe.cuisine=='Guyanese' %}selected{% endif %}>Guyanese</option>
+                    <option value="Haitian" {% if recipe.cuisine=='Haitian' %}selected{% endif %}>Haitian</option>
+                    <option value="Herzegovinian" {% if recipe.cuisine=='Herzegovinian' %}selected{% endif %}>
+                        Herzegovinian</option>
+                    <option value="Honduran" {% if recipe.cuisine=='Honduran' %}selected{% endif %}>Honduran</option>
+                    <option value="Hungarian" {% if recipe.cuisine=='Hungarian' %}selected{% endif %}>Hungarian</option>
+                    <option value="Icelander" {% if recipe.cuisine=='Icelander' %}selected{% endif %}>Icelander</option>
+                    <option value="Indian" {% if recipe.cuisine=='Indian' %}selected{% endif %}>Indian</option>
+                    <option value="Indonesian" {% if recipe.cuisine=='Indonesian' %}selected{% endif %}>Indonesian
+                    </option>
+                    <option value="Iranian" {% if recipe.cuisine=='Iranian' %}selected{% endif %}>Iranian</option>
+                    <option value="Iraqi" {% if recipe.cuisine=='Iraqi' %}selected{% endif %}>Iraqi</option>
+                    <option value="Irish" {% if recipe.cuisine=='Irish' %}selected{% endif %}>Irish</option>
+                    <option value="Israeli" {% if recipe.cuisine=='Israeli' %}selected{% endif %}>Israeli</option>
+                    <option value="Italian" {% if recipe.cuisine=='Italian' %}selected{% endif %}>Italian</option>
+                    <option value="Ivorian" {% if recipe.cuisine=='Ivorian' %}selected{% endif %}>Ivorian</option>
+                    <option value="Jamaican" {% if recipe.cuisine=='Jamaican' %}selected{% endif %}>Jamaican</option>
+                    <option value="Japanese" {% if recipe.cuisine=='Japanese' %}selected{% endif %}>Japanese</option>
+                    <option value="Jordanian" {% if recipe.cuisine=='Jordanian' %}selected{% endif %}>Jordanian</option>
+                    <option value="Kazakhstani" {% if recipe.cuisine=='Kazakhstani' %}selected{% endif %}>Kazakhstani
+                    </option>
+                    <option value="Kenyan" {% if recipe.cuisine=='Kenyan' %}selected{% endif %}>Kenyan</option>
+                    <option value="Kittian and Nevisian" {% if recipe.cuisine=='Kittian and Nevisian' %}selected{% endif
+                        %}>Kittian and Nevisian</option>
+                    <option value="Kuwaiti" {% if recipe.cuisine=='Kuwaiti' %}selected{% endif %}>Kuwaiti</option>
+                    <option value="Kyrgyz" {% if recipe.cuisine=='Kyrgyz' %}selected{% endif %}>Kyrgyz</option>
+                    <option value="Laotian" {% if recipe.cuisine=='Laotian' %}selected{% endif %}>Laotian</option>
+                    <option value="Latvian" {% if recipe.cuisine=='Latvian' %}selected{% endif %}>Latvian</option>
+                    <option value="Lebanese" {% if recipe.cuisine=='Lebanese' %}selected{% endif %}>Lebanese</option>
+                    <option value="Liberian" {% if recipe.cuisine=='Liberian' %}selected{% endif %}>Liberian</option>
+                    <option value="Libyan" {% if recipe.cuisine=='Libyan' %}selected{% endif %}>Libyan</option>
+                    <option value="Liechtensteiner" {% if recipe.cuisine=='Liechtensteiner' %}selected{% endif %}>
+                        Liechtensteiner</option>
+                    <option value="Lithuanian" {% if recipe.cuisine=='Lithuanian' %}selected{% endif %}>Lithuanian
+                    </option>
+                    <option value="Luxembourger" {% if recipe.cuisine=='Luxembourger' %}selected{% endif %}>Luxembourger
+                    </option>
+                    <option value="Macedonian" {% if recipe.cuisine=='Macedonian' %}selected{% endif %}>Macedonian
+                    </option>
+                    <option value="Malagasy" {% if recipe.cuisine=='Malagasy' %}selected{% endif %}>Malagasy</option>
+                    <option value="Malawian" {% if recipe.cuisine=='Malawian' %}selected{% endif %}>Malawian</option>
+                    <option value="Malaysian" {% if recipe.cuisine=='Malaysian' %}selected{% endif %}>Malaysian</option>
+                    <option value="Maldivan" {% if recipe.cuisine=='Maldivan' %}selected{% endif %}>Maldivan</option>
+                    <option value="Malian" {% if recipe.cuisine=='Malian' %}selected{% endif %}>Malian</option>
+                    <option value="Maltese" {% if recipe.cuisine=='Maltese' %}selected{% endif %}>Maltese</option>
+                    <option value="Marshallese" {% if recipe.cuisine=='Marshallese' %}selected{% endif %}>Marshallese
+                    </option>
+                    <option value="Mauritanian" {% if recipe.cuisine=='Mauritanian' %}selected{% endif %}>Mauritanian
+                    </option>
+                    <option value="Mauritian" {% if recipe.cuisine=='Mauritian' %}selected{% endif %}>Mauritian</option>
+                    <option value="Mexican" {% if recipe.cuisine=='Mexican' %}selected{% endif %}>Mexican</option>
+                    <option value="Micronesian" {% if recipe.cuisine=='Micronesian' %}selected{% endif %}>Micronesian
+                    </option>
+                    <option value="Moldovan" {% if recipe.cuisine=='Moldovan' %}selected{% endif %}>Moldovan</option>
+                    <option value="Monacan" {% if recipe.cuisine=='Monacan' %}selected{% endif %}>Monacan</option>
+                    <option value="Mongolian" {% if recipe.cuisine=='Mongolian' %}selected{% endif %}>Mongolian</option>
+                    <option value="Moroccan" {% if recipe.cuisine=='Moroccan' %}selected{% endif %}>Moroccan</option>
+                    <option value="Mosotho" {% if recipe.cuisine=='Mosotho' %}selected{% endif %}>Mosotho</option>
+                    <option value="Motswana" {% if recipe.cuisine=='Motswana' %}selected{% endif %}>Motswana</option>
+                    <option value="Mozambican" {% if recipe.cuisine=='Mozambican' %}selected{% endif %}>Mozambican
+                    </option>
+                    <option value="Namibian" {% if recipe.cuisine=='Namibian' %}selected{% endif %}>Namibian</option>
+                    <option value="Nauruan" {% if recipe.cuisine=='Nauruan' %}selected{% endif %}>Nauruan</option>
+                    <option value="Nepalese" {% if recipe.cuisine=='Nepalese' %}selected{% endif %}>Nepalese</option>
+                    <option value="New Zealander" {% if recipe.cuisine=='New Zealander' %}selected{% endif %}>New
+                        Zealander</option>
+                    <option value="Ni-Vanuatu" {% if recipe.cuisine=='Ni-Vanuatu' %}selected{% endif %}>Ni-Vanuatu
+                    </option>
+                    <option value="Nicaraguan" {% if recipe.cuisine=='Nicaraguan' %}selected{% endif %}>Nicaraguan
+                    </option>
+                    <option value="Nigerien" {% if recipe.cuisine=='Nigerien' %}selected{% endif %}>Nigerien</option>
+                    <option value="North Korean" {% if recipe.cuisine=='North Korean' %}selected{% endif %}>North Korean
+                    </option>
+                    <option value="Northern Irish" {% if recipe.cuisine=='Northern Irish' %}selected{% endif %}>Northern
+                        Irish</option>
+                    <option value="Norwegian" {% if recipe.cuisine=='Norwegian' %}selected{% endif %}>Norwegian</option>
+                    <option value="Omani" {% if recipe.cuisine=='Omani' %}selected{% endif %}>Omani</option>
+                    <option value="Pakistani" {% if recipe.cuisine=='Pakistani' %}selected{% endif %}>Pakistani</option>
+                    <option value="Palauan" {% if recipe.cuisine=='Palauan' %}selected{% endif %}>Palauan</option>
+                    <option value="Panamanian" {% if recipe.cuisine=='Panamanian' %}selected{% endif %}>Panamanian
+                    </option>
+                    <option value="Papua New Guinean" {% if recipe.cuisine=='Papua New Guinean' %}selected{% endif %}>
+                        Papua New Guinean</option>
+                    <option value="Paraguayan" {% if recipe.cuisine=='Paraguayan' %}selected{% endif %}>Paraguayan
+                    </option>
+                    <option value="Peruvian" {% if recipe.cuisine=='Peruvian' %}selected{% endif %}>Peruvian</option>
+                    <option value="Polish" {% if recipe.cuisine=='Polish' %}selected{% endif %}>Polish</option>
+                    <option value="Portuguese" {% if recipe.cuisine=='Portuguese' %}selected{% endif %}>Portuguese
+                    </option>
+                    <option value="Qatari" {% if recipe.cuisine=='Qatari' %}selected{% endif %}>Qatari</option>
+                    <option value="Romanian" {% if recipe.cuisine=='Romanian' %}selected{% endif %}>Romanian</option>
+                    <option value="Russian" {% if recipe.cuisine=='Russian' %}selected{% endif %}>Russian</option>
+                    <option value="Rwandan" {% if recipe.cuisine=='Rwandan' %}selected{% endif %}>Rwandan</option>
+                    <option value="Saint Lucian" {% if recipe.cuisine=='Saint Lucian' %}selected{% endif %}>Saint Lucian
+                    </option>
+                    <option value="Salvadoran" {% if recipe.cuisine=='Salvadoran' %}selected{% endif %}>Salvadoran
+                    </option>
+                    <option value="Samoan" {% if recipe.cuisine=='Samoan' %}selected{% endif %}>Samoan</option>
+                    <option value="San Marinese" {% if recipe.cuisine=='San Marinese' %}selected{% endif %}>San Marinese
+                    </option>
+                    <option value="Sao Tomean" {% if recipe.cuisine=='Sao Tomean' %}selected{% endif %}>Sao Tomean
+                    </option>
+                    <option value="Saudi" {% if recipe.cuisine=='Saudi' %}selected{% endif %}>Saudi</option>
+                    <option value="Scottish" {% if recipe.cuisine=='Scottish' %}selected{% endif %}>Scottish</option>
+                    <option value="Senegalese" {% if recipe.cuisine=='Senegalese' %}selected{% endif %}>Senegalese
+                    </option>
+                    <option value="Serbian" {% if recipe.cuisine=='Serbian' %}selected{% endif %}>Serbian</option>
+                    <option value="Seychellois" {% if recipe.cuisine=='Seychellois' %}selected{% endif %}>Seychellois
+                    </option>
+                    <option value="Sierra Leonean" {% if recipe.cuisine=='Sierra Leonean' %}selected{% endif %}>Sierra
+                        Leonean</option>
+                    <option value="Singaporean" {% if recipe.cuisine=='Singaporean' %}selected{% endif %}>Singaporean
+                    </option>
+                    <option value="Slovakian" {% if recipe.cuisine=='Slovakian' %}selected{% endif %}>Slovakian</option>
+                    <option value="Slovenian" {% if recipe.cuisine=='Slovenian' %}selected{% endif %}>Slovenian</option>
+                    <option value="Solomon Islander" {% if recipe.cuisine=='Solomon Islander' %}selected{% endif %}>
+                        Solomon Islander</option>
+                    <option value="Somali" {% if recipe.cuisine=='Somali' %}selected{% endif %}>Somali</option>
+                    <option value="South African" {% if recipe.cuisine=='South African' %}selected{% endif %}>South
+                        African</option>
+                    <option value="South Korean" {% if recipe.cuisine=='South Korean' %}selected{% endif %}>South Korean
+                    </option>
+                    <option value="Spanish" {% if recipe.cuisine=='Spanish' %}selected{% endif %}>Spanish</option>
+                    <option value="Sri Lankan" {% if recipe.cuisine=='Sri Lankan' %}selected{% endif %}>Sri Lankan
+                    </option>
+                    <option value="Sudanese" {% if recipe.cuisine=='Sudanese' %}selected{% endif %}>Sudanese</option>
+                    <option value="Surinamer" {% if recipe.cuisine=='Surinamer' %}selected{% endif %}>Surinamer</option>
+                    <option value="Swazi" {% if recipe.cuisine=='Swazi' %}selected{% endif %}>Swazi</option>
+                    <option value="Swedish" {% if recipe.cuisine=='Swedish' %}selected{% endif %}>Swedish</option>
+                    <option value="Swiss" {% if recipe.cuisine=='Swiss' %}selected{% endif %}>Swiss</option>
+                    <option value="Syrian" {% if recipe.cuisine=='Syrian' %}selected{% endif %}>Syrian</option>
+                    <option value="Taiwanese" {% if recipe.cuisine=='Taiwanese' %}selected{% endif %}>Taiwanese</option>
+                    <option value="Tajik" {% if recipe.cuisine=='Tajik' %}selected{% endif %}>Tajik</option>
+                    <option value="Tanzanian" {% if recipe.cuisine=='Tanzanian' %}selected{% endif %}>Tanzanian</option>
+                    <option value="Thai" {% if recipe.cuisine=='Thai' %}selected{% endif %}>Thai</option>
+                    <option value="Togolese" {% if recipe.cuisine=='Togolese' %}selected{% endif %}>Togolese</option>
+                    <option value="Tongan" {% if recipe.cuisine=='Tongan' %}selected{% endif %}>Tongan</option>
+                    <option value="Trinidadian or Tobagonian" {% if recipe.cuisine=='Trinidadian or Tobagonian'
+                        %}selected{% endif %}>Trinidadian or Tobagonian</option>
+                    <option value="Tunisian" {% if recipe.cuisine=='Tunisian' %}selected{% endif %}>Tunisian</option>
+                    <option value="Turkish" {% if recipe.cuisine=='Turkish' %}selected{% endif %}>Turkish</option>
+                    <option value="Tuvaluan" {% if recipe.cuisine=='Tuvaluan' %}selected{% endif %}>Tuvaluan</option>
+                    <option value="Ugandan" {% if recipe.cuisine=='Ugandan' %}selected{% endif %}>Ugandan</option>
+                    <option value="Ukrainian" {% if recipe.cuisine=='Ukrainian' %}selected{% endif %}>Ukrainian</option>
+                    <option value="Uruguayan" {% if recipe.cuisine=='Uruguayan' %}selected{% endif %}>Uruguayan</option>
+                    <option value="Uzbekistani" {% if recipe.cuisine=='Uzbekistani' %}selected{% endif %}>Uzbekistani
+                    </option>
+                    <option value="Venezuelan" {% if recipe.cuisine=='Venezuelan' %}selected{% endif %}>Venezuelan
+                    </option>
+                    <option value="Vietnamese" {% if recipe.cuisine=='Vietnamese' %}selected{% endif %}>Vietnamese
+                    </option>
+                    <option value="Welsh" {% if recipe.cuisine=='Welsh' %}selected{% endif %}>Welsh</option>
+                    <option value="Yemenite" {% if recipe.cuisine=='Yemenite' %}selected{% endif %}>Yemenite</option>
+                    <option value="Zambian" {% if recipe.cuisine=='Zambian' %}selected{% endif %}>Zambian</option>
+                    <option value="Zimbabwean" {% if recipe.cuisine=='Zimbabwean' %}selected{% endif %}>Zimbabwean
+                    </option>
+
+                </select>
+            </div>
+
+            <!-- Other Input Fields -->
+            <div class="input-field col s12 m6">
+                <input type="number" id="prep_time" name="prep_time" value="{{ recipe.prep_time }}" required>
+                <label for="prep_time" class="active">Preparation Time (minutes)</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <input type="number" id="cook_time" name="cook_time" value="{{ recipe.cook_time }}" required>
+                <label for="cook_time" class="active">Cook Time (minutes)</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <input type="number" id="servings" name="servings" value="{{ recipe.servings }}" required>
+                <label for="servings" class="active">Servings</label>
+            </div>
+            <div class="input-field col s12">
+                <input type="url" id="image_url" name="image_url" value="{{ recipe.image_url }}">
+                <label for="image_url" class="active">Image URL</label>
+            </div>
+            <div class="input-field col s12">
+                <input type="text" id="tags" name="tags" value="{{ recipe.tags|join(',') }}">
+                <label for="tags" class="active">Tags (comma-separated)</label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="col s12">
+                <button type="submit" class="btn-large teal waves-effect waves-light">Update Recipe</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let ingredientCount = parseInt("{{ recipe.ingredients|length or 0 }}", 10);
+        let stepCount = parseInt("{{ recipe.preparation_steps|length or 0 }}", 10);
+        let toolCount = parseInt("{{ recipe.required_tools|length or 0 }}", 10);
+
+        // Add Ingredient
+        document.getElementById('add-ingredient-btn').addEventListener('click', function () {
+            ingredientCount++;
+            const newIngredient = `
+                <div class="input-field" style="display: flex;" id="ingredient-${ingredientCount}">
+                    <input type="text" id="ingredient_input_${ingredientCount}" name="ingredients[]" required>
+                    <label for="ingredient_input_${ingredientCount}">Ingredient ${ingredientCount}</label>
+                    <i class="material-icons red-text delete-ingredient" style="cursor: pointer;">delete</i>
+                </div>`;
+            document.getElementById('ingredients-section').insertAdjacentHTML('beforeend', newIngredient);
+        });
+
+        // Add Preparation Step
+        document.getElementById('add-step-btn').addEventListener('click', function () {
+            stepCount++;
+            const newStep = `
+                <div class="input-field" style="display: flex;" id="step-${stepCount}">
+                    <textarea id="preparation_step_${stepCount}" name="preparation_steps[]" class="materialize-textarea" required></textarea>
+                    <label for="preparation_step_${stepCount}">Step ${stepCount}</label>
+                    <i class="material-icons red-text delete-step" style="cursor: pointer;">delete</i>
+                </div>`;
+            document.getElementById('preparation-steps-section').insertAdjacentHTML('beforeend', newStep);
+        });
+        // Add Required Tool
+        document.getElementById('add-tool-btn').addEventListener('click', function () {
+            toolCount++;
+            const newTool = `
+            <div class="input-field" style="display: flex;" id="tool-${toolCount}">
+                <input type="text" id="required_tool_${toolCount}" name="required_tools[]" required>
+                <label for="required_tool_${toolCount}">Tool ${toolCount}</label>
+                <i class="material-icons red-text delete-tool" style="cursor: pointer;">delete</i>
+            </div>`;
+            document.getElementById('required-tools-section').insertAdjacentHTML('beforeend', newTool);
+        });
+        // Delete Ingredient
+        document.getElementById('ingredients-section').addEventListener('click', function (e) {
+            if (e.target.classList.contains('delete-ingredient')) {
+                e.target.parentElement.remove();
+            }
+        });
+
+        // Delete Preparation Step
+        document.getElementById('preparation-steps-section').addEventListener('click', function (e) {
+            if (e.target.classList.contains('delete-step')) {
+                e.target.parentElement.remove();
+            }
+        });
+        // Delete Required Tool
+        document.getElementById('required-tools-section').addEventListener('click', function (e) {
+            if (e.target.classList.contains('delete-tool')) {
+                e.target.parentElement.remove();
+            }
+        });
+    });
+</script>
+
+{% endblock %}
