@@ -1,19 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
- <!-- Flash Messages -->
- {% with messages = get_flashed_messages(with_categories=true) %}
- {% if messages %}
- <div class="col s12">
-     {% for category, message in messages %}
-     <div id="flashMessage" class="card-panel {{ category }}">
-         {{ message }}
-     </div>
-     {% endfor %}
- </div>
- {% endif %}
- {% endwith %}
+<!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="col s12">
+    {% for category, message in messages %}
+    <div id="flashMessage" class="card-panel {{ category }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
 <div class="container">
+    <button onclick="goBack()" style="background:none; border:none; cursor:pointer;">
+        <i class="fas fa-arrow-left" style="font-size:24px;"></i>
+    </button>
     <h4>Update Account Information</h4>
     <form action="{{ url_for('update_profile') }}" method="POST">
         <div class="input-field">
