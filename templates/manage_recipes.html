@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="col s12">
+    {% for category, message in messages %}
+    <div id="flashMessage" class="card-panel {{ category }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="container">
+    <button onclick="goBack()" style="background:none; border:none; cursor:pointer;">
+        <i class="fas fa-arrow-left" style="font-size:24px;"></i>
+    </button>
+    <h4>Manage My Recipes</h4>
+    <!-- Add New Recipe Button -->
+    <div class="row">
+        <a href="{{ url_for('create_recipe') }}" class="btn waves-effect waves-light">
+            <i class="material-icons left">add</i>Add New Recipe
+        </a>
+    </div>
+
+    <!-- Recipes List -->
+    <div class="row">
+        {% for recipe in recipes %}
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}">
+                </div>
+                <div class="card-content">
+                    <span class="card-title">{{ recipe['title'] }}</span>
+                    <p>{{ recipe['cook_time'] }} | Serves: {{ recipe['servings'] }}</p>
+                </div>
+                <div class="card-action">
+                    <a href="{{ url_for('get_recipe', recipe_id=recipe['_id'], from_page='home') }}">View</a>
+                    <a href="{{ url_for('edit_recipe', recipe_id=recipe['_id']) }}">Edit</a>
+                    <!-- Trigger Modal for Delete -->
+                    <a href="#deleteModal" class="red-text modal-trigger" data-recipe-id="{{ recipe['_id'] }}"
+                        data-recipe-title="{{ recipe['title'] }}">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <h4>Delete Recipe</h4>
+        <p>Are you sure you want to delete the recipe <span id="recipeTitle"></span>?</p>
+    </div>
+    <div class="modal-footer" style="display: flex; justify-content: space-between; ">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+        <form id="deleteForm" method="POST">
+            <button type="submit" class="red waves-effect waves-light btn">Delete</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
