@@ -198,6 +198,7 @@ def login():
             if check_password_hash(user['password_hash'], password):  
                 session['user'] = user['username']
                 flash('Login successful!', 'success')
+                session.permanent = True
                 return redirect(url_for('get_index'))
             else:
                 flash('Incorrect password, please try again.', 'error')
@@ -205,6 +206,12 @@ def login():
             flash('Email not found, please register first.', 'error')
 
     return render_template('login.html')
+
+
+@app.route('/keep_alive')
+def keep_alive():
+    session.modified = True
+    return '', 204
 
 @app.route('/logout')
 def logout():
