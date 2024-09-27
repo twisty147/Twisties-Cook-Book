@@ -1,6 +1,34 @@
 function goBack() {
     window.history.back();
 }
+
+// Function to reset session timeout on user activity
+function resetSession() {
+    fetch('/keep_alive');  // Send a request to the server to reset session
+}
+
+// Add event listeners for any user activity
+window.onload = function() {
+    document.addEventListener('mousemove', resetSession);
+    document.addEventListener('keypress', resetSession);
+    document.addEventListener('click', resetSession);
+};
+
+// Auto-logout after 10 minutes of inactivity
+let idleTime = 0;
+function timerIncrement() {
+    idleTime++;
+    if (idleTime >= 10) {  // After 10 minutes
+        window.location.href = "/logout";  // Redirect to logout page
+    }
+}
+
+// Increment the idle time every minute
+setInterval(timerIncrement, 60000);  // 1 minute intervals
+document.onmousemove = document.onkeypress = function() {
+    idleTime = 0;  // Reset idle time on any activity
+};
+
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize Materialize
     M.AutoInit();

@@ -6,6 +6,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime 
+from datetime import timedelta
 
 if os.path.exists("env.py"):
     import env
@@ -411,6 +412,9 @@ def delete_recipe(recipe_id):
         flash('An error occurred while trying to delete the recipe', 'error')
     return redirect(url_for('manage_recipes'))
 
+
+app.secret_key = '$ww=997Mhn%F00_F<%o0A_*5?/Hhn2' 
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=10)
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
