@@ -74,7 +74,8 @@
                 <div class="card-panel grey lighten-4">
                     <h5>Required Tools</h5>
                     <p class="">Use our premium kitchen tools for the best cooking experience! Discover more tools <a
-                            href="">here</a>.</p>
+                            href="{{ url_for('show_equipment_categories') }}">here</a>.</p>
+
 
                     <ul class="collection">
                         {% for tool in recipe.required_tools %}
