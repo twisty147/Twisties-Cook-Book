@@ -7,6 +7,7 @@ from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime 
 from datetime import timedelta
+from bson.errors import InvalidId 
 
 if os.path.exists("env.py"):
     import env
@@ -424,10 +425,39 @@ def delete_recipe(recipe_id):
 def show_equipment_categories():
     equipment_collection = mongo.db['equipmentCollection']
     # Retrieve all categories with their menu_image
-    categories = equipment_collection.find({}, {"category": 1, "menu_image": 1})
+    categories = equipment_collection.find({}, {"category": 1, "menu_image": 1, "_id": 1})
 
     # Pass the categories to the template
     return render_template('equipment_categories.html', categories=categories)
+
+
+@app.route('/category/<category_id>')
+def show_category_items(category_id):
+    try:
+        # Convert the category_id to ObjectId if it is a valid ObjectId
+        try:
+            category_id = ObjectId(category_id)
+        except InvalidId:
+            # If it's not a valid ObjectId, continue using it as a string
+            pass
+
+        # Query using either ObjectId or string, based on the type of category_id
+        query = {"_id": category_id} if isinstance(category_id, ObjectId) else {"_id": str(category_id)}
+        category = mongo.db.equipmentCollection.find_one(query)
+
+    except Exception as e:
+        # Return a 500 error page if something goes wrong with the database query
+        return "An error occurred while querying the database.", 500
+
+    if category:
+        # Convert the ObjectId in the category to a string before passing to the template
+        category["_id"] = str(category["_id"])
+        items = category.get('items', [])
+        return render_template('category_items.html', category=category, items=items)
+    else:
+        # Return a 404 error if the category is not found
+        return "Category not found", 404
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
