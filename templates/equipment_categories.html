@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="section">
+    <div class="container">
+        <button onclick="goBack()" style="background:none; border:none; cursor:pointer;">
+            <i class="fas fa-arrow-left" style="font-size:24px;"></i>
+        </button>
+        <h4 class="center-align">Equipment Categories</h4>
+        <div class="row">
+            {% for category in categories %}
+            <div class="col s12 m6 l4">
+                <a href="#" class="card-link"> <!-- Wrap each card in an individual link -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ category.menu_image }}" alt="{{ category.category }} image">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">{{ category.category }}</span>
+                        </div>
+                        <div class="card-action">
+                            <span class="teal-text">View Items</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            {% if loop.index % 3 == 0 and not loop.last %}
+        </div>
+        <div class="row"> <!-- Close and open new row after every 3 items -->
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}
