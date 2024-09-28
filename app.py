@@ -17,7 +17,7 @@ app = Flask(__name__)
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
-
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=20)
 
 mongo = PyMongo(app)
 
@@ -420,8 +420,14 @@ def delete_recipe(recipe_id):
     return redirect(url_for('manage_recipes'))
 
 
-app.secret_key = '$ww=997Mhn%F00_F<%o0A_*5?/Hhn2' 
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=10)
+@app.route('/equipment_categories')
+def show_equipment_categories():
+    equipment_collection = mongo.db['equipmentCollection']
+    # Retrieve all categories with their menu_image
+    categories = equipment_collection.find({}, {"category": 1, "menu_image": 1})
+
+    # Pass the categories to the template
+    return render_template('equipment_categories.html', categories=categories)
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
