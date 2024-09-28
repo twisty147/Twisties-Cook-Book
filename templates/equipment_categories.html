@@ -10,7 +10,8 @@
         <div class="row">
             {% for category in categories %}
             <div class="col s12 m6 l4">
-                <a href="#" class="card-link"> <!-- Wrap each card in an individual link -->
+                <!-- Convert ObjectId to string in URL generation -->
+                <a href="{{ url_for('show_category_items', category_id=category._id) }}" class="card-link">
                     <div class="card">
                         <div class="card-image">
                             <img src="{{ category.menu_image }}" alt="{{ category.category }} image">
@@ -27,11 +28,11 @@
 
             {% if loop.index % 3 == 0 and not loop.last %}
         </div>
-        <div class="row"> <!-- Close and open new row after every 3 items -->
+        <div class="row"> <!-- Close and open a new row after every 3 items -->
             {% endif %}
             {% endfor %}
         </div>
     </div>
-
 </div>
 {% endblock %}
+
