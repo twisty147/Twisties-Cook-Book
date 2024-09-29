@@ -160,3 +160,96 @@ footer {
 .btn-large {
     margin-top: 20px;
 }
+
+
+.modal {
+    width: 90%; 
+    max-width: 500px; 
+    border-radius: 10px;
+}
+
+.modal-content {
+    padding: 15px; 
+}
+
+#modalItemImage {
+    max-width: 100%;
+    height: auto;
+}
+
+#modalItemDescription {
+    font-size: 14px; 
+    line-height: 1.4;
+}
+
+.price {
+    font-size: 16px; 
+}
+
+#modalQuantity {
+    width: 50px; 
+    padding: 5px;
+}
+
+.modal-footer {
+    flex-direction: column; 
+    padding: 10px;
+}
+
+.modal-footer a {
+    width: 100%; 
+    margin: 5px 0; 
+    padding: 10px; 
+    text-align: center;
+}
+
+/* Media Query for devices with max-width 600px (small phones) */
+@media only screen and (max-width: 600px) {
+    .modal {
+        width: 95%; 
+    }
+
+    .modal-content {
+        padding: 10px; 
+    }
+
+    #modalItemDescription {
+        font-size: 13px; 
+    }
+
+    #modalQuantity {
+        width: 40px; 
+    }
+
+    .modal-footer {
+        padding: 8px; 
+    }
+
+    .modal-footer a {
+        padding: 8px; 
+        font-size: 14px; 
+    }
+}
+
+/* Media Query for devices with max-width 400px (very small screens) */
+@media only screen and (max-width: 400px) {
+    #modalItemDescription {
+        font-size: 12px; 
+        line-height: 1.3;
+    }
+
+    #modalQuantity {
+        width: 35px; 
+        padding: 4px;
+    }
+
+    .modal-footer a {
+        padding: 6px; 
+        font-size: 13px; 
+    }
+
+    /* Adjust image size for very small screens */
+    #modalItemImage {
+        max-height: 200px; 
+    }
+}
