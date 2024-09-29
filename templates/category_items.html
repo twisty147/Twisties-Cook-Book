@@ -29,8 +29,10 @@
             {% for item in items %}
             <div class="col s12 m6 l4">
                 <div class="card">
-                    <div class="card-image">
+                    <div class="card-image"
+                        onclick="showItemModal('{{ item.name }}', '{{ item.image_url }}', '{{ item.description }}', '{{ item.price_in_pounds }}', '{{ category._id }}', '{{ loop.index }}', '{{ item.no_in_stock }}')">
                         <img src="{{ item.image_url }}" alt="{{ item.name }} image">
+                       
                     </div>
                     <div class="card-content">
                         <!-- Display item name -->
@@ -60,4 +62,27 @@
     </div>
 </div>
 
+<!-- Modal Structure -->
+<div id="itemModal" class="modal" style="border-radius: 10px; overflow: hidden;">
+    <div class="modal-content">
+        <h4 id="modalItemName"></h4>
+        <img id="modalItemImage" src="" alt="Item image" style="width: 100%; height: auto;">
+        <p id="modalItemDescription"></p>
+        <p class="price">Price: £<span id="modalItemPrice"></span></p>
+
+        <!-- Quantity input inside modal -->
+        <div class="input-field inline" style="width: 100px;">
+            <input type="number" id="modalQuantity" min="1" value="1" class="validate">
+            <label for="modalQuantity">Quantity</label>
+        </div>
+
+        <!-- Add to Cart Button -->
+        <a href="#" class="btn teal" id="modalAddToCartButton">
+            <i class="fas fa-cart-plus"></i> Add to Cart
+        </a>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close btn-flat">Close</a>
+    </div>
+</div>
 {% endblock %}
