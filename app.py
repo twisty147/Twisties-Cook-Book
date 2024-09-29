@@ -492,6 +492,39 @@ def get_cart_item_count():
     cart_item_count = cart_count_processor()['cart_item_count']
     return jsonify({'cart_item_count': cart_item_count})
 
+@app.route('/add_to_cart', methods=['POST'])
+def add_to_cart():
+    username = session['user']
+    user = mongo.db.usersCollection.find_one({"username": username})
+    user_id = user['_id']
+    try:
+        data = request.get_json()
+
+        # Assuming you have a cartCollection to store cart items
+        result= mongo.db.cartsCollection.insert_one({
+            "item_category_id": ObjectId(data['category_id']),
+            "item_name": data['item_name'],
+            "item_price": data['item_price'],
+            "quantity": data['quantity'],
+            "total_price": data['total_price'],
+            "user": user['_id']
+        })
+        # Check if the insertion was successful
+        if result.inserted_id:  # This means the item was added to the cart
+            flash('Item added to cart successfully!', 'success')
+            return jsonify(success=True)
+        else:
+            flash('Failed to add item to cart. Please try again.', 'error')
+            return jsonify(success=False)
+        
+       
+    except Exception as e:
+        print(f"Error adding to cart: {e}")
+        flash('An error occurred while adding the item to the cart. Please try again.', 'error')
+        return jsonify({"success": False}), 500
+
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
