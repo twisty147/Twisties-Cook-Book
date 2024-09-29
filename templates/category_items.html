@@ -3,11 +3,16 @@
 {% block content %}
 <div class="section">
     <div class="container">
+        <!-- Go Back Button -->
         <button onclick="goBack()" style="background:none; border:none; cursor:pointer;">
             <i class="fas fa-arrow-left" style="font-size:24px;"></i>
         </button>
+
+        <!-- Category Title -->
         <h4 class="center-align">{{ category.category }} - Items</h4>
+
         <div class="row">
+            <!-- Loop through each item -->
             {% for item in items %}
             <div class="col s12 m6 l4">
                 <div class="card">
@@ -15,7 +20,23 @@
                         <img src="{{ item.image_url }}" alt="{{ item.name }} image">
                     </div>
                     <div class="card-content">
+                        <!-- Display item name -->
                         <span class="card-title">{{ item.name }}</span>
+                        <!-- Display price with pound (£) sign -->
+                        <p class="price">Price: £{{ item.price_in_pounds }}</p>
+                        
+                    </div>
+                    <div class="card-action">
+                        <!-- Quantity input -->
+                        <div class="input-field inline" style="width: 100px;">
+                            <input type="number" id="quantity-{{ item._id }}" min="1" value="1" class="validate">
+                            <label for="quantity-{{ item._id }}">Quantity</label>
+                        </div>
+
+                        <!-- Add to Cart Button -->
+                        <a href="#" class="btn teal" onclick="addToCart('{{ item._id }}')">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </a>
                     </div>
                 </div>
             </div>
@@ -23,4 +44,5 @@
         </div>
     </div>
 </div>
+
 {% endblock %}
