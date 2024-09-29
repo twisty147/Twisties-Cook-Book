@@ -12,83 +12,82 @@ window.onload = function () {
     document.addEventListener('mousemove', resetSession);
     document.addEventListener('keypress', resetSession);
     document.addEventListener('click', resetSession);
-};
 
-fetch('/cart_item_count')
-    .then(response => response.json())
-    .then(data => {
-        document.querySelector('.badge').innerText = data.cart_item_count;
-    });
+    fetch('/cart_item_count')
+        .then(response => response.json())
+        .then(data => {
+            const badge = document.querySelector('.badge');
+            if (badge) {
+                badge.innerText = data.cart_item_count;
+            }
+        });
 
-
-
-// Auto-logout after 10 minutes of inactivity
-let idleTime = 0;
-function timerIncrement() {
-    idleTime++;
-    if (idleTime >= 10) {  // After 10 minutes
-        window.location.href = "/logout";  // Redirect to logout page
+    // Auto-logout after 10 minutes of inactivity
+    let idleTime = 0;
+    function timerIncrement() {
+        idleTime++;
+        if (idleTime >= 10) {  // After 10 minutes
+            window.location.href = "/logout";  // Redirect to logout page
+        }
     }
-}
 
-// Increment the idle time every minute
-setInterval(timerIncrement, 60000);  // 1 minute intervals
-document.onmousemove = document.onkeypress = function () {
-    idleTime = 0;  // Reset idle time on any activity
-};
+    // Increment the idle time every minute
+    setInterval(timerIncrement, 60000);  // 1 minute intervals
+    document.onmousemove = document.onkeypress = function () {
+        idleTime = 0;  // Reset idle time on any activity
+    };
 
-document.addEventListener('DOMContentLoaded', function () {
     // Initialize Materialize
     M.AutoInit();
 
     // Reset filter functionality
-    var resetFilter = document.getElementById('reset-filter');
-    var urls = document.getElementById('urls');
-    var recipesUrl = urls ? urls.getAttribute('data-recipes-url') : null;
+    const resetFilter = document.getElementById('reset-filter');
+    const urls = document.getElementById('urls');
+    const recipesUrl = urls ? urls.getAttribute('data-recipes-url') : null;
 
     if (resetFilter && recipesUrl) {
         resetFilter.addEventListener('click', function () {
             // Clear the search field
             document.getElementById('search').value = '';
-
             // Redirect to the recipes URL
             window.location.href = recipesUrl;
         });
     }
 
     // Initialize Materialize sidenav
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems);
-
-
+    const sidenavElems = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(sidenavElems);
 
     // Auto-hide flash messages after 5 seconds
     setTimeout(function () {
-        let message = document.getElementById('flashMessage');
+        const message = document.getElementById('flashMessage');
         if (message) {
             message.style.display = 'none';
         }
     }, 5000); // 5000 milliseconds = 5 seconds
 
-
-
-    var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems);
+    // Initialize modal functionality
+    const modalElems = document.querySelectorAll('.modal');
+    M.Modal.init(modalElems);
 
     // When a delete link is clicked
     document.querySelectorAll('.modal-trigger').forEach(function (element) {
         element.addEventListener('click', function () {
-            var recipeId = this.getAttribute('data-recipe-id');
-            var recipeTitle = this.getAttribute('data-recipe-title');
+            const recipeId = this.getAttribute('data-recipe-id');
+            const recipeTitle = this.getAttribute('data-recipe-title');
             // Set the recipe title in the modal
-            document.getElementById('recipeTitle').textContent = recipeTitle;
+            const recipeTitleElement = document.getElementById('recipeTitle');
+            if (recipeTitleElement) {
+                recipeTitleElement.textContent = recipeTitle;
+            }
             // Set the delete form action dynamically
-            var deleteForm = document.getElementById('deleteForm');
-            deleteForm.setAttribute('action', '/delete_recipe/' + recipeId);
+            const deleteForm = document.getElementById('deleteForm');
+            if (deleteForm) {
+                deleteForm.setAttribute('action', '/delete_recipe/' + recipeId);
+            }
         });
     });
-
-});
+};
 
 function addToCart(categoryId, itemName, itemPrice, itemIndex) {
     const quantityInput = document.getElementById(`quantity-${itemIndex}`);
@@ -116,13 +115,34 @@ function addToCart(categoryId, itemName, itemPrice, itemIndex) {
     })
     .then(response => response.json())
     .then(data => {
-        if (data.success) {
-            window.location.reload();
-        } else {
-            window.location.reload();
-        }
+        window.location.reload(); // Reload page regardless of success
     })
     .catch(error => {
         console.error('Error:', error);
     });
+}
+
+function showItemModal(name, imageUrl, description, price, categoryId, index, noInStock) {
+    // Set the modal content
+    document.getElementById('modalItemName').innerText = name;
+    document.getElementById('modalItemImage').src = imageUrl;
+    document.getElementById('modalItemDescription').innerText = description;
+    document.getElementById('modalItemPrice').innerText = price;
+    document.getElementById('modalQuantity').value = 1;
+    document.getElementById('modalQuantity').max = noInStock;
+
+    // Update Add to Cart button functionality
+    const addToCartButton = document.getElementById('modalAddToCartButton');
+    if (addToCartButton) {
+        addToCartButton.onclick = function() {
+            const quantity = document.getElementById('modalQuantity').value;
+            addToCart(categoryId, name, price, index);
+        };
+    }
+
+    // Open the modal
+    const modalInstance = M.Modal.getInstance(document.getElementById('itemModal'));
+    if (modalInstance) {
+        modalInstance.open();
+    }
 }
