@@ -24,17 +24,17 @@
                         <span class="card-title">{{ item.name }}</span>
                         <!-- Display price with pound (£) sign -->
                         <p class="price">Price: £{{ item.price_in_pounds }}</p>
-                        
+
                     </div>
                     <div class="card-action">
                         <!-- Quantity input -->
                         <div class="input-field inline" style="width: 100px;">
-                            <input type="number" id="quantity-{{ item._id }}" min="1" value="1" class="validate">
+                            <input type="number" id="quantity-{{ item._id }}" min="1" value="1" class="validate quantity-input">
                             <label for="quantity-{{ item._id }}">Quantity</label>
                         </div>
-
+                    
                         <!-- Add to Cart Button -->
-                        <a href="#" class="btn teal" onclick="addToCart('{{ item._id }}')">
+                        <a href="#" class="btn teal" onclick="addToCart('{{ item._id }}', '{{ item.name }}', '{{ item.price_in_pounds }}', '{{ item.item_category_id }}')">
                             <i class="fas fa-cart-plus"></i> Add to Cart
                         </a>
                     </div>

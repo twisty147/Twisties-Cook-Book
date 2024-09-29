@@ -8,17 +8,17 @@ function resetSession() {
 }
 
 // Add event listeners for any user activity
-window.onload = function() {
+window.onload = function () {
     document.addEventListener('mousemove', resetSession);
     document.addEventListener('keypress', resetSession);
     document.addEventListener('click', resetSession);
 };
 
 fetch('/cart_item_count')
-  .then(response => response.json())
-  .then(data => {
-    document.querySelector('.badge').innerText = data.cart_item_count;
-  });
+    .then(response => response.json())
+    .then(data => {
+        document.querySelector('.badge').innerText = data.cart_item_count;
+    });
 
 
 
@@ -33,7 +33,7 @@ function timerIncrement() {
 
 // Increment the idle time every minute
 setInterval(timerIncrement, 60000);  // 1 minute intervals
-document.onmousemove = document.onkeypress = function() {
+document.onmousemove = document.onkeypress = function () {
     idleTime = 0;  // Reset idle time on any activity
 };
 
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }, 5000); // 5000 milliseconds = 5 seconds
 
-    
+
 
     var elems = document.querySelectorAll('.modal');
     var instances = M.Modal.init(elems);
@@ -89,3 +89,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 });
+

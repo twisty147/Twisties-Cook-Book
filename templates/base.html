@@ -43,18 +43,15 @@
                     <li><a href="{{ url_for('login') }}">Log In</a></li>
                     {% else %}
                     <!-- Visible links if user IS logged in -->
+                    <li>
+                        <a href="">
+                            <i class="fas fa-shopping-cart " style="font-size: small;"> {{ cart_item_count }}</i>
+                        </a>
+                    </li>
                     <li><a href="{{ url_for('get_index') }}">Home</a></li>
                     <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
                     <li><a href="{{ url_for('get_contact') }}">Contact</a></li>
-                    <li>
-                        <a href="">
-                            <i class="fas fa-shopping-cart"></i>
-                            <!-- Cart count badge; uses cart_item_count from context processor -->
-                            <span class="badge" data-badge-caption="">
-                                {{ cart_item_count }}
-                            </span>
-                        </a>
-                    </li>
+                    
                     <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                     {% endif %}
                 </ul>
