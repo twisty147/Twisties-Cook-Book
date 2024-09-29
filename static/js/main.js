@@ -14,6 +14,14 @@ window.onload = function() {
     document.addEventListener('click', resetSession);
 };
 
+fetch('/cart_item_count')
+  .then(response => response.json())
+  .then(data => {
+    document.querySelector('.badge').innerText = data.cart_item_count;
+  });
+
+
+
 // Auto-logout after 10 minutes of inactivity
 let idleTime = 0;
 function timerIncrement() {
@@ -32,7 +40,6 @@ document.onmousemove = document.onkeypress = function() {
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize Materialize
     M.AutoInit();
-
 
     // Reset filter functionality
     var resetFilter = document.getElementById('reset-filter');
