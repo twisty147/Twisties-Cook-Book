@@ -1,7 +1,7 @@
 import os
 from flask import (
     Flask, flash, render_template,
-    redirect, request, session, url_for)
+    redirect, request, session, url_for, jsonify)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -458,6 +458,39 @@ def show_category_items(category_id):
         # Return a 404 error if the category is not found
         return "Category not found", 404
 
+
+@app.context_processor
+def cart_count_processor():
+    cart_item_count = 0  # Default cart count
+
+    if 'user' in session:
+        # Get the logged-in username
+        username = session['user']
+        
+        # Find the user in the usersCollection
+        user = mongo.db.usersCollection.find_one({"username": username})
+        if user:
+            # Extract user ID
+            user_id = user['_id']
+            
+            # Find all cart documents for the user
+            carts = mongo.db.cartsCollection.find({"user": ObjectId(user_id)})
+            
+            # Sum up the quantity from all cart documents
+            for cart in carts:
+                # Check if 'quantity' field is present in the cart document
+                if 'quantity' in cart:
+                    # Add the quantity to the cart count
+                    cart_item_count += int(cart['quantity'])
+    # Make cart_item_count available globally in all templates
+    return {'cart_item_count': cart_item_count}
+
+
+
+@app.route('/cart_item_count', methods=['GET'])
+def get_cart_item_count():
+    cart_item_count = cart_count_processor()['cart_item_count']
+    return jsonify({'cart_item_count': cart_item_count})
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
