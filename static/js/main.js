@@ -90,3 +90,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+function addToCart(categoryId, itemName, itemPrice, itemIndex) {
+    const quantityInput = document.getElementById(`quantity-${itemIndex}`);
+    const quantity = parseInt(quantityInput.value);
+
+    if (!quantity || quantity < 1) {
+        quantityInput.style.borderColor = 'red';
+        return;
+    }
+
+    const totalPrice = itemPrice * quantity;
+
+    const data = {
+        category_id: categoryId,
+        item_name: itemName,
+        item_price: itemPrice,
+        quantity: quantity,
+        total_price: totalPrice
+    };
+
+    fetch('/add_to_cart', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            window.location.reload();
+        } else {
+            window.location.reload();
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
