@@ -121,6 +121,11 @@ footer {
     background-color: red;
     color: white;
 }
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333; /* Dark gray */
+}
 
 @media (max-width: 600px) {
     .login-card {
