@@ -3,6 +3,19 @@
 {% block content %}
 <div class="section">
     <div class="container">
+        <!-- Display Flash Messages -->
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="col s12">
+            {% for category, message in messages %}
+            <div id="flashMessage" class="card-panel {{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
         <!-- Go Back Button -->
         <button onclick="goBack()" style="background:none; border:none; cursor:pointer;">
             <i class="fas fa-arrow-left" style="font-size:24px;"></i>
@@ -29,12 +42,14 @@
                     <div class="card-action">
                         <!-- Quantity input -->
                         <div class="input-field inline" style="width: 100px;">
-                            <input type="number" id="quantity-{{ item._id }}" min="1" value="1" class="validate quantity-input">
-                            <label for="quantity-{{ item._id }}">Quantity</label>
+                            <input type="number" id="quantity-{{ loop.index }}" min="1" max="{{ item.no_in_stock }}"
+                                value="1" class="validate">
+                            <label for="quantity-{{ loop.index }}">Quantity</label>
                         </div>
-                    
+
                         <!-- Add to Cart Button -->
-                        <a href="#" class="btn teal" onclick="addToCart('{{ item._id }}', '{{ item.name }}', '{{ item.price_in_pounds }}', '{{ item.item_category_id }}')">
+                        <a href="#" class="btn teal"
+                            onclick="addToCart('{{ category._id }}', '{{ item.name }}', '{{ item.price_in_pounds }}', '{{ loop.index }}')">
                             <i class="fas fa-cart-plus"></i> Add to Cart
                         </a>
                     </div>
