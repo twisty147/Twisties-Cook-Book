@@ -146,3 +146,111 @@ function showItemModal(name, imageUrl, description, price, categoryId, index, no
         modalInstance.open();
     }
 }
+function showRemoveConfirmation(itemId, itemName) {
+    // Set the item title in the confirmation modal
+    document.getElementById('itemTitle').innerText = itemName;
+
+    // Update the delete form's action dynamically
+    const deleteForm = document.getElementById('deleteForm');
+    deleteForm.onsubmit = function(e) {
+        e.preventDefault(); // Prevent the default form submission
+        removeFromCart(itemId);  // Call the remove function
+    };
+
+    // Open the modal
+    const modalInstance = M.Modal.getInstance(document.getElementById('deleteModal'));
+    modalInstance.open();
+}
+
+function removeFromCart(itemId) {
+    fetch(`/remove_from_cart/${itemId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            window.location.reload();  // Reload the page to update cart
+        } else {
+            console.error('Failed to remove item:', data.message);
+            alert('Failed to remove item from cart');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+function toggleEdit(itemId) {
+    const displaySpan = document.getElementById(`quantity-display-${itemId}`);
+    const inputField = document.getElementById(`quantity-input-${itemId}`);
+    const updateButton = document.getElementById(`update-button-${itemId}`);
+
+    if (inputField.style.display === "none") {
+        // Show input field and hide display span
+        inputField.style.display = "inline-block";
+        displaySpan.style.display = "none";
+        updateButton.style.display = "inline-block";
+    } else {
+        // Hide input field and show display span
+        inputField.style.display = "none";
+        displaySpan.style.display = "inline-block";
+        updateButton.style.display = "none";
+    }
+}
+
+function updateCart(itemId) {
+    const quantityInput = document.getElementById(`quantity-input-${itemId}`);
+    const newQuantity = parseInt(quantityInput.value);
+
+    if (newQuantity < 1) {
+        alert('Quantity must be at least 1.');
+        return;
+    }
+
+    // Call your function to update the cart on the server
+    fetch(`/update_cart/${itemId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ quantity: newQuantity })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Update displayed quantity
+            window.location.reload();
+            
+        } else {
+            alert('Failed to update the cart. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+// Function to calculate the total cost of all cart items
+function calculateTotalCost() {
+    let totalCost = 0;
+
+    // Select all cart items using the class `cart-item`
+    const cartItems = document.querySelectorAll('.collection-item');
+
+    // Iterate through each item and sum up the total cost
+    cartItems.forEach(item => {
+        // Retrieve the item price and quantity from data attributes
+        const itemPrice = parseFloat(item.getAttribute('data-item-price'));
+        const itemQuantity = parseInt(item.getAttribute('data-item-quantity'));
+
+        // Calculate the total price for this item and add it to the total cost
+        totalCost += itemPrice * itemQuantity;
+    });
+
+    // Display the total cost in the cart summary
+    document.getElementById('total-cost').innerText = totalCost.toFixed(2);
+}
+
+// Call the function when the page loads
+document.addEventListener('DOMContentLoaded', calculateTotalCost);
