@@ -21,3 +21,80 @@ In addition to being a valuable resource for users, the **Twisties Cookbook** se
 For those looking to enhance their cooking toolkit, the **Required Tools** feature highlights the best kitchen gadgets that make the recipes easier and more enjoyable to prepare. Not only do we recommend the right tools for each recipe, but we also feature our own brand of kitchen essentials, ensuring you have the best equipment at your fingertips.
 
 With **Twisties Cookbook**, cooking becomes more than just a task—it’s an interactive, engaging, and highly personalized experience. Start exploring, sharing, and cooking with a twist today!
+
+# Table of Contents
+
+1. [Requirements](#requirements)
+2. [Usecase](#usecase)
+3. [Design](#design)
+4. [Development](#development)
+5. [Testing](#testing)
+6. [Deployment](#deployment)
+7. [Credits](#credits)
+8. [License](#license)
+
+
+# Requirements
+
+## 1. Functional Requirements
+
+**User Login Verification**
+   - The system must check if a user is logged in using session data.
+   - If the user is not logged in, a welcome message for guests should be displayed.
+
+**Personalized Welcome Message**
+   - Display a welcome message that includes the username of the logged-in user.
+   - Display a general welcome message for users who are not logged in.
+
+**Dashboard Statistics (Nice to Have)**
+   - Show statistics:
+     - Total number of recipes available in the application.
+     - Number of recipes added by the logged-in user.
+     - Number of favorited recipes by the logged-in user.
+
+**Dashboard Statistics (Nice to Have)**
+   - Show statistics:
+     - Total number of recipes available in the application.
+     - Number of recipes added by the logged-in user.
+     - Number of favorited recipes by the logged-in user.
+
+**Quick Links Section**
+   - Provide links for:
+     - Home.
+     - Viewing all recipes.
+     - Contact.
+     - Managing user recipes with CRUD Functionalities.
+     - Updating user account information.
+
+**Call to Action Button**
+   - Include a prominent button that allows guests to log in to explore recipes.
+
+**Featured Recipes Display**
+   - Display a section for "Featured Recipes."
+
+**Responsive Design**
+   - Ensure that the design is adaptable across diffrent types of devices.
+
+**Feedback Notifications**
+   - Implement messages to provide feedback for various user actions.
+
+
+## 2. Non-Functional Requirements
+
+**User Interface Design**
+   - The interface should be intuitive and easy to navigate.
+   - Use consistent design elements (colors, fonts) throughout the page.
+
+**Accessibility**
+   - The page must comply with WCAG 2.1 Level AA accessibility standards.
+
+**Session Management**
+   - Ensure that session data is securely managed and sensitive information is protected.
+
+**Input Validation**
+   - Validate all user inputs.
+
+**Cross-Browser Support**
+   - The website should be compatible with the latest versions of major browsers.
+
+
