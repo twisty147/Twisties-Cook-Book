@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="section">
+
+    <div class="container">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="col s12">
+            {% for category, message in messages %}
+            <div id="flashMessage" class="card-panel {{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+        <h4 class="center-align">Your Cart</h4>
+
+        <!-- Check if the cart is empty -->
+        {% if cart_items|length == 0 %}
+        <div class="card-panel teal lighten-4 center-align">
+            <p>Your cart is currently empty. Browse items and add them to your cart!</p>
+            <a href="{{ url_for('show_equipment_categories') }}" class="btn teal">Browse Equiptments</a>
+        </div>
+        {% else %}
+        <!-- Display Cart Items -->
+        <ul class="collection">
+            {% for item in cart_items %}
+            <li class="collection-item avatar" data-item-id="{{ item.id }}" data-item-price="{{ item.item_price }}" data-item-quantity="{{ item.quantity }}">
+                <img src="{{ item.image_url }}" alt="{{ item.name }} image" class="circle" style="object-fit: cover;">
+                <span class="title"><strong>{{ item.item_name }}</strong></span>
+
+                <p>
+                    Quantity:
+                    <span id="quantity-display-{{ item.id }}"
+                        style="border: 1px solid #ccc; padding: 5px; display: inline-block; width: 50px; text-align: center;">
+                        {{ item.quantity }}
+                    </span>
+                    <input type="number" id="quantity-input-{{ item.id }}" value="{{ item.quantity }}" min="1"
+                        style="width: 50px; display: none; text-align: center;">
+                </p>
+
+                <p><strong>Total: £{{ item.total_price }}</strong></p>
+
+                <!-- Edit button -->
+                <button onclick="toggleEdit('{{ item.id }}')" class="waves-effect waves-light btn-small">
+                    <i class="material-icons">edit</i>Edit
+                </button>
+
+                <!-- Update button (initially hidden) -->
+                <button onclick="updateCart('{{ item.id }}')" class="waves-effect waves-light btn-small"
+                    style="display: none;" id="update-button-{{ item.id }}">
+                    <i class="material-icons">check</i>Update
+                </button>
+
+                <!-- Remove button -->
+                <a href="#" onclick="showRemoveConfirmation('{{ item.id }}', '{{ item.name }}')"
+                    class="secondary-content">
+                    <i class="material-icons red-text">remove_shopping_cart</i>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+
+
+        <!-- Cart Summary -->
+        <div class="card-panel">
+            <h5 class="center-align">Cart Summary</h5>
+            <p><strong>Total Items Types:</strong> <span id="total-items">{{ cart_items|length }}</span></p>
+            <p><strong>Total Cost:</strong> £<span id="total-cost">{{ total_cost }}</span></p>
+            <a href="" class="btn teal btn-large right">Proceed to Checkout</a>
+            <a href="{{ url_for('show_equipment_categories') }}" class="btn grey btn-large left">Continue Shopping</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteModal" class="modal" style="max-width: 97%; max-height: 85vh; overflow: hidden;">
+    <div class="modal-content" style="padding: 15px;">
+        <h4 class="red-text text-darken-2" style="font-size: 1.5rem;">
+            <i class="material-icons left" style="font-size: 1.8rem;">warning</i> Remove Item
+        </h4>
+        <p style="font-size: 1.1rem;">Are you sure you want to remove the item from your cart?</p>
+        <p class="flow-text" id="itemTitle" style="font-weight: 600; margin-top: 10px; font-size: 1.2rem;"></p>
+    </div>
+    <div class="" style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+        <!-- Cancel button -->
+        <a href="#!" class="modal-close waves-effect waves-dark btn-flat black-text"
+            style="font-size: 1.1rem; display: flex; align-items: center;">
+            <i class="material-icons left">cancel</i>Cancel
+        </a>
+
+        <!-- Delete form -->
+        <form id="deleteForm" method="POST" style="margin: 0;">
+            <button type="submit" class="waves-effect waves-light btn red darken-1"
+                style="display: flex; align-items: center; padding: 0 15px; font-size: 1.1rem;">
+                <i class="material-icons left">delete</i>Remove
+            </button>
+        </form>
+    </div>
+
+</div>
+
+
+{% endblock %}
