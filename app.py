@@ -500,7 +500,7 @@ def add_to_cart():
     try:
         data = request.get_json()
 
-        # Assuming you have a cartCollection to store cart items
+        
         result= mongo.db.cartsCollection.insert_one({
             "item_category_id": ObjectId(data['category_id']),
             "item_name": data['item_name'],
@@ -522,6 +522,151 @@ def add_to_cart():
         print(f"Error adding to cart: {e}")
         flash('An error occurred while adding the item to the cart. Please try again.', 'error')
         return jsonify({"success": False}), 500
+
+
+
+@app.route('/view_cart', methods=['GET'])
+def view_cart():
+    # Get the logged-in user from the session
+    username = session.get('user')
+
+    if not username:
+        flash('Please log in to view your cart', 'error')
+        return redirect(url_for('login'))  # Redirect to login page if user is not logged in
+
+    # Find the user's ID
+    user = mongo.db.usersCollection.find_one({"username": username})
+    
+    if not user:
+        flash('User not found', 'error')
+        return redirect(url_for('get_index'))  # Handle if the user is not found
+
+    try:
+        # Fetch all cart items for the logged-in user
+        cart_items = list(mongo.db.cartsCollection.find({"user": user['_id']}))
+
+        # Prepare a list to store cart items with image URLs
+        cart_with_images = []
+
+        # Loop through each cart item to fetch image_url from equipmentCollection
+        for item in cart_items:
+            # Find the corresponding equipment by item_category_id in equipmentCollection
+            equipment = mongo.db.equipmentCollection.find_one({"_id": ObjectId(item['item_category_id'])})
+
+            # Find the matching item in the equipment 'items' array and extract the image URL
+            image_url = None
+            if equipment and 'items' in equipment:
+                for equipment_item in equipment['items']:
+                    if equipment_item['name'] == item['item_name']:  # Match the item name
+                        image_url = equipment_item.get('image_url', '/static/images/default.png')
+                        break
+
+            # Add the image URL and other details to the cart item data
+            cart_with_images.append({
+                "item_name": item['item_name'],
+                "item_price": item['item_price'],
+                "quantity": item['quantity'],
+                "total_price": item['total_price'],
+                "item_category_id": str(item['item_category_id']),
+                "image_url": image_url if image_url else "/static/images/default.png",  # Fallback image
+                "stock": equipment_item.get('stock', 0) if equipment_item else 0,  # Assuming there's a stock field
+                "id": str(item['_id'])  # Cart item ID for updating/removing
+            })
+
+
+
+        # Render to a template (for web page)
+        return render_template('view_cart.html', cart_items=cart_with_images)
+
+    except Exception as e:
+        print(f"Error fetching cart: {e}")
+        flash('An error occurred while retrieving your cart. Please try again.', 'error')
+        return redirect(url_for('get_index'))
+
+
+@app.route('/remove_from_cart/<item_id>', methods=['POST'])
+def remove_from_cart(item_id):
+    # Get the logged-in user from the session
+    username = session.get('user')
+
+    if not username:
+        flash('Please log in to modify your cart', 'error')
+        return redirect(url_for('login'))  # Redirect to login page if user is not logged in
+
+    try:
+        # Find the user's ID
+        user = mongo.db.usersCollection.find_one({"username": username})
+
+        if not user:
+            flash('User not found', 'error')
+            return jsonify(success=False, message="User not found"), 404
+
+        # Remove the item from the cart for the user
+        result = mongo.db.cartsCollection.delete_one({
+            "_id": ObjectId(item_id),
+            "user": user['_id']
+        })
+
+        if result.deleted_count > 0:
+            flash('Item removed from cart', 'success')
+            return jsonify(success=True, message="Item removed successfully"), 200
+        else:
+            flash('Failed to remove item from cart', 'error')
+            return jsonify(success=False, message="Item not found or unauthorized access"), 404
+
+    except Exception as e:
+        print(f"Error removing item from cart: {e}")
+        flash('An error occurred while removing the item from the cart.', 'error')
+        return jsonify(success=False, message="Internal server error"), 500
+
+
+@app.route('/update_cart/<item_id>', methods=['POST'])
+def update_cart(item_id):
+    username = session['user']
+    user = mongo.db.usersCollection.find_one({"username": username})
+    user_id = user['_id']
+
+    # Get the new quantity from the request
+    data = request.get_json()
+    new_quantity = data.get('quantity')
+    
+    # Ensure the quantity is an integer (if not, this could cause calculation issues)
+    try:
+        new_quantity = int(new_quantity)
+    except ValueError:
+        return jsonify(success=False, error="Invalid quantity value"), 400
+
+    try:
+        # Fetch the cart item to get the current price
+        cart_item = mongo.db.cartsCollection.find_one({"_id": ObjectId(item_id), "user": user_id})
+        
+        if not cart_item:
+            return jsonify(success=False, error="Cart item not found"), 404
+
+        # Get the price from the cart item and ensure it's a float for calculation
+        item_price = cart_item.get('item_price', 0.0)
+        try:
+            item_price = float(item_price)
+        except ValueError:
+            return jsonify(success=False, error="Invalid item price value"), 400
+
+        print(f"Updating cart item. Item Price: {item_price}, New Quantity: {new_quantity}")
+
+        # Update the cart item in the database
+        mongo.db.cartsCollection.update_one(
+            {"_id": ObjectId(item_id), "user": user_id},
+            {"$set": {
+                "quantity": new_quantity,
+                "total_price": new_quantity * item_price  # Update total price
+            }}
+        )
+        flash("Cart item updated successfully.", "success")
+        return jsonify(success=True)
+        
+
+    except Exception as e:
+        print(f"Error updating cart item: {e}")
+        return jsonify(success=False, error=str(e)), 500
 
 
 
