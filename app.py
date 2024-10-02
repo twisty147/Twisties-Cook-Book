@@ -8,7 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime 
 from datetime import timedelta
 from bson.errors import InvalidId 
-
+import cloudinary.uploader
 if os.path.exists("env.py"):
     import env
 
@@ -19,6 +19,7 @@ app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=20)
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Maximum file size limit (16MB)
 
 mongo = PyMongo(app)
 
@@ -326,17 +327,20 @@ def manage_recipes():
     user_recipes = mongo.db.recipesCollection.find({"added_by": session['user']})
     return render_template('manage_recipes.html', recipes=user_recipes)
 
-
+# Configure Cloudinary 
+cloudinary.config(
+    cloud_name='dq27h3qqy',
+    api_key='657419882937697',
+    api_secret='zCM1OE5iDvdDUOy3-twKpygTerU',
+    secure=True
+)
 @app.route('/recipe/create', methods=['GET', 'POST'])
 @app.route('/create_recipe', methods=['POST'])
 def create_recipe():
-   
-    usersCollection = mongo.db.usersCollection
-    user = usersCollection.find_one({"username": session['user']})
-    username = session['user']
-   
+    username = session.get('user')
+    
     if request.method == 'POST':
-    # Extract form data
+        # Extract form data
         title = request.form.get('title')
         ingredients = request.form.getlist('ingredients[]')
         preparation_steps = request.form.getlist('preparation_steps[]')
@@ -344,10 +348,22 @@ def create_recipe():
         prep_time = int(request.form.get('prep_time'))
         cook_time = int(request.form.get('cook_time'))
         servings = int(request.form.get('servings'))
-        image_url = request.form.get('image_url')
         tags = request.form.get('tags')
+        required_tools = request.form.getlist('required_tools[]') or []
 
-    # Create a recipe dictionary
+        # Handle image upload
+        image_url = None  # Initialize image URL as None
+        if 'image_file' in request.files:
+            image_file = request.files['image_file']
+            
+            # Check if the user selected a file
+            if image_file and image_file.filename != '':
+                # Upload the file to Cloudinary
+                upload_result = cloudinary.uploader.upload(image_file)
+                # Get the URL of the uploaded image
+                image_url = upload_result.get('url')
+        
+        # Create a recipe dictionary with the image URL if available
         recipe = {
             'title': title,
             'ingredients': ingredients,
@@ -356,9 +372,9 @@ def create_recipe():
             'prep_time': prep_time,
             'cook_time': cook_time,
             'servings': servings,
-            'image_url': image_url,
-            'required_tools': request.form.getlist('required_tools[]') or [],  
-            'tags': tags.split(',') if tags else [],  
+            'image_url': image_url, 
+            'required_tools': required_tools,
+            'tags': tags.split(',') if tags else [],
             'added_by': username,
             'date_time_added': datetime.now()
         }
@@ -370,9 +386,9 @@ def create_recipe():
         except Exception as e:
             flash(f'An error occurred: {str(e)}', 'error')
 
-        return redirect(url_for('manage_recipes')) 
+        return redirect(url_for('manage_recipes'))
 
-    return render_template('create_recipe.html') 
+    return render_template('create_recipe.html')
 
 
 @app.route('/recipe/edit/<recipe_id>', methods=['GET', 'POST'])
@@ -393,23 +409,33 @@ def edit_recipe(recipe_id):
             'title': request.form.get('title'),
             'ingredients': request.form.getlist('ingredients[]'),
             'preparation_steps': request.form.getlist('preparation_steps[]'),
-            'required_tools': request.form.get('required_tools []'),
             'cuisine': request.form.get('cuisine'),
-            'prep_time': request.form.get('prep_time'),
-            'cook_time': request.form.get('cook_time'),
-            'servings': request.form.get('servings'),
+            'prep_time': int(request.form.get('prep_time')),
+            'cook_time': int(request.form.get('cook_time')),
+            'servings': int(request.form.get('servings')),
             'required_tools': request.form.getlist('required_tools[]') or [],
-            'image_url': request.form.get('image_url'),
             'tags': request.form.get('tags').split(","),
             'date_time_edited': datetime.now()
-            
         }
-        mongo.db.recipesCollection.update_one({"_id": ObjectId(recipe_id)}, {"$set": update_data})
-        flash('Recipe updated successfully!.', 'success')
+
+        # Handle image upload
+        if 'image_file' in request.files:
+            image_file = request.files['image_file']
+            # Check if the user selected a file
+            if image_file and image_file.filename != '':
+                # Upload the file to Cloudinary
+                upload_result = cloudinary.uploader.upload(image_file)
+                # Get the URL of the uploaded image
+                update_data['image_url'] = upload_result.get('url')
         
+        # Update the recipe document in the MongoDB collection
+        mongo.db.recipesCollection.update_one({"_id": ObjectId(recipe_id)}, {"$set": update_data})
+        flash('Recipe updated successfully!', 'success')
+
         return redirect(url_for('manage_recipes'))
   
     return render_template('edit_recipe.html', recipe=recipe, enumerate=enumerate)
+
 
 @app.route('/delete_recipe/<recipe_id>', methods=['POST'])
 def delete_recipe(recipe_id):
