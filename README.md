@@ -91,7 +91,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 **Cross-Browser Support**
    - The website should be compatible with the latest versions of major browsers.
 
-## 2. Requirements Engineering
+## 1.1. Requirements Engineering
 **Base Template**
    - Include CSS Frameworks
    - Include javaScript Libraries/files
@@ -154,4 +154,23 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
       - **Register Button**
 
 **Recipes Page**
-   - Include a button to allow users to go back to the previous page:
+   - Include a button to allow users to go back to the previous page
+   - Display the title of the page
+   - Implement a search form for users to search recipes
+   - Create a section to display the recipes
+   - Implement pagination controls to navigate through multiple pages of recipes
+   - Users should be able to add recipes to favorites
+   - users should be able to share recipes to their page on social media
+   - **NICE TO HAVE** Build upon the required tools field to promote Twisties brand of kitchen tools 
+   
+
+**Manage Recipe**
+   - Users Should be able to perform CRUD functionalities on recipes. Update/Delete only for the recipes they added.
+
+**Cart**
+- The users cart page should extend the base template
+- Display the title of the page
+- Check if the cart is empty and display a message accordingly
+- Create a list to display items in the cart
+- Display a summary of the cart contents and total cost
+- Confirm before deleting an item in cart
