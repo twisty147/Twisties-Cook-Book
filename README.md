@@ -73,7 +73,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
    - Implement messages to provide feedback for various user actions.
 
 
-## 2. Non-Functional Requirements
+## 1.1. Non-Functional Requirements
 
 **User Interface Design**
    - The interface should be intuitive and easy to navigate.
@@ -91,7 +91,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 **Cross-Browser Support**
    - The website should be compatible with the latest versions of major browsers.
 
-## 1.1. Requirements Engineering
+## 1.2. Requirements Engineering
 **Base Template**
    - Include CSS Frameworks
    - Include javaScript Libraries/files
@@ -174,3 +174,4 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 - Create a list to display items in the cart
 - Display a summary of the cart contents and total cost
 - Confirm before deleting an item in cart
+- Users should be able to edit items in their cart
