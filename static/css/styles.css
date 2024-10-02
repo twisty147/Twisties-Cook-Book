@@ -247,8 +247,7 @@ footer {
         padding: 6px; 
         font-size: 13px; 
     }
-
-    /* Adjust image size for very small screens */
+    
     #modalItemImage {
         max-height: 200px; 
     }

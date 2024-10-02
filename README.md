@@ -1,12 +1,12 @@
-# Introduction to the Twisties Cookbook Web Application
+# Introduction to the Twisties Cookbook
 
-Welcome to the **Twisties Cookbook**, a one-stop platform where culinary creativity meets convenience. Designed with food enthusiasts in mind, our application allows you to easily find, share, and store your favorite recipes—all while discovering new ways to enhance your cooking experience.
+Welcome to the **Twisties Cookbook**, a one-stop platform where culinary creativity meets convenience. Designed with food enthusiasts in mind, our web application allows you to easily find, share, and store your favorite recipes—all while discovering new ways to enhance your cooking experience.
 
 ## Purpose and Value for Users
 
 The **Twisties Cookbook** is built for home cooks, foodies, and anyone passionate about preparing delicious meals. Our platform gives you the freedom to organize and access recipes like never before. Whether you’re searching for the perfect dish to cook tonight or want to add your own culinary creations to share with the world, the *Twisties Cookbook*  makes the process seamless.
 
-With features like ingredient lists, step-by-step preparation instructions, cuisine categories, and required tools, the application offers a comprehensive cooking experience that goes beyond simple recipes. Users can:
+With features like ingredient lists, step-by-step preparation instructions, personal favorite cuisine, and required tools, the application offers a comprehensive cooking experience that goes beyond simple recipes. Users can:
 
 - **Find Recipes Easily**: Our intuitive search and directory allow you to locate recipes by ingredient, cuisine, or required cooking tools.
 - **Add & Customize**: Upload your own recipes, edit them as needed, and share your unique culinary twists with the community.
@@ -45,12 +45,6 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 **Personalized Welcome Message**
    - Display a welcome message that includes the username of the logged-in user.
    - Display a general welcome message for users who are not logged in.
-
-**Dashboard Statistics (Nice to Have)**
-   - Show statistics:
-     - Total number of recipes available in the application.
-     - Number of recipes added by the logged-in user.
-     - Number of favorited recipes by the logged-in user.
 
 **Dashboard Statistics (Nice to Have)**
    - Show statistics:
@@ -97,4 +91,17 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 **Cross-Browser Support**
    - The website should be compatible with the latest versions of major browsers.
 
-
+## 2. Requirements Engineering
+**Home Page**
+   - If a user is logged in, the page displays a personalized welcome message: "Welcome, {username}!".
+   - Below the welcome message, there should be a dashboard summary showing:
+   - **Total Recipes**: Displays the total number of recipes in the database.
+   - **Recipes Added by User**: Displays the count of recipes added by the logged-in user.
+   - **Favorited Recipes**: Displays the count of recipes favorited by the user.
+   - Additional cards allow users to:
+   - **Manage My Recipes**: Link to the recipe management page.
+   - **View All Recipes**: Link to view all available recipes.
+   - **Update Account**: Link to the account update page.
+   ### For Guests:
+   - If a user is not logged in, the page displays a welcoming message: "Welcome to Twisties Cookbook".
+   - There should be a call-to-action button prompting guests to log in: "Log In to Explore Recipes".
