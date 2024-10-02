@@ -178,12 +178,12 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 
 -**userCollection** 
    - Used for storing user information in the MongoDB collection.
-         - Fields Explanation:
-            - _id
+      - Fields Explanation:
+            **- _id**
                - Type: ObjectId
                - Description: This is a unique identifier for the user document in the MongoDB collection. MongoDB automatically generates this value when a new document is inserted which ensures that a specific user document can be uniquely identified within the collection.
          
-            - username
+           ** - username**
                - Type: String
                - Description: This field stores the unique username chosen by the user when they registered.  The application will use this field for displaying the user's name in various parts of the application, such as on the profile page.
            
