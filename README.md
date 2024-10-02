@@ -100,9 +100,9 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
    - Include a mobile-friendly sidebar menu.
    - Include a Main content section
    - Include a Footer Section.
+    **All pages should extend from the base template.**
 
 **Index Page**
-   - The page should extend from the base template.
    - If a user is logged in, the page displays a personalized welcome message: "Welcome, {username}!".
    - Below the welcome message, there should be a dashboard summary showing:
    - **Total Recipes**: Displays the total number of recipes in the database.
