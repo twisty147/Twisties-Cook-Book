@@ -6,7 +6,7 @@
         <i class="fas fa-arrow-left" style="font-size:24px;"></i>
     </button>
     <h3 class="center-align">Create a New Recipe</h3>
-    <form method="POST" action="{{ url_for('create_recipe') }}">
+    <form method="POST" action="{{ url_for('create_recipe') }}" enctype="multipart/form-data">
         <div class="row">
             <!-- Recipe Title -->
             <div class="input-field col s12">
@@ -266,9 +266,21 @@
                 <input type="number" id="servings" name="servings" required>
                 <label for="servings">Servings</label>
             </div>
-            <div class="input-field col s12">
-                <input type="url" id="image_url" name="image_url">
-                <label for="image_url">Image URL</label>
+            <!-- Image Uploader Field -->
+            <div class="file-field input-field col s12">
+                <div class="btn">
+                    <span>Upload Image</span>
+                    <input type="file" id="image_file" name="image_file" accept="image/*"
+                        onchange="previewImage(event)">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Upload an image file">
+                </div>
+            </div>
+
+            <!-- Image preview section -->
+            <div class="col s12">
+                <img id="image_preview" src="" alt="Image Preview" style="max-width: 200px; height: auto; border: 1px solid #ddd; padding: 5px; display: none;" />
             </div>
             <div class="input-field col s12">
                 <input type="text" id="tags" name="tags">
