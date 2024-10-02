@@ -100,7 +100,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
    - Include a mobile-friendly sidebar menu.
    - Include a Main content section
    - Include a Footer Section.
-    **All pages should extend from the base template.**
+   - **All pages should extend from the base template.**
 
 **Index Page**
    - If a user is logged in, the page displays a personalized welcome message: "Welcome, {username}!".
@@ -124,7 +124,6 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
    - A link to view the full recipe.
 
 **Contact Page**
-   - The page should extend from the base template and includes a block to hold the contact information and form.
    - There should be a button with a back arrow icon allowing users to navigate back to the previous page.
    - There should be a centered header with the text "Contact Us" to indicate the purpose of the page.
    - There should be a form that captures user input with the following fields:
@@ -137,7 +136,6 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
    - An embedded Google Map that displays the location of the business.
 
 **Log in Page**
-   - The page should extend from the base template.
    - Include a message prompting users who do not have an account to register, linking to the registration page
    - Include the following fields in the login form:
       - **Email Field:**
@@ -145,7 +143,6 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
       - **Submit Button**
 
 **Registration Page**
-   - The page should extend from the base template.
    - Include a message prompting users who already have an account to log in, linking to the login page:
    - Include a Registration Form with the following fields: 
       - **Name Field:**
