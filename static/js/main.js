@@ -88,7 +88,67 @@ window.onload = function () {
         });
     });
 };
+//JavaScript for adding and removing ingredients and preparation steps
+let ingredientCount = 1;
+let stepCount = 1;
+let toolCount = 1;
+// Add Ingredient
+document.getElementById('add-ingredient-btn').addEventListener('click', function () {
+    ingredientCount++;
+    const newIngredient = `
+                <div class="input-field" id="ingredient-${ingredientCount}" style="display: flex;">
+                    <input type="text" id="ingredient_input_${ingredientCount}" name="ingredients[]" required>
+                    <label for="ingredient_input_${ingredientCount}">Ingredient ${ingredientCount}</label>
+                    <i class="material-icons red-text delete-ingredient" style="cursor: pointer;">delete</i>
+                </div>`;
+    document.getElementById('ingredients-section').insertAdjacentHTML('beforeend', newIngredient);
+});
 
+// Add Preparation Step
+document.getElementById('add-step-btn').addEventListener('click', function () {
+    stepCount++;
+    const newStep = `
+                <div class="input-field" id="step-${stepCount}" style="display: flex;">
+                    <textarea id="preparation_step_${stepCount}" name="preparation_steps[]" class="materialize-textarea" required></textarea>
+                    <label for="preparation_step_${stepCount}">Step ${stepCount}</label>
+                    <i class="material-icons red-text delete-step" style="cursor: pointer;">delete</i>
+                </div>`;
+    document.getElementById('preparation-steps-section').insertAdjacentHTML('beforeend', newStep);
+});
+
+// Delete Ingredient
+document.getElementById('ingredients-section').addEventListener('click', function (e) {
+    if (e.target.classList.contains('delete-ingredient')) {
+        e.target.parentElement.remove();
+    }
+});
+
+// Delete Preparation Step
+document.getElementById('preparation-steps-section').addEventListener('click', function (e) {
+    if (e.target.classList.contains('delete-step')) {
+        e.target.parentElement.remove();
+    }
+});
+
+
+// Add Required Tool
+document.getElementById('add-tool-btn').addEventListener('click', function () {
+    toolCount++;
+    const newTool = `
+        <div class="input-field" id="tool-${toolCount}" style="display: flex;">
+            <input type="text" id="tool_input_${toolCount}" name="required_tools[]" required>
+            <label for="tool_input_${toolCount}">Tool ${toolCount}</label>
+            <i class="material-icons red-text delete-tool" style="cursor: pointer;">delete</i>
+        </div>`;
+    document.getElementById('tools-section').insertAdjacentHTML('beforeend', newTool);
+});
+
+// Delete Required Tool
+document.getElementById('tools-section').addEventListener('click', function (e) {
+    if (e.target.classList.contains('delete-tool')) {
+        e.target.parentElement.remove();
+    }
+});
 function addToCart(categoryId, itemName, itemPrice, itemIndex) {
     const quantityInput = document.getElementById(`quantity-${itemIndex}`);
     const quantity = parseInt(quantityInput.value);
@@ -113,13 +173,13 @@ function addToCart(categoryId, itemName, itemPrice, itemIndex) {
         body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' }
     })
-    .then(response => response.json())
-    .then(data => {
-        window.location.reload(); // Reload page regardless of success
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            window.location.reload(); // Reload page regardless of success
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 
 function showItemModal(name, imageUrl, description, price, categoryId, index, noInStock) {
@@ -134,7 +194,7 @@ function showItemModal(name, imageUrl, description, price, categoryId, index, no
     // Update Add to Cart button functionality
     const addToCartButton = document.getElementById('modalAddToCartButton');
     if (addToCartButton) {
-        addToCartButton.onclick = function() {
+        addToCartButton.onclick = function () {
             const quantity = document.getElementById('modalQuantity').value;
             addToCart(categoryId, name, price, index);
         };
@@ -152,7 +212,7 @@ function showRemoveConfirmation(itemId, itemName) {
 
     // Update the delete form's action dynamically
     const deleteForm = document.getElementById('deleteForm');
-    deleteForm.onsubmit = function(e) {
+    deleteForm.onsubmit = function (e) {
         e.preventDefault(); // Prevent the default form submission
         removeFromCart(itemId);  // Call the remove function
     };
@@ -167,18 +227,18 @@ function removeFromCart(itemId) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            window.location.reload();  // Reload the page to update cart
-        } else {
-            console.error('Failed to remove item:', data.message);
-            alert('Failed to remove item from cart');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.reload();  // Reload the page to update cart
+            } else {
+                console.error('Failed to remove item:', data.message);
+                alert('Failed to remove item from cart');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 
 
@@ -217,19 +277,19 @@ function updateCart(itemId) {
         },
         body: JSON.stringify({ quantity: newQuantity })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Update displayed quantity
-            window.location.reload();
-            
-        } else {
-            alert('Failed to update the cart. Please try again.');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update displayed quantity
+                window.location.reload();
+
+            } else {
+                alert('Failed to update the cart. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 // Function to calculate the total cost of all cart items
 function calculateTotalCost() {
@@ -261,7 +321,7 @@ function previewImage(event) {
     const reader = new FileReader();
 
     // When the file is loaded, show the image preview
-    reader.onload = function() {
+    reader.onload = function () {
         image.src = reader.result; // Set the image src to the loaded file
         image.style.display = 'block'; // Show the image
     }
@@ -271,3 +331,63 @@ function previewImage(event) {
         reader.readAsDataURL(file);
     }
 }
+// Add more ingredients, steps, and tools dynamically on page load
+document.addEventListener('DOMContentLoaded', function () {
+    let ingredientCount = parseInt("{{ recipe.ingredients|length or 0 }}", 10);
+    let stepCount = parseInt("{{ recipe.preparation_steps|length or 0 }}", 10);
+    let toolCount = parseInt("{{ recipe.required_tools|length or 0 }}", 10);
+
+    // Add Ingredient
+    document.getElementById('add-ingredient-btn').addEventListener('click', function () {
+        ingredientCount++;
+        const newIngredient = `
+            <div class="input-field" style="display: flex;" id="ingredient-${ingredientCount}">
+                <input type="text" id="ingredient_input_${ingredientCount}" name="ingredients[]" required>
+                <label for="ingredient_input_${ingredientCount}">Ingredient ${ingredientCount}</label>
+                <i class="material-icons red-text delete-ingredient" style="cursor: pointer;">delete</i>
+            </div>`;
+        document.getElementById('ingredients-section').insertAdjacentHTML('beforeend', newIngredient);
+    });
+
+    // Add Preparation Step
+    document.getElementById('add-step-btn').addEventListener('click', function () {
+        stepCount++;
+        const newStep = `
+            <div class="input-field" style="display: flex;" id="step-${stepCount}">
+                <textarea id="preparation_step_${stepCount}" name="preparation_steps[]" class="materialize-textarea" required></textarea>
+                <label for="preparation_step_${stepCount}">Step ${stepCount}</label>
+                <i class="material-icons red-text delete-step" style="cursor: pointer;">delete</i>
+            </div>`;
+        document.getElementById('preparation-steps-section').insertAdjacentHTML('beforeend', newStep);
+    });
+    // Add Required Tool
+    document.getElementById('add-tool-btn').addEventListener('click', function () {
+        toolCount++;
+        const newTool = `
+        <div class="input-field" style="display: flex;" id="tool-${toolCount}">
+            <input type="text" id="required_tool_${toolCount}" name="required_tools[]" required>
+            <label for="required_tool_${toolCount}">Tool ${toolCount}</label>
+            <i class="material-icons red-text delete-tool" style="cursor: pointer;">delete</i>
+        </div>`;
+        document.getElementById('required-tools-section').insertAdjacentHTML('beforeend', newTool);
+    });
+    // Delete Ingredient
+    document.getElementById('ingredients-section').addEventListener('click', function (e) {
+        if (e.target.classList.contains('delete-ingredient')) {
+            e.target.parentElement.remove();
+        }
+    });
+
+    // Delete Preparation Step
+    document.getElementById('preparation-steps-section').addEventListener('click', function (e) {
+        if (e.target.classList.contains('delete-step')) {
+            e.target.parentElement.remove();
+        }
+    });
+    // Delete Required Tool
+    document.getElementById('required-tools-section').addEventListener('click', function (e) {
+        if (e.target.classList.contains('delete-tool')) {
+            e.target.parentElement.remove();
+        }
+    });
+});
