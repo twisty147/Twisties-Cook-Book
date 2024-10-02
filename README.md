@@ -115,7 +115,6 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
    ### For Guests:
    - If a user is not logged in, the page displays a welcoming message: "Welcome to Twisties Cookbook".
    - There should be a call-to-action button prompting guests to log in: "Log In to Explore Recipes".
-
    - **Section Header**: A heading titled "Featured Recipes" should be displayed in the center.
    - **Recipe Cards**: Each featured recipe should be shown in a card format, which includes:
    - An image of the recipe.
