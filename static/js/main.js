@@ -254,3 +254,20 @@ function calculateTotalCost() {
 
 // Call the function when the page loads
 document.addEventListener('DOMContentLoaded', calculateTotalCost);
+
+function previewImage(event) {
+    const image = document.getElementById('image_preview');
+    const file = event.target.files[0]; // Get the selected file
+    const reader = new FileReader();
+
+    // When the file is loaded, show the image preview
+    reader.onload = function() {
+        image.src = reader.result; // Set the image src to the loaded file
+        image.style.display = 'block'; // Show the image
+    }
+
+    // Read the image file as a data URL
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}
