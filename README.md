@@ -601,7 +601,7 @@ This section contains a description of the features and functions implemented. T
 
 **Registration**
 
-![Registration Function](./static/images/report_images/register.html.png)
+![Registration Function](./static/images/report_images/register.png)
 
 This form allows the user to submit their information (username, email, and password). The form action points to the /register route (handled by Flask), and the POST method ensures the form data is securely submitted to the server.
 
