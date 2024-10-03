@@ -466,3 +466,16 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
       -  If there are no conflicts, the system updates the user's document in `usersCollection` with the new username, email, and (if provided) the hashed password.
       -  If the username has been changed, the system updates the session with the new username.
       -  The user is redirected to the index page where they can continue using the application with their updated profile.
+
+
+# DESIGN
+This is the foundational blueprint for Twisties'Cook Book Design and layout. It outlines the structural framework of the site, depicting the arrangement of key elements such as navigation menus, content sections, and interactive features.
+![Low fidelity prototype](./static/images/report_images/indexPageGuest.png)
+
+![Low fidelity prototype](./static/images/report_images/loggedInUserIndex.pngg)
+
+![Low fidelity prototype](./static/images/report_images/recipesPage.png)
+
+![Low fidelity prototype](./static/images/report_images/recipeDetail.png)
+
+![Low fidelity prototype](./static/images/report_images/equipmentCategory.png)
