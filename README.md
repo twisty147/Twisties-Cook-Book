@@ -610,11 +610,13 @@ This form allows the user to submit their information (username, email, and pass
 
 -  When the user initially loads the registration page, the request method is GET, and the form is displayed via return render_template('register.html').
 -  When the user submits the registration form, the request method becomes POST, and the form data is processed.
--  The data from the registration form is extracted using request.form.get('...'). The values for username, email, and password are retrieved from the form.
+-  The data from the registration form is extracted using request.form.get('...'). The values are retrieved from the form.
 -  A hashing function (generate_password_hash) is used to hash the password before storing it in the database.
 -  A dictionary is created to represent the new user
 -  role is hardcoded as 'User'.
 -  mongo.db.usersCollection.insert_one(user_data) inserts the user_data dictionary into the usersCollection in MongoDB database.
+-  Upon successful registration, the user is flashed a success message and redirected to the login page.
+-
 
 
 
