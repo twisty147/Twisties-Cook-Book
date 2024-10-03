@@ -26,15 +26,15 @@
         <!-- Navbar -->
         <nav class="blue-grey darken-4">
             <div class="nav-wrapper container">
-              
+
                 <a href="/" class="brand-logo">
                     <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Twisties Cookbook Logo"
                         style="height: 50px;">
                     <span class="brand-text">Twisties Cookbook</span>
 
                 </a>
-               
-                               
+
+
                 <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
                 <ul class="right hide-on-med-and-down">
                     <!-- Visible links if user is NOT logged in -->
@@ -60,7 +60,7 @@
             </div>
         </nav>
 
-       
+
         <!-- Mobile Sidebar -->
         <ul class="sidenav center-align" id="mobile-menu">
             <li>
@@ -74,14 +74,15 @@
             <li><a href="{{ url_for('login') }}">Log In</a></li>
             {% else %}
             <!-- Visible links if user IS logged in -->
-           
+
             <li><a href="{{ url_for('get_index') }}">Home</a></li>
             <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
             <li><a href="{{ url_for('get_contact') }}">Contact</a></li>
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             <li style="padding-left: 140;">
                 <a href="{{url_for('view_cart')}}">
-                    <i class="fas fa-shopping-cart " style="font-size: medium; display: flex; "> {{ cart_item_count }}</i>
+                    <i class="fas fa-shopping-cart " style="font-size: medium; display: flex; "> {{ cart_item_count
+                        }}</i>
                 </a>
             </li>
             {% endif %}

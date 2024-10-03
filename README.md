@@ -597,7 +597,15 @@ This was used when a user attempts to log in, ensuring that the password entered
 
 
 #### **Features and Functionalities Implemented**
-**Registration Function**
+This section contains a description of the features and functions implemented. The structure of the pages in **Twisties Cook Book** used Flask's templating system (Jinja2). All pages inherit their layout from base.html, that includes includes the common structure (header, footer, and Nav) for all pages. For styling the Materialize framework was used along with some custom CSS. 
+
+**Registration**
+
+![Registration Function](./static/images/report_images/register.html.png)
+
+This form allows the user to submit their information (username, email, and password). The form action points to the /register route (handled by Flask), and the POST method ensures the form data is securely submitted to the server.
+
+
 **Login Function**
 **Access Home Page**
 **Manage Recipes**
