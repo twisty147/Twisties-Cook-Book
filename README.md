@@ -422,7 +422,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
       - The system queries the `recipesCollection` in MongoDB to retrieve recipes that were added by the logged-in user.
       - The system renders the `manage_recipes.html` template and passes the user's recipes for display, allowing the user to manage their recipe collection.
    - If the user tries to access manage recipe without being logged in, they are redirected to the login page.
-   -**Step 5:** The user clicks on the manage view recipe.
+   - **Step 5:** The user clicks on the manage view recipe.
       - The system checks if the user is logged in by verifying the session.
          - The system attempts to convert the `recipe_id` to an `ObjectId`.
          - The system queries the `recipesCollection` to find the recipe by its ID.
@@ -430,15 +430,15 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
          - The system sets `is_favorite` to `True` if the recipe is favorited; otherwise, it remains `False`.
          - The system renders the `recipe_detail.html` template, passing the recipe details, `is_favorite` status, and `from_page` parameters.
       - If the user tries to access view recipe without being logged in, they are redirected to the login page.
-   -**Step 6:** The user clicks on the edit recipe.
+   - **Step 6:** The user clicks on the edit recipe.
       -The system checks if the user is logged in.
          - The system fetches the recipe with the given `recipe_id` from the MongoDB collection.
       - If the user tries to access edit recipe without being logged in, they are redirected to the login page.
-   -**Step 7** The user edits the recipe details on the form and submits the updated information via a `POST` request.
+   - **Step 7:** The user edits the recipe details on the form and submits the updated information via a `POST` request.
       - The system collects the updated data from the form.
       - The system updates the recipe document in the `recipesCollection` in MongoDB with the new data.
       - The user is redirected to the "Manage Recipes" page.
-   -**Step 8** The user clicks on delete recipe
+   - **Step 8** The user clicks on delete recipe
       - The system converts the `recipe_id` to an `ObjectId` and attempts to delete the recipe from the `recipesCollection` in the MongoDB database.
       - The user is redirected back to the "Manage Recipes" page to view the updated list of their recipes.
 
