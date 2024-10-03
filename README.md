@@ -601,7 +601,7 @@ This section contains a description of the features and functions implemented. T
 
 **Registration**
 
-![Registration Function](./static/images/report_images/register.png)
+![Registration Feature](./static/images/report_images/register.png)
 
 This form allows the user to submit their information (username, email, and password). The form action points to the /register route (handled by Flask), and the POST method ensures the form data is securely submitted to the server.
 
@@ -616,12 +616,35 @@ This form allows the user to submit their information (username, email, and pass
 -  role is hardcoded as 'User'.
 -  mongo.db.usersCollection.insert_one(user_data) inserts the user_data dictionary into the usersCollection in MongoDB database.
 -  Upon successful registration, the user is flashed a success message and redirected to the login page.
--
-
-
 
 **Login Function**
-**Access Home Page**
+
+![Login Feature](./static/images/report_images/login.png)
+
+The form allows users to input their login details, such as email and password, and submit them to the server using a POST request. The form action is directed at the /login route in Flask.
+
+![Login route](./static/images/report_images/LoginRoute.png)
+
+-  When the user first visits the login page, the method is GET, and the login form is rendered (return render_template('login.html')).
+-  When the user submits the form, the method changes to POST, and the server processes the login credentials.
+-  The user's email and password are extracted from the form
+-  The email provided is used to search for the user in the MongoDB collection usersCollection. If a matching user is found, the server proceeds to verify the password.
+-  The check_password_hash function compares the hashed password stored in the database (user['password_hash']) with the password entered by the user. If the password is correct, the user is logged in.
+-  Upon successful login, the user's session is set with their username. Flask's session management keeps track of the logged-in user's information. The session.permanent = True line ensures the session lasts longer (as defined by your app's settings).
+-  If the login is successful, a success message is flashed
+-  If the password is incorrect or the email is not found in the database, an error message is flashed
+-  fter logging in, the user is redirected to the index page
+
+**Access Index Page**
+
+
+
+
+
+
+
+
+
 **Manage Recipes**
    -  Add Recipe
    -  Edit Recipe
