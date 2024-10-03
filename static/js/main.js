@@ -12,7 +12,7 @@ window.onload = function () {
     document.addEventListener('mousemove', resetSession);
     document.addEventListener('keypress', resetSession);
     document.addEventListener('click', resetSession);
-
+   
     fetch('/cart_item_count')
         .then(response => response.json())
         .then(data => {
@@ -20,6 +20,7 @@ window.onload = function () {
             if (badge) {
                 badge.innerText = data.cart_item_count;
             }
+            calculateTotalCost();
         });
 
     // Auto-logout after 10 minutes of inactivity
