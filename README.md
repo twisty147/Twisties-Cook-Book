@@ -634,9 +634,23 @@ The form allows users to input their login details, such as email and password, 
 -  Upon successful login, the user's session is set with their username. Flask's session management keeps track of the logged-in user's information. The session.permanent = True line ensures the session lasts longer (as defined by your app's settings).
 -  If the login is successful, a success message is flashed
 -  If the password is incorrect or the email is not found in the database, an error message is flashed
--  fter logging in, the user is redirected to the index page
+-  After logging in, the user is redirected to the index page
 
 **Access Index Page**
+This home page is a dashboard-style homepage that dynamically adjusts its content based on whether the user is logged in or not. If the user is logged in (i.e., session['user'] is set), they are greeted with a personalized message and given a quick overview of key statistics from their dashboard, such as total recipes, recipes they've added, and their favorited recipes.
+
+The statistics are displayed using card-panel components, and each card links to a different part of the site (e.g., viewing all recipes, managing the user's recipes, viewing favorited recipes).
+
+![Index Page](./static/images/report_images/index.png)
+
+If the user is not logged in, they are shown a generic welcome message and prompted to log in. The main call to action is a button that redirects guests to the login page.
+
+![Index Page](./static/images/report_images/index2.png)
+
+
+
+![Index Route](./static/images/report_images/indexroute.png)
+
 
 
 
