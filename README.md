@@ -525,7 +525,7 @@ Flask, a lightweight and flexible Python web framework, was the backbone of the 
 
 **Flask**: Flask is a lightweight and modular web framework for Python, used for building web applications. It provides essential tools and features such as routing, template rendering, and request handling. Flask was used to create the app instance and manage the flow of the application using routes and view functions. 
 
-![Sample Route](./static/images/report_images/sampleRoute.png)
+![Flask Import](./static/images/report_images/flask.png)
 
 **flash**:This function is part of Flask and is used to send one-time messages from the backend to the frontend (usually in response to a user action). Messages flashed using flash() are stored in the session and displayed on the next page load, then removed.
 
