@@ -23,14 +23,13 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 # Table of Contents
 
 1. [Requirements](#requirements)
-2. [Database](#database)
-3. [Usecase](#usecase)
-4. [Design](#design)
-5. [Development](#development)
-6. [Testing](#testing)
-7. [Deployment](#deployment)
-8. [Credits](#credits)
-9. [License](#license)
+2. [Usecase](#usecase)
+3. [Design](#design)
+4. [Development](#development)
+5. [Testing](#testing)
+6. [Deployment](#deployment)
+7. [Credits](#credits)
+8. [License](#license)
 
 
 # REQUIREMENTS
@@ -173,11 +172,166 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 
 [Back to Top](#requirements)
 
-# DATABASE
+# USECASE
 
-The database used for **Twisties Cookbook** is MongoDB. It is a popular NoSQL (Non-Relational) database that stores data in a flexible, document-oriented format known as BSON (Binary JSON), which is similar to JSON. Unlike traditional Relational Database Management Systems (RDBMS), MongoDB does not use structured tables and rows. Instead, it organizes data as collections of documents, making it highly scalable, adaptable, and capable of handling large volumes of unstructured or semi-structured data.
+### Actors
+- **Primary Actor:** User
+- **Secondary Actors:** System
+### Main Flow (Basic Scenario)
+
+**Access Home Page**
+   - **Step 1:** The user navigates to the home page http://twisties-cook-book-e57860eccdee.herokuapp.com/.
+      - The system queries the `recipesCollection` to retrieve the last 9 inserted recipes, sorted by `_id` in descending order.
+      - The system calculates the total number of recipes in the database.
+      - if the user is logged in (determined by checking the session):
+         - The system queries the `usersCollection` to find the user by their username.
+         - The system counts the number of recipes added by the logged-in user.
+         - The system retrieves the count of recipes that the user has favorited.
+         - The system renders the `index.html` template, passing the following data:
+            - The latest 9 recipes.
+            - The total number of recipes in the database.
+            - The count of recipes added by the logged-in user.
+            - The count of favorited recipes by the logged-in user.
+      - if the user isnt logged in
+         - The system will render the guest home page and prompt them to login.
+
+**Access Recipe**
+   - **Step 2:** The user navigates to the recipes page or the user clicks on the total recipe card or view all recipe Card.
+      - The system checks if the user is logged in.
+         - The system counts the total number of recipes for pagination purposes.
+         - The system retrieves a subset of recipes based on the current page and the number of recipes per page (6 recipes per page).
+         - The system renders the `recipes.html` template, passing the list of recipes, current page.
+      -  if the user searches with the provided search field
+         -  The system queries the `recipesCollection` using the search term, if provided. If no search term is entered, the query matches all recipes.
+         -  The system calculates the total number of matching recipes to support pagination and determines the total number of pages based on the `per_page` value (6 recipes per page).
+         -  The system retrieves the recipes for the current page and renders the `recipes.html` template, passing the recipes, current page number, total pages, and search term to the template for display.
+      - if the user isnt loggedin
+         - The system redirects the user to the `login.html` template page.
+
+**Access Recipe Details**
+   - **Step 3:** The user clicks on a particular recipe.
+      - The system checks if the user is logged in by verifying the session.
+         - The system attempts to convert the `recipe_id` to an `ObjectId`.
+         - The system queries the `recipesCollection` to find the recipe by its ID.
+         - The system checks if the recipe is in the user's list of favorited recipes.
+         - The system sets `is_favorite` to `True` if the recipe is favorited; otherwise, it remains `False`.
+         - The system renders the `recipe_detail.html` template, passing the recipe details, `is_favorite` status, and `from_page` parameters.
+            - if the user clicks any of the tags
+               -  The system receives the `<tag>` parameter from the URL.
+               -  The system queries the `recipesCollection` in the database, searching for recipes that contain the specified `<tag>` in their `tags` field.
+               -  The system renders the `recipes_by_tag.html` template, passing the list of matching recipes and the tag to the template.
+            -if the user clicks on the Discover more tools here link in the required tools section.
+               -  The system receives the request to view equipment categories.
+               -  The system queries the `equipmentCollection` in the MongoDB database, retrieving all documents with the fields `category` (name of the category) and `menu_image` (image associated with the category).
+               - The system renders the `equipment_categories.html` template, passing the list of categories to be displayed to the user.
+               - if the user clicks any of the categories
+                  -  The system queries the MongoDB collection `equipmentCollection` to retrieve the category based on the provided `category_id`.
+                  -  The system attempts to convert the `category_id` to an `ObjectId`. If it fails (invalid `ObjectId`), the system treats `category_id` as a string.
+                  -  The system retrieves the category matching the `category_id`.
+                  -  The system retrieves the list of items in the category from the `items` field.
+                  -  The system renders the `category_items.html` template, passing the category and its items to the template.
+
+**Access Manage Recipes**
+   - **Step 4:** The user clicks on the manage recipe card.
+   - The system checks if the user is logged in.
+      - The system queries the `recipesCollection` in MongoDB to retrieve recipes that were added by the logged-in user.
+      - The system renders the `manage_recipes.html` template and passes the user's recipes for display, allowing the user to manage their recipe collection.
+   - If the user tries to access manage recipe without being logged in, they are redirected to the login page.
+   - **Step 5:** The user clicks on the manage view recipe.
+      - The system checks if the user is logged in by verifying the session.
+         - The system attempts to convert the `recipe_id` to an `ObjectId`.
+         - The system queries the `recipesCollection` to find the recipe by its ID.
+         - The system checks if the recipe is in the user's list of favorited recipes.
+         - The system sets `is_favorite` to `True` if the recipe is favorited; otherwise, it remains `False`.
+         - The system renders the `recipe_detail.html` template, passing the recipe details, `is_favorite` status, and `from_page` parameters.
+      - If the user tries to access view recipe without being logged in, they are redirected to the login page.
+   - **Step 6:** The user clicks on the edit recipe.
+      -The system checks if the user is logged in.
+         - The system fetches the recipe with the given `recipe_id` from the MongoDB collection.
+      - If the user tries to access edit recipe without being logged in, they are redirected to the login page.
+   - **Step 7:** The user edits the recipe details on the form and submits the updated information via a `POST` request.
+      - The system collects the updated data from the form.
+      - The system updates the recipe document in the `recipesCollection` in MongoDB with the new data.
+      - The user is redirected to the "Manage Recipes" page.
+   - **Step 8** The user clicks on delete recipe
+      - The system converts the `recipe_id` to an `ObjectId` and attempts to delete the recipe from the `recipesCollection` in the MongoDB database.
+      - The user is redirected back to the "Manage Recipes" page to view the updated list of their recipes.
+
+**Access Recipes Added By Me**
+   - **Step 9** The user clicks on recipe added by me card
+      - The system checks if the user is logged in.
+      - The system queries the `recipesCollection` in MongoDB to retrieve recipes that were added by the logged-in user.
+      - The system renders the `manage_recipes.html` template and passes the user's recipes for display, allowing the user to manage their recipe collection.
+   
+**Access Favorites**
+   -  **Step 10** The user clicks on the my favorites card.
+      -  The system checks if the user is logged in by verifying the session.
+      -  If the user is logged in, the system queries the `usersCollection` to retrieve the logged-in user's document.
+      -  The system extracts the list of favorited recipe IDs from the user’s document.
+      -  If the user has favorited recipes, the system queries the `recipesCollection` using the list of favorite recipe IDs to retrieve the corresponding recipe documents.
+      -  The system renders the `favorites.html` template, passing the list of favorite recipes to be displayed on the page.
+
+**Update User Profile**
+   - **Step 11** The user clicks on the update account card.
+      -  The system checks if the user is logged in by verifying the session.
+      -  The system queries the `usersCollection` to get the current user’s document using their session username.
+      -  The system displays the current user profile data in the `update_profile.html` form.
+      -  The user updates their username, email, or password in the form and submits it.
+      -  The system checks if the provided username or email already exists in the database for another user.
+      -  If there are no conflicts, the system updates the user's document in `usersCollection` with the new username, email, and (if provided) the hashed password.
+      -  If the username has been changed, the system updates the session with the new username.
+      -  The user is redirected to the index page where they can continue using the application with their updated profile.
+
+[Back to Top](#requirements)
+
+
+# DESIGN
+
+### Low-Fidelity Prototype
+
+This is the foundational blueprint for Twisties' Cook Book Design and layout. It outlines the structural framework of the site, depicting the arrangement of key elements such as navigation menus, content sections, and interactive features.
+
+![Low fidelity prototype](./static/images/report_images/indexPageGuest.png)
+
+![Low fidelity prototype](./static/images/report_images/loggedInUserIndex.png)
+
+![Low fidelity prototype](./static/images/report_images/recipesPage.png)
+
+![Low fidelity prototype](./static/images/report_images/recipeDetail.png)
+
+![Low fidelity prototype](./static/images/report_images/equipmentCategory.png)
+
+### Color Justification
+
+**Color Meanings and Associations**
+- The choice of a Teal, white, and dark-grey colour scheme for the **Twisties Cookbook** is deliberate and serves several purposes:
+
+   -  Teal is often associated with freshness, balance, and tranquility, making it a suitable choice for a cookbook focused on healthy or innovative recipes. It evokes the colors of fresh herbs and vegetables, aligning well with a culinary theme. This shade can also represent creativity and innovation, suggesting that the cookbook offers fresh ideas and twists on traditional recipes.
+
+   -  White symbolizes purity, simplicity, and cleanliness. Using white as a background color helps create a clean, uncluttered look that makes recipes and ingredients stand out, enhancing readability. Also, white space can provide a sense of openness and calm, allowing users to navigate the cookbook easily without feeling overwhelmed by too many elements or colors.
+
+   - Dark Grey conveys stability and sophistication, grounding the color palette. It provides a strong contrast against the teal and white, ensuring that text is easy to read and elements are distinct.
+
+   - The combination of teal, white, and dark grey creates a visually appealing contrast that enhances readability. 
+
+[Back to Top](#requirements)
+
+# DEVELOPMENT
+
+Initially the requirements for this project was vague and it had to be updated as the process unfolded, and I was working as a solo developer, as a result the Software Development Life Cycle (SDLC) approach selected for this project was Agile, specifically an Iterative variant known as Lean Software Development (LSD). LDS is an adaptation of the Lean manufacturing principles, originally developed by Toyota, applied to the software development process. The goal of Lean Software Development is to deliver software quickly and efficiently by focusing on value creation and eliminating waste in the development process. It emphasizes continuous improvement, minimizing resource use, and maximizing customer value.
+
+This development approach enabled me to use a flow-based approach, where the tasks for **Twisties Cookbook** were prioritized and completed one by one. This allowed me to manage the development workload effectively.
+
+### Implementation
+
+The **Twisties Cookbook** was developed using a combination of Flask, JavaScript, Materialize CSS, CSS, Jinja templating, and MongoDB to create a dynamic and interactive platform for users to manage and explore various recipes. The implementation process was carefully planned to ensure that the application was both functional and visually appealing while maintaining a seamless user experience.
+
+#### **Data Handling and Database Integration**
+T**Twisties Cookbook** utilized MongoDB as the primary database to store data such as recipe information, user data, and equipment categories. It is a popular NoSQL (Non-Relational) database that stores data in a flexible, document-oriented format known as BSON (Binary JSON), which is similar to JSON. Unlike traditional Relational Database Management Systems (RDBMS), MongoDB does not use structured tables and rows. Instead, it organizes data as collections of documents, making it highly scalable, adaptable, and capable of handling large volumes of unstructured or semi-structured data.
 
 MongoDB was selected because **Twisties Cookbook** has an evolving data requirements and MongoDB supports dynamic, schema-less design, allowing documents to have varying structures. Also, It is designed for scale-out architectures that handle large data volumes and high traffic like the type that will be generated from **Twisties Cookbook**. Hence, it was considered fit for use and purpose. 
+
+The data collections created were used to categorize and manage data efficiently. Flask-PyMongo, a Flask extension, was employed to establish a connection between the Flask app and the MongoDB database, allowing for seamless data retrieval and updates. Here are the collections that were created in MongoDB:
 
 -**userCollection** 
    - Used for storing user information in the MongoDB collection.
@@ -361,171 +515,11 @@ MongoDB was selected because **Twisties Cookbook** has an evolving data requirem
 
 [Back to Top](#requirements)
 
-
-# USECASE
-
-### Actors
-- **Primary Actor:** User
-- **Secondary Actors:** System
-### Main Flow (Basic Scenario)
-
-**Access Home Page**
-   - **Step 1:** The user navigates to the home page http://twisties-cook-book-e57860eccdee.herokuapp.com/.
-      - The system queries the `recipesCollection` to retrieve the last 9 inserted recipes, sorted by `_id` in descending order.
-      - The system calculates the total number of recipes in the database.
-      - if the user is logged in (determined by checking the session):
-         - The system queries the `usersCollection` to find the user by their username.
-         - The system counts the number of recipes added by the logged-in user.
-         - The system retrieves the count of recipes that the user has favorited.
-         - The system renders the `index.html` template, passing the following data:
-            - The latest 9 recipes.
-            - The total number of recipes in the database.
-            - The count of recipes added by the logged-in user.
-            - The count of favorited recipes by the logged-in user.
-      - if the user isnt logged in
-         - The system will render the guest home page and prompt them to login.
-
-**Access Recipe**
-   - **Step 2:** The user navigates to the recipes page or the user clicks on the total recipe card or view all recipe Card.
-      - The system checks if the user is logged in.
-         - The system counts the total number of recipes for pagination purposes.
-         - The system retrieves a subset of recipes based on the current page and the number of recipes per page (6 recipes per page).
-         - The system renders the `recipes.html` template, passing the list of recipes, current page.
-      -  if the user searches with the provided search field
-         -  The system queries the `recipesCollection` using the search term, if provided. If no search term is entered, the query matches all recipes.
-         -  The system calculates the total number of matching recipes to support pagination and determines the total number of pages based on the `per_page` value (6 recipes per page).
-         -  The system retrieves the recipes for the current page and renders the `recipes.html` template, passing the recipes, current page number, total pages, and search term to the template for display.
-      - if the user isnt loggedin
-         - The system redirects the user to the `login.html` template page.
-
-**Access Recipe Details**
-   - **Step 3:** The user clicks on a particular recipe.
-      - The system checks if the user is logged in by verifying the session.
-         - The system attempts to convert the `recipe_id` to an `ObjectId`.
-         - The system queries the `recipesCollection` to find the recipe by its ID.
-         - The system checks if the recipe is in the user's list of favorited recipes.
-         - The system sets `is_favorite` to `True` if the recipe is favorited; otherwise, it remains `False`.
-         - The system renders the `recipe_detail.html` template, passing the recipe details, `is_favorite` status, and `from_page` parameters.
-            - if the user clicks any of the tags
-               -  The system receives the `<tag>` parameter from the URL.
-               -  The system queries the `recipesCollection` in the database, searching for recipes that contain the specified `<tag>` in their `tags` field.
-               -  The system renders the `recipes_by_tag.html` template, passing the list of matching recipes and the tag to the template.
-            -if the user clicks on the Discover more tools here link in the required tools section.
-               -  The system receives the request to view equipment categories.
-               -  The system queries the `equipmentCollection` in the MongoDB database, retrieving all documents with the fields `category` (name of the category) and `menu_image` (image associated with the category).
-               - The system renders the `equipment_categories.html` template, passing the list of categories to be displayed to the user.
-               - if the user clicks any of the categories
-                  -  The system queries the MongoDB collection `equipmentCollection` to retrieve the category based on the provided `category_id`.
-                  -  The system attempts to convert the `category_id` to an `ObjectId`. If it fails (invalid `ObjectId`), the system treats `category_id` as a string.
-                  -  The system retrieves the category matching the `category_id`.
-                  -  The system retrieves the list of items in the category from the `items` field.
-                  -  The system renders the `category_items.html` template, passing the category and its items to the template.
-
-**Access Manage Recipes**
-   - **Step 4:** The user clicks on the manage recipe card.
-   - The system checks if the user is logged in.
-      - The system queries the `recipesCollection` in MongoDB to retrieve recipes that were added by the logged-in user.
-      - The system renders the `manage_recipes.html` template and passes the user's recipes for display, allowing the user to manage their recipe collection.
-   - If the user tries to access manage recipe without being logged in, they are redirected to the login page.
-   - **Step 5:** The user clicks on the manage view recipe.
-      - The system checks if the user is logged in by verifying the session.
-         - The system attempts to convert the `recipe_id` to an `ObjectId`.
-         - The system queries the `recipesCollection` to find the recipe by its ID.
-         - The system checks if the recipe is in the user's list of favorited recipes.
-         - The system sets `is_favorite` to `True` if the recipe is favorited; otherwise, it remains `False`.
-         - The system renders the `recipe_detail.html` template, passing the recipe details, `is_favorite` status, and `from_page` parameters.
-      - If the user tries to access view recipe without being logged in, they are redirected to the login page.
-   - **Step 6:** The user clicks on the edit recipe.
-      -The system checks if the user is logged in.
-         - The system fetches the recipe with the given `recipe_id` from the MongoDB collection.
-      - If the user tries to access edit recipe without being logged in, they are redirected to the login page.
-   - **Step 7:** The user edits the recipe details on the form and submits the updated information via a `POST` request.
-      - The system collects the updated data from the form.
-      - The system updates the recipe document in the `recipesCollection` in MongoDB with the new data.
-      - The user is redirected to the "Manage Recipes" page.
-   - **Step 8** The user clicks on delete recipe
-      - The system converts the `recipe_id` to an `ObjectId` and attempts to delete the recipe from the `recipesCollection` in the MongoDB database.
-      - The user is redirected back to the "Manage Recipes" page to view the updated list of their recipes.
-
-**Access Recipes Added By Me**
-   - **Step 9** The user clicks on recipe added by me card
-      - The system checks if the user is logged in.
-      - The system queries the `recipesCollection` in MongoDB to retrieve recipes that were added by the logged-in user.
-      - The system renders the `manage_recipes.html` template and passes the user's recipes for display, allowing the user to manage their recipe collection.
-   
-**Access Favorites**
-   -  **Step 10** The user clicks on the my favorites card.
-      -  The system checks if the user is logged in by verifying the session.
-      -  If the user is logged in, the system queries the `usersCollection` to retrieve the logged-in user's document.
-      -  The system extracts the list of favorited recipe IDs from the user’s document.
-      -  If the user has favorited recipes, the system queries the `recipesCollection` using the list of favorite recipe IDs to retrieve the corresponding recipe documents.
-      -  The system renders the `favorites.html` template, passing the list of favorite recipes to be displayed on the page.
-
-**Update User Profile**
-   - **Step 11** The user clicks on the update account card.
-      -  The system checks if the user is logged in by verifying the session.
-      -  The system queries the `usersCollection` to get the current user’s document using their session username.
-      -  The system displays the current user profile data in the `update_profile.html` form.
-      -  The user updates their username, email, or password in the form and submits it.
-      -  The system checks if the provided username or email already exists in the database for another user.
-      -  If there are no conflicts, the system updates the user's document in `usersCollection` with the new username, email, and (if provided) the hashed password.
-      -  If the username has been changed, the system updates the session with the new username.
-      -  The user is redirected to the index page where they can continue using the application with their updated profile.
-
-[Back to Top](#requirements)
-
-
-# DESIGN
-
-### Low-Fidelity Prototype
-
-This is the foundational blueprint for Twisties' Cook Book Design and layout. It outlines the structural framework of the site, depicting the arrangement of key elements such as navigation menus, content sections, and interactive features.
-
-![Low fidelity prototype](./static/images/report_images/indexPageGuest.png)
-
-![Low fidelity prototype](./static/images/report_images/loggedInUserIndex.png)
-
-![Low fidelity prototype](./static/images/report_images/recipesPage.png)
-
-![Low fidelity prototype](./static/images/report_images/recipeDetail.png)
-
-![Low fidelity prototype](./static/images/report_images/equipmentCategory.png)
-
-### Color Justification
-
-**Color Meanings and Associations**
-- The choice of a Teal, white, and dark-grey colour scheme for the **Twisties Cookbook** is deliberate and serves several purposes:
-
-   -  Teal is often associated with freshness, balance, and tranquility, making it a suitable choice for a cookbook focused on healthy or innovative recipes. It evokes the colors of fresh herbs and vegetables, aligning well with a culinary theme. This shade can also represent creativity and innovation, suggesting that the cookbook offers fresh ideas and twists on traditional recipes.
-
-   -  White symbolizes purity, simplicity, and cleanliness. Using white as a background color helps create a clean, uncluttered look that makes recipes and ingredients stand out, enhancing readability. Also, white space can provide a sense of openness and calm, allowing users to navigate the cookbook easily without feeling overwhelmed by too many elements or colors.
-
-   - Dark Grey conveys stability and sophistication, grounding the color palette. It provides a strong contrast against the teal and white, ensuring that text is easy to read and elements are distinct.
-
-   - The combination of teal, white, and dark grey creates a visually appealing contrast that enhances readability. 
-
-[Back to Top](#requirements)
-
-# DEVELOPMENT
-
-Initially the requirements for this project was vague and it had to be updated as the process unfolded, and I was working as a solo developer, as a result the Software Development Life Cycle (SDLC) approach selected for this project was Agile, specifically an Iterative variant known as Lean Software Development (LSD). LDS is an adaptation of the Lean manufacturing principles, originally developed by Toyota, applied to the software development process. The goal of Lean Software Development is to deliver software quickly and efficiently by focusing on value creation and eliminating waste in the development process. It emphasizes continuous improvement, minimizing resource use, and maximizing customer value.
-
-This development approach enabled me to use a flow-based approach, where the tasks for **Twisties Cookbook** were prioritized and completed one by one. This allowed me to manage the development workload effectively.
-
-### Implementation
-
-The **Twisties Cookbook** was developed using a combination of Flask, JavaScript, Materialize CSS, CSS, Jinja templating, and MongoDB to create a dynamic and interactive platform for users to manage and explore various recipes. The implementation process was carefully planned to ensure that the application was both functional and visually appealing while maintaining a seamless user experience.
-
 #### **Backend Development with Flask**
 
 Flask, a lightweight and flexible Python web framework, was the backbone of the **Twisties Cookbook** due to its simplicity and ease of integration with other technologies. The backend implementation involved the following key elements:
 
 - **Routing and Views**: Flask’s routing system was used to define endpoints for displaying pages, handling form submissions, and performing CRUD (Create, Read, Update, Delete) operations on recipe data. Each page, such as the homepage, recipe detail page, and user profile, was implemented using separate view functions.
-
-  
-- **Data Handling and Database Integration**: 
-  - The application utilized MongoDB as the primary database to store data such as recipe information, user data, and equipment categories. Collections such as `recipesCollection` and `usersCollection` were used to categorize and manage data efficiently.
-  - Flask-PyMongo, a Flask extension, was employed to establish a connection between the Flask app and the MongoDB database, allowing for seamless data retrieval and updates.
 
 ### **Modules used in the backend code**
 
