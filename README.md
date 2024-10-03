@@ -16,10 +16,6 @@ With features like ingredient lists, step-by-step preparation instructions, pers
 
 In addition to being a valuable resource for users, the **Twisties Cookbook** serves as a platform to promote high-quality kitchen tools that can elevate any cooking experience. Each recipe highlights the necessary cooking tools, helping users discover the best products to enhance their culinary skills. By offering direct links and suggestions for kitchen tools, the app bridges the gap between cooking content and product discovery, ensuring a seamless integration of tools into the cooking process.
 
-## Advanced Features
-
-For those looking to enhance their cooking toolkit, the **Required Tools** feature highlights the best kitchen gadgets that make the recipes easier and more enjoyable to prepare. Not only do we recommend the right tools for each recipe, but we also feature our own brand of kitchen essentials, ensuring you have the best equipment at your fingertips.
-
 With **Twisties Cookbook**, cooking becomes more than just a task—it’s an interactive, engaging, and highly personalized experience. Start exploring, sharing, and cooking with a twist today!
 
 # Table of Contents
@@ -470,6 +466,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 
 # DESIGN
 This is the foundational blueprint for Twisties'Cook Book Design and layout. It outlines the structural framework of the site, depicting the arrangement of key elements such as navigation menus, content sections, and interactive features.
+
 ![Low fidelity prototype](./static/images/report_images/indexPageGuest.png)
 
 ![Low fidelity prototype](./static/images/report_images/loggedInUserIndex.png)
