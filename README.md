@@ -562,7 +562,7 @@ Flask, a lightweight and flexible Python web framework, was the backbone of the 
 ![PyMongo](./static/images/report_images/PYMongoSample2.png)
 
 **Bson (Binary JSON) and Related Libraries**
-**bson.objectid.ObjectId**: Part of the BSON (Binary JSON) library, ObjectId is a class used to create or handle MongoDB’s unique identifier type, ObjectId. This was used for querying and handling MongoDB documents by their _id fields, ensuring operations are performed on the correct data entries.
+- **bson.objectid.ObjectId**: Part of the BSON (Binary JSON) library, ObjectId is a class used to create or handle MongoDB’s unique identifier type, ObjectId. This was used for querying and handling MongoDB documents by their _id fields, ensuring operations are performed on the correct data entries.
 
 ![bson.objectid](./static/images/report_images/bsonSample2.png)
 ![bson.objectid](./static/images/report_images/bsonSample.png)
