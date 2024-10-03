@@ -472,7 +472,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 This is the foundational blueprint for Twisties'Cook Book Design and layout. It outlines the structural framework of the site, depicting the arrangement of key elements such as navigation menus, content sections, and interactive features.
 ![Low fidelity prototype](./static/images/report_images/indexPageGuest.png)
 
-![Low fidelity prototype](./static/images/report_images/loggedInUserIndex.pngg)
+![Low fidelity prototype](./static/images/report_images/loggedInUserIndex.png)
 
 ![Low fidelity prototype](./static/images/report_images/recipesPage.png)
 
