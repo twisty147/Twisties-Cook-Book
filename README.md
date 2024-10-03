@@ -179,27 +179,27 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 -**userCollection** 
    - Used for storing user information in the MongoDB collection.
       - Fields Explanation:
-            **- _id**
+               - _id
                - Type: ObjectId
                - Description: This is a unique identifier for the user document in the MongoDB collection. MongoDB automatically generates this value when a new document is inserted which ensures that a specific user document can be uniquely identified within the collection.
          
-           ** - username**
+               - username
                - Type: String
                - Description: This field stores the unique username chosen by the user when they registered.  The application will use this field for displaying the user's name in various parts of the application, such as on the profile page.
            
-            - email
+               - email
                - Type: String
                - Description: This field contains the user's email address, which they use to register, log in to the application and for communication purposes.
 
-            - password_hash
+               - password_hash
                - Type: String
                - Description: This field stores the hashed version of the user's password. Hashing will ensure that the password is stored securely and is not readable in plain text. This hash will be used for verifying the password during the login process.
 
-           - role
+               - role
                - Type: String
                - Description: This field specifies the role of the user in the application. The role can be User, Admin, or other predefined roles based on the application's access control requirements.
 
-           - favorited_recipes
+               - favorited_recipes
                - Type: Array of ObjectIds
                - Description: This field is an array that stores the unique IDs of recipes that the user has marked as favorites. The IDs correspond to recipes stored in the recipesCollection. The application will use this field to check if a particular recipe is in the user’s favorites list and to display all favorited recipes on the user's profile or favorites page.
 
