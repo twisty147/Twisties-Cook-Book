@@ -532,6 +532,7 @@ Flask, a lightweight and flexible Python web framework, was the backbone of the 
 ![Sample Flash Message](./static/images/report_images/flashMessageCode.png)
 
 **render_template**: Renders a HTML template file and returns it as a response to the client. It also allowed passing variables to the template for dynamic content generation. It was used to render pages like index.html, login.html, recipe_details.html etc., and inject data from the backend into these templates.
+
 ![Sample Render](./static/images/report_images/renderSample.png)
 
 **redirect**: Was used to redirect users to a different endpoint/ URL after a certain action. For example, redirecting a user to the login page after logging out. It simplified the process of sending users to different pages programmatically.
