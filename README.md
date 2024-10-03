@@ -110,7 +110,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
    - **View All Recipes**: Link to view all available recipes.
    - **Update Account**: Link to the account update page.
    - **Index Page for Guests**
-      - If a user is not logged in, the page displays a welcoming message: "Welcome to Twisties Cookbook".
+      - If a user is not logged in, the page displays a welcoming message: "Welcome to **Twisties Cookbook**".
       - There should be a call-to-action button prompting guests to log in: "Log In to Explore Recipes".
    - **Section Header**: A heading titled "Featured Recipes" should be displayed in the center.
    - **Recipe Cards**: Each featured recipe should be shown in a card format, which includes:
@@ -128,7 +128,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
    - **Message**: A required textarea for the user's message.
    - A submit button with that triggers the form submission.
    - A section displaying contact information.
-   - A section with a centered header "Find Us" indicating the location of Twisties Cookbook Physical office.
+   - A section with a centered header "Find Us" indicating the location of **Twisties Cookbook** Physical office.
    - An embedded Google Map that displays the location of the business.
 
 **Log in Page**
@@ -488,7 +488,7 @@ This is the foundational blueprint for Twisties' Cook Book Design and layout. It
 ### Color Justification
 
 **Color Meanings and Associations**
-- The choice of a Teal, white, and dark-grey colour scheme for the Twisties Cook Book is deliberate and serves several purposes:
+- The choice of a Teal, white, and dark-grey colour scheme for the **Twisties Cookbook** is deliberate and serves several purposes:
 
    -  Teal is often associated with freshness, balance, and tranquility, making it a suitable choice for a cookbook focused on healthy or innovative recipes. It evokes the colors of fresh herbs and vegetables, aligning well with a culinary theme. This shade can also represent creativity and innovation, suggesting that the cookbook offers fresh ideas and twists on traditional recipes.
 
@@ -497,4 +497,90 @@ This is the foundational blueprint for Twisties' Cook Book Design and layout. It
    - Dark Grey conveys stability and sophistication, grounding the color palette. It provides a strong contrast against the teal and white, ensuring that text is easy to read and elements are distinct.
 
    - The combination of teal, white, and dark grey creates a visually appealing contrast that enhances readability. 
+
+# DEVELOPMENT
+
+Initially the requirements for this project was vague and it had to be updated as the process unfolded, and I was working as a solo developer, as a result the Software Development Life Cycle (SDLC) approach selected for this project was Agile, specifically an Iterative variant known as Lean Software Development (LSD). LDS is an adaptation of the Lean manufacturing principles, originally developed by Toyota, applied to the software development process. The goal of Lean Software Development is to deliver software quickly and efficiently by focusing on value creation and eliminating waste in the development process. It emphasizes continuous improvement, minimizing resource use, and maximizing customer value.
+
+This development approach enabled me to use a flow-based approach, where the tasks for **Twisties Cookbook** were prioritized and completed one by one. This allowed me to manage the development workload effectively.
+
+### Implementation
+
+The **Twisties Cookbook** was developed using a combination of Flask, JavaScript, Materialize CSS, CSS, Jinja templating, and MongoDB to create a dynamic and interactive platform for users to manage and explore various recipes. The implementation process was carefully planned to ensure that the application was both functional and visually appealing while maintaining a seamless user experience.
+
+#### **Backend Development with Flask**
+
+Flask, a lightweight and flexible Python web framework, was the backbone of the **Twisties Cookbook** due to its simplicity and ease of integration with other technologies. The backend implementation involved the following key elements:
+
+- **Routing and Views**: Flask’s routing system was used to define endpoints for displaying pages, handling form submissions, and performing CRUD (Create, Read, Update, Delete) operations on recipe data. Each page, such as the homepage, recipe detail page, and user profile, was implemented using separate view functions.
+
+  
+- **Data Handling and Database Integration**: 
+  - The application utilized MongoDB as the primary database to store data such as recipe information, user data, and equipment categories. Collections such as `recipesCollection` and `usersCollection` were used to categorize and manage data efficiently.
+  - Flask-PyMongo, a Flask extension, was employed to establish a connection between the Flask app and the MongoDB database, allowing for seamless data retrieval and updates.
+
+### **Modules used in the backend code**
+
+**Flask**: Flask is a lightweight and modular web framework for Python, used for building web applications. It provides essential tools and features such as routing, template rendering, and request handling. Flask was used to create the app instance and manage the flow of your application using routes and view functions. 
+
+![Sample Route](./static/images/report_images/sampleRoute.png)
+
+**flash**:This function is part of Flask and is used to send one-time messages from the backend to the frontend (usually in response to a user action). Messages flashed using flash() are stored in the session and displayed on the next page load, then removed.
+
+![Sample Flash Message](./static/images/report_images/flashMessageCode.png)
+
+**render_template**: Renders an HTML template file and returns it as a response to the client. It also allowed passing variables to the template for dynamic content generation. It was used to render pages like index.html, login.html, recipe_details.html etc., and inject data from the backend into these templates.
+![Sample Render](./static/images/report_images/renderSample.png)
+
+**redirect**: Was used to redirect users to a different endpoint or URL after a certain action. For example, redirecting a user to the login page after logging out. It simplified the process of sending users to different pages programmatically.
+
+![Sample Redirect](./static/images/report_images/redirectSample.png)
+
+**request**: Provided access to incoming request data, such as form submissions, query parameters, and headers. This module allows the server to handle HTTP methods like GET, POST, and more. Request was used to handle data submitted through forms.
+
+![Sample Request](./static/images/report_images/requestSample.png)
+
+**session**: A dictionary-like object provided by Flask to store information specific to a user's session, such as login status. The session data is stored on the server and can persist across multiple requests. Session was used to keep track of logged-in users and their session-specific data like username or cart_item_count.
+
+![Sample session](./static/images/report_images/sessionSample.png)
+
+**url_for**: Generates URLs for Flask routes based on the endpoint name. This is particularly useful for creating dynamic links that will update if the route changes. Instead of hardcoding URLs, url_for helps maintain link consistency across the application.
+
+![Sample url_for](./static/images/report_images/sampleURL_For.png)
+
+**jsonify**: Converts Python dictionaries or lists into JSON (JavaScript Object Notation) format. It is used for building RESTful APIs and returning structured data responses. jsonify was used for AJAX responses to send data to the frontend.
+
+![Sample jsonify](./static/images/report_images/jsonifySample.png)
+
+**flask_pymongo.PyMongo**: is a library that facilitates the connection between a Flask application and a MongoDB database. It simplifies CRUD (Create, Read, Update, Delete) operations and provides methods to interact with the MongoDB collections. PyMongo was used to connect to the MongoDB database and perform operations like inserting new user data, retrieving recipes, or updating cart information.
+![PyMongo](./static/images/report_images/PYMongoSample.png)
+![PyMongo](./static/images/report_images/PYMongoSample2.png)
+
+**Bson (Binary JSON) and Related Libraries**
+**bson.objectid.ObjectId**: Part of the BSON (Binary JSON) library, ObjectId is a class used to create or handle MongoDB’s unique identifier type, ObjectId. This was used for querying and handling MongoDB documents by their _id fields, ensuring operations are performed on the correct data entries.
+![bson.objectid](./static/images/report_images/bsonSample2.png)
+![bson.objectid](./static/images/report_images/bsonSample.png)
+
+
+**bson.errors.InvalidId**: An exception class from the BSON library, InvalidId is raised when attempting to convert a string into an ObjectId fails.
+This helps in validating and handling scenarios where the provided ID is not a valid MongoDB identifier.
+![InvalidId](./static/images/report_images/InvalidIdSample.png)
+
+**Werkzeug Security**
+**werkzeug.security.generate_password_hash**: A utility function that hashes a plaintext password using a secure hashing algorithm (e.g., SHA256) and a salt value. This function is used during user registration to securely store passwords in the database.
+![Generate Password Hash](./static/images/report_images/PasswordHash.png)
+
+**werkzeug.security.check_password_hash**: Compares a plaintext password to its hashed counterpart stored in the database to validate login credentials.
+This was used when a user attempts to log in, ensuring that the password entered matches the stored hash value.
+![Check Password Hash](./static/images/report_images/checkPasswordHash.png)
+
+
+**DateTime Libraries**
+**datetime and timedelta**: Part of Python’s standard library, datetime provides classes for manipulating dates and times. datetime and timedelta was used for features like tracking time of recipe creation and edit.
+![dateTime](./static/images/report_images/datetimeSample.png)
+
+**Cloudinary**
+**cloudinary.uploader**: Cloudinary is a cloud-based media management service. The cloudinary.uploader module provides methods to upload images or other media files to Cloudinary’s cloud storage. This was useful in Twisties cook book for handling user profile pictures, recipe images, or other media content that needs to be hosted and served dynamically.
+![Cloudinary uploader](./static/images/report_images/cloudinary%20uploader.png)
+
 
