@@ -553,34 +553,41 @@ Flask, a lightweight and flexible Python web framework, was the backbone of the 
 ![Sample jsonify](./static/images/report_images/jsonifySample.png)
 
 **flask_pymongo.PyMongo**: is a library that facilitates the connection between a Flask application and a MongoDB database. It simplifies CRUD (Create, Read, Update, Delete) operations and provides methods to interact with the MongoDB collections. PyMongo was used to connect to the MongoDB database and perform operations like inserting new user data, retrieving recipes, or updating cart information.
+
 ![PyMongo](./static/images/report_images/PYMongoSample.png)
 ![PyMongo](./static/images/report_images/PYMongoSample2.png)
 
 **Bson (Binary JSON) and Related Libraries**
 **bson.objectid.ObjectId**: Part of the BSON (Binary JSON) library, ObjectId is a class used to create or handle MongoDB’s unique identifier type, ObjectId. This was used for querying and handling MongoDB documents by their _id fields, ensuring operations are performed on the correct data entries.
+
 ![bson.objectid](./static/images/report_images/bsonSample2.png)
 ![bson.objectid](./static/images/report_images/bsonSample.png)
 
 
 **bson.errors.InvalidId**: An exception class from the BSON library, InvalidId is raised when attempting to convert a string into an ObjectId fails.
 This helps in validating and handling scenarios where the provided ID is not a valid MongoDB identifier.
+
 ![InvalidId](./static/images/report_images/InvalidIdSample.png)
 
 **Werkzeug Security**
 **werkzeug.security.generate_password_hash**: A utility function that hashes a plaintext password using a secure hashing algorithm (e.g., SHA256) and a salt value. This function is used during user registration to securely store passwords in the database.
+
 ![Generate Password Hash](./static/images/report_images/PasswordHash.png)
 
 **werkzeug.security.check_password_hash**: Compares a plaintext password to its hashed counterpart stored in the database to validate login credentials.
 This was used when a user attempts to log in, ensuring that the password entered matches the stored hash value.
+
 ![Check Password Hash](./static/images/report_images/checkPasswordHash.png)
 
 
 **DateTime Libraries**
 **datetime and timedelta**: Part of Python’s standard library, datetime provides classes for manipulating dates and times. datetime and timedelta was used for features like tracking time of recipe creation and edit.
+
 ![dateTime](./static/images/report_images/datetimeSample.png)
 
 **Cloudinary**
 **cloudinary.uploader**: Cloudinary is a cloud-based media management service. The cloudinary.uploader module provides methods to upload images or other media files to Cloudinary’s cloud storage. This was useful in Twisties cook book for handling user profile pictures, recipe images, or other media content that needs to be hosted and served dynamically.
+
 ![Cloudinary uploader](./static/images/report_images/cloudinary%20uploader.png)
 
 
