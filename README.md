@@ -606,6 +606,14 @@ This section contains a description of the features and functions implemented. T
 This form allows the user to submit their information (username, email, and password). The form action points to the /register route (handled by Flask), and the POST method ensures the form data is securely submitted to the server.
 
 
+![Registration Route](./static/images/report_images/registerBE.png)
+
+-  When the user initially loads the registration page, the request method is GET, and the form is displayed via return render_template('register.html').
+-  When the user submits the registration form, the request method becomes POST, and the form data is processed.
+-  The data from the registration form is extracted using request.form.get('...'). The values for username, email, and password are retrieved from the form.
+-  A hashing function (generate_password_hash) is used to hash the password before storing it in the database.
+-  A dictionary is created to represent the new user
+
 **Login Function**
 **Access Home Page**
 **Manage Recipes**
