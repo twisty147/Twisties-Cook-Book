@@ -558,7 +558,7 @@ Flask, a lightweight and flexible Python web framework, was the backbone of the 
 
 **flask_pymongo.PyMongo**: is a library that facilitates the connection between a Flask application and a MongoDB database. It simplifies CRUD (Create, Read, Update, Delete) operations and provides methods to interact with the MongoDB collections. PyMongo was used to connect to the MongoDB database and perform operations like inserting new user data, retrieving recipes, or updating cart information.
 
-![PyMongo](./static/images/report_images/PYMongoSample.png)
+![PyMongo](./static/images/report_images/PyMongoSample.png)
 ![PyMongo](./static/images/report_images/PYMongoSample2.png)
 
 **Bson (Binary JSON) and Related Libraries**
