@@ -169,6 +169,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 - Confirm before deleting an item in cart
 - Users should be able to edit items in their cart
 
+[Back to Top](#requirements)
 
 # DATABASE
 
@@ -352,6 +353,8 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
                -  Type: String
                -  Description: The message or inquiry sent by the user through the contact form. It could be a general inquiry, feedback, or a request for support.
 
+[Back to Top](#requirements)
+
 
 # USECASE
 
@@ -463,9 +466,14 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
       -  If the username has been changed, the system updates the session with the new username.
       -  The user is redirected to the index page where they can continue using the application with their updated profile.
 
+[Back to Top](#requirements)
+
 
 # DESIGN
-This is the foundational blueprint for Twisties'Cook Book Design and layout. It outlines the structural framework of the site, depicting the arrangement of key elements such as navigation menus, content sections, and interactive features.
+
+###Low-Fidelity Prototype
+
+This is the foundational blueprint for Twisties' Cook Book Design and layout. It outlines the structural framework of the site, depicting the arrangement of key elements such as navigation menus, content sections, and interactive features.
 
 ![Low fidelity prototype](./static/images/report_images/indexPageGuest.png)
 
@@ -476,3 +484,15 @@ This is the foundational blueprint for Twisties'Cook Book Design and layout. It 
 ![Low fidelity prototype](./static/images/report_images/recipeDetail.png)
 
 ![Low fidelity prototype](./static/images/report_images/equipmentCategory.png)
+
+###Color Justification
+
+**Color Meanings and Associations**
+
+-  Teal is often associated with freshness, balance, and tranquility, making it a suitable choice for a cookbook focused on healthy or innovative recipes. It evokes the colors of fresh herbs and vegetables, aligning well with a culinary theme. This shade can also represent creativity and innovation, suggesting that the cookbook offers fresh ideas and twists on traditional recipes.
+
+-  White symbolizes purity, simplicity, and cleanliness. Using white as a background color helps create a clean, uncluttered look that makes recipes and ingredients stand out, enhancing readability. Also, white space can provide a sense of openness and calm, allowing users to navigate the cookbook easily without feeling overwhelmed by too many elements or colors.
+
+- Dark Grey conveys stability and sophistication, grounding the color palette. It provides a strong contrast against the teal and white, ensuring that text is easy to read and elements are distinct.
+
+- The combination of teal, white, and dark grey creates a visually appealing contrast that enhances readability. 
