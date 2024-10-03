@@ -173,6 +173,10 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 
 # DATABASE
 
+The database used for **Twisties Cookbook** is MongoDB. It is a popular NoSQL (Non-Relational) database that stores data in a flexible, document-oriented format known as BSON (Binary JSON), which is similar to JSON. Unlike traditional Relational Database Management Systems (RDBMS), MongoDB does not use structured tables and rows. Instead, it organizes data as collections of documents, making it highly scalable, adaptable, and capable of handling large volumes of unstructured or semi-structured data.
+
+MongoDB was selected because **Twisties Cookbook** has an evolving data requirements and MongoDB supports dynamic, schema-less design, allowing documents to have varying structures. Also, It is designed for scale-out architectures that handle large data volumes and high traffic like the type that will be generated from **Twisties Cookbook**. Hence, it was considered fit for use and purpose. 
+
 -**userCollection** 
    - Used for storing user information in the MongoDB collection.
    - Fields Explanation:
@@ -498,6 +502,8 @@ This is the foundational blueprint for Twisties' Cook Book Design and layout. It
 
    - The combination of teal, white, and dark grey creates a visually appealing contrast that enhances readability. 
 
+[Back to Top](#requirements)
+
 # DEVELOPMENT
 
 Initially the requirements for this project was vague and it had to be updated as the process unfolded, and I was working as a solo developer, as a result the Software Development Life Cycle (SDLC) approach selected for this project was Agile, specifically an Iterative variant known as Lean Software Development (LSD). LDS is an adaptation of the Lean manufacturing principles, originally developed by Toyota, applied to the software development process. The goal of Lean Software Development is to deliver software quickly and efficiently by focusing on value creation and eliminating waste in the development process. It emphasizes continuous improvement, minimizing resource use, and maximizing customer value.
@@ -521,7 +527,7 @@ Flask, a lightweight and flexible Python web framework, was the backbone of the 
 
 ### **Modules used in the backend code**
 
-**Flask**: Flask is a lightweight and modular web framework for Python, used for building web applications. It provides essential tools and features such as routing, template rendering, and request handling. Flask was used to create the app instance and manage the flow of your application using routes and view functions. 
+**Flask**: Flask is a lightweight and modular web framework for Python, used for building web applications. It provides essential tools and features such as routing, template rendering, and request handling. Flask was used to create the app instance and manage the flow of the application using routes and view functions. 
 
 ![Sample Route](./static/images/report_images/sampleRoute.png)
 
@@ -590,4 +596,38 @@ This was used when a user attempts to log in, ensuring that the password entered
 
 ![Cloudinary uploader](./static/images/report_images/cloudinary%20uploader.png)
 
+[Back to Top](#requirements)
+
+
+#### **Features and Functionalities Implemented**
+**Registration Functionality**
+**Login**
+**Access Home Page**
+**Manage Recipes**
+   - Add Recipe
+   - Edit Recipe
+   - Delete Reciepe
+**View All Reciepe**
+   - Search
+   - Search By Tag
+   - Add to Favorite
+   - Required tools
+   - Add to cart
+   - Edit Cart Items
+   - Delete Cart Item
+
+
+
+Login
+Registration
+Dashboard
+Manage Recipes
+Add
+Edit  
+Delete
+Favorite
+Search 
+Tag Search
+Equiptment 
+Cart 
 
