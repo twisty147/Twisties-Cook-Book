@@ -1,21 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- Flash Messages -->
-{% with messages = get_flashed_messages(with_categories=true) %}
-{% if messages %}
-<div class="col s12">
-    {% for category, message in messages %}
-    <div id="flashMessage" class="card-panel {{ category }}">
-        {{ message }}
-    </div>
-    {% endfor %}
-</div>
-{% endif %}
-{% endwith %}
+
 
 <div class="container">
-    <a href="{{ url_for('get_index') }}"  >
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="col s12">
+        {% for category, message in messages %}
+        <div id="flashMessage" class="card-panel {{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <a href="{{ url_for('get_index') }}">
         <button onclick="" style="background:none; border:none; cursor:pointer;">
             <i class="fas fa-arrow-left" style="font-size:24px;"></i>
         </button>
@@ -63,7 +64,8 @@
     <div class="" style="display: flex; justify-content: space-between; ">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
         <form id="deleteForm" method="POST">
-            <button type="submit" class="red waves-effect waves-light btn"><i class="material-icons left">delete</i>Delete</button>
+            <button type="submit" class="red waves-effect waves-light btn"><i
+                    class="material-icons left">delete</i>Delete</button>
         </form>
     </div>
 </div>
