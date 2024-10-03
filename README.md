@@ -471,7 +471,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 
 # DESIGN
 
-###Low-Fidelity Prototype
+### Low-Fidelity Prototype
 
 This is the foundational blueprint for Twisties' Cook Book Design and layout. It outlines the structural framework of the site, depicting the arrangement of key elements such as navigation menus, content sections, and interactive features.
 
@@ -485,7 +485,7 @@ This is the foundational blueprint for Twisties' Cook Book Design and layout. It
 
 ![Low fidelity prototype](./static/images/report_images/equipmentCategory.png)
 
-###Color Justification
+### Color Justification
 
 **Color Meanings and Associations**
 
@@ -496,3 +496,4 @@ This is the foundational blueprint for Twisties' Cook Book Design and layout. It
 - Dark Grey conveys stability and sophistication, grounding the color palette. It provides a strong contrast against the teal and white, ensuring that text is easy to read and elements are distinct.
 
 - The combination of teal, white, and dark grey creates a visually appealing contrast that enhances readability. 
+
