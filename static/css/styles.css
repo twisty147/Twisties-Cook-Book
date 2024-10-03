@@ -133,14 +133,14 @@ footer {
     }
 }
 
-/* Hide brand text on mobile screens */
+/* Reduce brand text on mobile screens */
 @media (max-width: 600px) {
     .brand-text {
-        display: none;
+        font-size: 1.1rem;
     }
 
     .brand-logo img {
-        height: 40px;
+        display: none;
     }
 }
 
