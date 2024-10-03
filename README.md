@@ -174,10 +174,10 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 
 # USECASE
 
-### Actors
+## Actors
 - **Primary Actor:** User
 - **Secondary Actors:** System
-### Main Flow (Basic Scenario)
+## Main Flow (Basic Scenario)
 
 **Access Home Page**
    - **Step 1:** The user navigates to the home page http://twisties-cook-book-e57860eccdee.herokuapp.com/.
@@ -287,7 +287,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 
 # DESIGN
 
-### Low-Fidelity Prototype
+## Low-Fidelity Prototype
 
 This is the foundational blueprint for Twisties' Cook Book Design and layout. It outlines the structural framework of the site, depicting the arrangement of key elements such as navigation menus, content sections, and interactive features.
 
@@ -301,7 +301,7 @@ This is the foundational blueprint for Twisties' Cook Book Design and layout. It
 
 ![Low fidelity prototype](./static/images/report_images/equipmentCategory.png)
 
-### Color Justification
+## Color Justification
 
 **Color Meanings and Associations**
 - The choice of a Teal, white, and dark-grey colour scheme for the **Twisties Cookbook** is deliberate and serves several purposes:
@@ -322,11 +322,12 @@ Initially the requirements for this project was vague and it had to be updated a
 
 This development approach enabled me to use a flow-based approach, where the tasks for **Twisties Cookbook** were prioritized and completed one by one. This allowed me to manage the development workload effectively.
 
-### Implementation
+## Implementation
 
 The **Twisties Cookbook** was developed using a combination of Flask, JavaScript, Materialize CSS, CSS, Jinja templating, and MongoDB to create a dynamic and interactive platform for users to manage and explore various recipes. The implementation process was carefully planned to ensure that the application was both functional and visually appealing while maintaining a seamless user experience.
 
 #### **Data Handling and Database Integration**
+
 **Twisties Cookbook** utilized MongoDB as the primary database to store data such as recipe information, user data, and equipment categories. It is a popular NoSQL (Non-Relational) database that stores data in a flexible, document-oriented format known as BSON (Binary JSON), which is similar to JSON. Unlike traditional Relational Database Management Systems (RDBMS), MongoDB does not use structured tables and rows. Instead, it organizes data as collections of documents, making it highly scalable, adaptable, and capable of handling large volumes of unstructured or semi-structured data.
 
 MongoDB was selected because **Twisties Cookbook** has an evolving data requirements and MongoDB supports dynamic, schema-less design, allowing documents to have varying structures. Also, It is designed for scale-out architectures that handle large data volumes and high traffic like the type that will be generated from **Twisties Cookbook**. Hence, it was considered fit for use and purpose. 
@@ -515,7 +516,7 @@ The data collections created were used to categorize and manage data efficiently
 
 [Back to Top](#requirements)
 
-#### **Backend Development with Flask**
+### **Backend Development with Flask**
 
 Flask, a lightweight and flexible Python web framework, was the backbone of the **Twisties Cookbook** due to its simplicity and ease of integration with other technologies. The backend implementation involved the following key elements:
 
@@ -596,7 +597,7 @@ This was used when a user attempts to log in, ensuring that the password entered
 [Back to Top](#requirements)
 
 
-#### **Features and Functionalities Implemented**
+### **Features and Functionalities Implemented**
 This section contains a description of the features and functions implemented. The structure of the pages in **Twisties Cook Book** used Flask's templating system (Jinja2). All pages inherit their layout from base.html, that includes includes the common structure (header, footer, and Nav) for all pages. For styling the Materialize framework was used along with some custom CSS. 
 
 **Registration**
