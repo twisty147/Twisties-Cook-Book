@@ -65,7 +65,7 @@ window.onload = function () {
         if (message) {
             message.style.display = 'none';
         }
-    }, 5000); // 5000 milliseconds = 5 seconds
+    }, 3000); // 3000 milliseconds = 3 seconds
 
     // Initialize modal functionality
     const modalElems = document.querySelectorAll('.modal');
