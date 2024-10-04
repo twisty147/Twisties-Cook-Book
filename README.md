@@ -815,11 +815,24 @@ This Flask route fetches the data needed to populate this homepage
 
 **View Recipe**
 -  **Required tools**
-This part is  a **NICE TO HAVE** feauture that Build's upon the required tools field to promote Twisties brand of kitchen tools 
-
-![Add to favorite](./static/images/report_images/addtoFavoriteRoute.png)
 
 ![Required Tools](./static/images/report_images/PromoteBrand.png)
+
+-  This part is  a **NICE TO HAVE** feauture that Build's upon the required tools field to promote Twisties brand of kitchen tools 
+
+![Show Equiptment Category](./static/images/report_images/showEquipmentCategory.png)
+
+-  The show_equipment_categories route retrieves all equipment categories from the equipmentCollection and sends them to the template for display.
+-  The route uses the GET method to retrieve and display equipment categories.
+-  The equipmentCollection is accessed from the MongoDB database.
+-  The find method retrieves all documents from the collection but only returns specific fields:
+    - category: The name or identifier for each category.
+    - menu_image: An image associated with the category (which can be used for display on the page).
+    - _id: The unique identifier for each document, which is always useful for links or operations.
+-  The retrieved categories are passed to the equipment_categories.html template for rendering.
+-  The categories object will be available in the template, allowing for iteration and display of category data.
+
+
    
 
 
