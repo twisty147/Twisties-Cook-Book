@@ -161,7 +161,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 **Manage Recipe**
    - Users Should be able to perform CRUD functionalities on recipes. Update/Delete only for the recipes they added.
 
-**Cart**
+**Cart (Nice to have)**
 - The users cart page should extend the base template
 - Display the title of the page
 - Check if the cart is empty and display a message accordingly
@@ -756,7 +756,7 @@ This Flask route fetches the data needed to populate this homepage
 
 **Manage Recipes**
    -**Delete Recipe**
-   
+
 -  When the delete button is clicks it triggers a modal to confirming the action.
 
 ![Delete Confirmation](./static/images/report_images/deleteconfirmation.png)
@@ -799,8 +799,24 @@ This Flask route fetches the data needed to populate this homepage
 **View Recipe**
 -  **Add to Favorite**
 
+![Add to favorite](./static/images/report_images/addtoFavoriteRoute.png)
+
+-  The toggle_favorite route allows users to add or remove recipes from their list of favorites with a simple toggle action.
+-  The route is set to handle POST requests
+-  It accesses the usersCollection to find the currently logged-in user using their username stored in the session.
+-  The user's existing list of favorited recipes is retrieved. If the user has no favorited recipes, an empty list ([]) is used as the default.
+-  If the recipe is already in the user's list of favorites, it's removed using the $pull operation.
+-  A success message is flashed to notify the user that the recipe has been removed.
+-  If the recipe is not yet favorited, it is added using the $push operation.
+-  A success message is flashed to notify the user that the recipe has been added to their favorites.
+-  After toggling the favorite status, the user is redirected back to the recipe's details page.
+-  The from_page query parameter is passed to ensure proper navigation depending on where the user came from (for example, the homepage or search results).
+
+
 **View Recipe**
 -  **Required tools**
+
+
 
 **Required tools**
 -  **Equiptment Category**
