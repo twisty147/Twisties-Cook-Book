@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     let ingredientCount = 1;
     let stepCount = 1;
