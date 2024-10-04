@@ -745,11 +745,7 @@ This Flask route fetches the data needed to populate this homepage
    -**View Recipe**
 
 -  The view recipe function is triggered when a recipe card or link is clicked across the application. 
--  It displays a screen showing details about the recipe including its name, Details, ingridients, preparation steps, Required tool, tags, and icons to share the recipe on social media.
-
-![view Recipe](./static/images/report_images/viewrecipe.png)
-
-This get_recipe route allows users to view a specific recipe's details by its recipe_id
+-  The get_recipe route allows users to view a specific recipe's details by its recipe_id
 
 ![Get Recipe](./static/images/report_images/getRecipe.png)
 
@@ -763,6 +759,12 @@ This get_recipe route allows users to view a specific recipe's details by its re
 -  It then checks if the recipe is in the user's favorited_recipes list. If the recipe is favorited, is_favorite is set to True.
 - The recipe data, whether it's a favorite (is_favorite), and the origin page (from_page) are passed to the recipe_detail.html template for rendering.
 -  The from_page parameter allows for custom back navigation (e.g., "home" or "manage_recipes").
+
+-  It displays a screen showing details about the recipe including its name, Details, ingridients, preparation steps, Required tool, tags (click to search), a back button and icons to share the recipe on social media.
+
+![view Recipe](./static/images/report_images/viewrecipe.png)
+
+
 
 **Add to Favorite**
 **Click Tag to Search**
