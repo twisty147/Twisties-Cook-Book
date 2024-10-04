@@ -646,9 +646,19 @@ If the user is not logged in, they are shown a generic welcome message and promp
 
 ![Index Page](./static/images/report_images/index2.png)
 
+The featured recipes section displays the most recent recipes from the database. Each recipe is presented as a clickable card that contains the recipe image, title, cook time, and servings.
+The loop.index % 3 == 0 logic ensures that a new row starts after every three recipes, creating a neat grid layout.
 
+![Display Three Cards](./static/images/report_images/displayRecipeloop.png)
+
+This Flask route fetches the data needed to populate this homepage
 
 ![Index Route](./static/images/report_images/indexroute.png)
+
+-  The recipes = recipesCollection.find().sort('_id', -1).limit(9) line retrieves the last 9 recipes added to the database, sorting them in descending order by _id. This ensures that the most recent recipes are displayed on the homepage.
+-  The count_documents function counts the total number of recipes in the database, which is displayed on the user's dashboard.
+-  If the user is logged in, the server fetches the count of recipes they have added, which is also displayed in their dashboard.
+-  he Flask route passes the recipe data and statistics to the index.html template for rendering.
 
 
 
