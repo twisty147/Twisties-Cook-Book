@@ -90,6 +90,28 @@ window.onload = function () {
     });
 };
 
+// Function to delete a field dynamically
+function deleteField(event, section) {
+    if (event.target.classList.contains('delete-field')) {
+        event.target.parentElement.remove();
+        // Optionally adjust the counter if needed based on the section
+        if (section === 'ingredients') ingredientCount--;
+        if (section === 'preparation_steps') stepCount--;
+        if (section === 'required_tools') toolCount--;
+    }
+}
+
+// Event listeners for deleting fields
+document.getElementById('ingredients-section').addEventListener('click', function (e) {
+    deleteField(e, 'ingredients');
+});
+document.getElementById('preparation-steps-section').addEventListener('click', function (e) {
+    deleteField(e, 'preparation_steps');
+});
+document.getElementById('required-tools-section').addEventListener('click', function (e) {
+    deleteField(e, 'required_tools');
+});
+
 function addToCart(categoryId, itemName, itemPrice, itemIndex) {
     const quantityInput = document.getElementById(`quantity-${itemIndex}`);
     const quantity = parseInt(quantityInput.value);
@@ -272,4 +294,3 @@ function previewImage(event) {
         reader.readAsDataURL(file);
     }
 }
-// Add more ingredients, steps, and tools dynamically on page load

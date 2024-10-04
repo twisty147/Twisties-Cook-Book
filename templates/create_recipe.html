@@ -20,7 +20,7 @@
                 <div id="ingredients-section">
                     <div class="input-field" id="ingredient-1" style="display: flex;">
                         <input type="text" id="ingredient_input_1" name="ingredients[]" required>
-                        <label for="ingredient_input_1">Ingredient 1</label>
+                        <label for="ingredient_input_1">Ingredient </label>
                         <i class="material-icons red-text delete-ingredient" style="cursor: pointer;">delete</i>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <div class="input-field" id="step-1" style="display: flex;">
                         <textarea id="preparation_step_1" name="preparation_steps[]" class="materialize-textarea"
                             required></textarea>
-                        <label for="preparation_step_1">Step 1</label>
+                        <label for="preparation_step_1">Step </label>
                         <i class="material-icons red-text delete-step" style="cursor: pointer;">delete</i>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                 <div id="tools-section">
                     <div class="input-field" id="tool-1" style="display: flex;">
                         <input type="text" id="tool_input_1" name="required_tools[]" required>
-                        <label for="tool_input_1">Tool 1</label>
+                        <label for="tool_input_1">Tool </label>
                         <i class="material-icons red-text delete-tool" style="cursor: pointer;">delete</i>
                     </div>
                 </div>
@@ -280,7 +280,8 @@
 
             <!-- Image preview section -->
             <div class="col s12">
-                <img id="image_preview" src="" alt="Image Preview" style="max-width: 200px; height: auto; border: 1px solid #ddd; padding: 5px; display: none;" />
+                <img id="image_preview" src="" alt="Image Preview"
+                    style="max-width: 200px; height: auto; border: 1px solid #ddd; padding: 5px; display: none;" />
             </div>
             <div class="input-field col s12">
                 <input type="text" id="tags" name="tags">
@@ -294,6 +295,5 @@
         </div>
     </form>
 </div>
-<script src="/static/js/create_recipe.js"></script>
+<script src="{{ url_for('static', filename='/js/create_recipe.js') }}"></script>
 {% endblock %}
-
