@@ -699,8 +699,32 @@ This Flask route fetches the data needed to populate this homepage
    -  The recipe data is inserted into MongoDB after being constructed from the form input. If successful, a success message is flashed to the user.
    -  After the recipe is created, the user is redirected to the manage_recipes page.
 
+**Manage Recipes**
+   -**Edit Recipe**
 
-   -  **Edit Recipe**
+![Edit Recipe](./static/images/report_images/edit.html.png)
+
+-  When users click this button it opens a recipe update page where users can edit/update recipe details and image.
+
+![Edit route](./static/images/report_images/EditRoute%20Step1.png)
+
+-  The Route: /recipe/edit/<recipe_id> function first checks if the user is logged in by verifying if 'user' exists in the session. If not, the user is redirected to the login page.
+-  The recipe is retrieved from the MongoDB collection using its unique _id.
+-  It then checks if the recipe exists and if the logged-in user is the one who added it. If either check fails, the user is shown an error message and redirected to the recipe management page.
+-  if the user submits the form to update the recipe (i.e., the request method is POST), the function proceeds to update the recipe with the new data.
+
+![Edit route](./static/images/report_images/finaledit.png)
+
+-  The updated data is collected from the form and stored in the update_data dictionary.
+-  For the ingredients, preparation steps, and required tools, it uses request.form.getlist to handle the multiple input fields.
+-  It also splits the tags input (assuming it's a comma-separated string) into a list.
+-  Finally, it adds a date_time_edited field to track when the recipe was last updated.
+-  If the user uploads a new image, it is uploaded to Cloudinary, and the new URL is stored in the image_url field of the update_data dictionary.
+-  The update_one method is used to update the recipe document in MongoDB. The $set operator ensures that only the fields present in update_data are modified.
+-  Upon a successful update, the user is notified via a success message.
+
+
+   
    -  **Delete Reciepe**
    -  **View all recipes**
    -  **Search**
