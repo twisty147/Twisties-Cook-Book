@@ -703,7 +703,6 @@ This Flask route fetches the data needed to populate this homepage
 **View All Recipes**
 
 -  The view all recipes is trigered from the dashboard card view all recipes or from the link on the nav bar or quick links.
--  When this link is clicked, it opens up a page that displays all recipes with a search field at the top of the page.
 
 ![View All Recipes](./static/images/report_images/allRecipesRoute.png)
 
@@ -728,8 +727,10 @@ This Flask route fetches the data needed to populate this homepage
 
 ![View All Recipes](./static/images/report_images/allrecipes.png)
 
+
 **Manage Recipes**
    -**Edit Recipe**
+
 
 ![Edit Recipe](./static/images/report_images/edit.html.png)
 
@@ -752,8 +753,10 @@ This Flask route fetches the data needed to populate this homepage
 -  The update_one method is used to update the recipe document in MongoDB. The $set operator ensures that only the fields present in update_data are modified.
 -  Upon a successful update, the user is notified via a success message.
 
+
 **Manage Recipes**
    -**Delete Recipe**
+   
 -  When the delete button is clicks it triggers a modal to confirming the action.
 
 ![Delete Confirmation](./static/images/report_images/deleteconfirmation.png)
