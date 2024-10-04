@@ -738,15 +738,37 @@ This Flask route fetches the data needed to populate this homepage
 -  It uses the ObjectId function from bson to convert the recipe ID from its string representation to an ObjectId, which is required for MongoDB queries.
 -  If the deletion is successful, the user receives a success message via flash().
 -  If an exception occurs during the deletion process, an error message is displayed.
+-  After attempting to delete the recipe, the user is redirected to the recipe management page, whether the deletion was successful or not. The flash messages will notify them of the result.
+-  The try-except block ensures that any issues during the deletion process (e.g., database connection errors) are caught, and a corresponding error message is displayed to the user.
 
+**Manage Recipes**
+   -**View Recipe**
 
+-  The view recipe function is triggered when a recipe card or link is clicked across the application. 
+-  It displays a screen showing details about the recipe including its name, Details, ingridients, preparation steps, Required tool, tags, and icons to share the recipe on social media.
 
+![view Recipe](./static/images/report_images/viewrecipe.png)
+
+This get_recipe route allows users to view a specific recipe's details by its recipe_id
+
+![Get Recipe](./static/images/report_images/getRecipe.png)
+
+-  This route is designed to fetch the details of a recipe identified by the recipe_id.
+-  If the user is not logged in (i.e., their session doesn't contain a user), they are redirected to the login page, and a flash message notifies them that login is required.
+-  The route attempts to convert the recipe_id from a string to a MongoDB ObjectId.
+-  If the conversion fails (due to an invalid format), the route returns an error message (400 Bad Request).
+-  The recipe is queried from the recipesCollection based on the converted ObjectId.
+-  The find_one_or_404 method returns the recipe if it exists; otherwise, it throws a 404 error.
+-  If the user is logged in, the route fetches the user data from the usersCollection.
+-  It then checks if the recipe is in the user's favorited_recipes list. If the recipe is favorited, is_favorite is set to True.
+- The recipe data, whether it's a favorite (is_favorite), and the origin page (from_page) are passed to the recipe_detail.html template for rendering.
+-  The from_page parameter allows for custom back navigation (e.g., "home" or "manage_recipes").
 
 
 
 
    
-   -  **Delete Reciepe**
+   - 
    -  **View all recipes**
    -  **Search**
    -  **Search By Tag**
