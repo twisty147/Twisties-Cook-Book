@@ -723,6 +723,18 @@ This Flask route fetches the data needed to populate this homepage
 -  The update_one method is used to update the recipe document in MongoDB. The $set operator ensures that only the fields present in update_data are modified.
 -  Upon a successful update, the user is notified via a success message.
 
+**Manage Recipes**
+   -**Delete Recipe**
+When the delete button is clicks it triggers a modal to confirming the action.
+
+![Delete Confirmation](./static/images/report_images/deleteconfirmation.png)
+
+If the user clicks yes the Route: /delete_recipe/<recipe_id> is trigered. It supports the POST method as it avoids the risk of accidental deletion through URL access (which could happen if it were a GET request).
+
+![Delete route](./static/images/report_images/deleteroute.png)
+
+
+
 
    
    -  **Delete Reciepe**
