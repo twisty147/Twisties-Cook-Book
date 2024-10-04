@@ -683,9 +683,8 @@ This Flask route fetches the data needed to populate this homepage
 -  A dropdown for selecting the cuisine type. It’s required and defaults to an empty value.
 -  Other Input Fields include fields for preparation time, cook time, servings, and tags (comma-separated).
 -  Users can upload an image for the recipe. The onchange event triggers the previewImage(event) function to show a preview of the selected image.
-This section shows a preview of the uploaded image once it’s selected.
 
-- **Handling Add Recipe Form Submission**
+-  **Handling Add Recipe Form Submission**
 
 ![Create Recipe Route](./static/images/report_images/createRecipeRoute.png)
 -  Extracts the data submitted by the user via the form.
