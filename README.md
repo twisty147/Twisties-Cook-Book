@@ -663,7 +663,7 @@ This Flask route fetches the data needed to populate this homepage
 -  he Flask route passes the recipe data and statistics to the index.html template for rendering.
 
 **Manage Recipes**
-   -**Add Recipe** 
+   -  **Add Recipe** 
 
 ![Manage Recipes](./static/images/report_images/manageAdd.png)
 
@@ -700,7 +700,7 @@ This Flask route fetches the data needed to populate this homepage
    -  After the recipe is created, the user is redirected to the manage_recipes page.
 
 **Manage Recipes**
-**View All Recipes**
+   -  **View All Recipes**
 
 -  The view all recipes is trigered from the dashboard card view all recipes or from the link on the nav bar or quick links.
 
@@ -729,7 +729,7 @@ This Flask route fetches the data needed to populate this homepage
 
 
 **Manage Recipes**
-   -**Edit Recipe**
+   -  **Edit Recipe**
 
 
 ![Edit Recipe](./static/images/report_images/edit.html.png)
@@ -755,7 +755,7 @@ This Flask route fetches the data needed to populate this homepage
 
 
 **Manage Recipes**
-   -**Delete Recipe**
+   -  **Delete Recipe**
 
 -  When the delete button is clicks it triggers a modal to confirming the action.
 
@@ -774,7 +774,7 @@ This Flask route fetches the data needed to populate this homepage
 -  The try-except block ensures that any issues during the deletion process (e.g., database connection errors) are caught, and a corresponding error message is displayed to the user.
 
 **Manage Recipes**
-   -**View Recipe**
+   -  **View Recipe**
 
 -  The view recipe function is triggered when a recipe card or link is clicked across the application. 
 -  The get_recipe route allows users to view a specific recipe's details by its recipe_id
@@ -815,7 +815,12 @@ This Flask route fetches the data needed to populate this homepage
 
 **View Recipe**
 -  **Required tools**
+This part is  a **NICE TO HAVE** feauture that Build's upon the required tools field to promote Twisties brand of kitchen tools 
 
+![Add to favorite](./static/images/report_images/addtoFavoriteRoute.png)
+
+![Required Tools](./static/images/report_images/PromoteBrand.png)
+   
 
 
 **Required tools**
