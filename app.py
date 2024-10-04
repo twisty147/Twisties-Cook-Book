@@ -334,7 +334,7 @@ cloudinary.config(
     api_secret='zCM1OE5iDvdDUOy3-twKpygTerU',
     secure=True
 )
-@app.route('/recipe/create', methods=['GET', 'POST'])
+
 @app.route('/create_recipe', methods=['POST'])
 def create_recipe():
     username = session.get('user')

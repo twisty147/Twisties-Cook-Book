@@ -685,6 +685,22 @@ This Flask route fetches the data needed to populate this homepage
 -  Users can upload an image for the recipe. The onchange event triggers the previewImage(event) function to show a preview of the selected image.
 This section shows a preview of the uploaded image once it’s selected.
 
+- **Handling Add Recipe Form Submission**
+
+![Create Recipe Route](./static/images/report_images/createRecipeRoute.png)
+-  Extracts the data submitted by the user via the form.
+-  Uses getlist to handle dynamic fields like ingredients, preparation steps, and tools.
+
+![Create Recipe Route](./static/images/report_images/handlesImageUpload.png)
+
+-  This part handles the image file upload to Cloudinary. If the image is uploaded successfully, the image_url is stored.
+
+![Create Recipe Route](./static/images/report_images/SNRDB.png)
+
+-  The recipe data is inserted into MongoDB after being constructed from the form input. If successful, a success message is flashed to the user.
+-  After the recipe is created, the user is redirected to the manage_recipes page.
+
+
    -  **Edit Recipe**
    -  **Delete Reciepe**
    -  **View all recipes**
