@@ -637,6 +637,7 @@ The form allows users to input their login details, such as email and password, 
 -  After logging in, the user is redirected to the index page
 
 **Access Index Page**
+
 This home page is a dashboard-style homepage that dynamically adjusts its content based on whether the user is logged in or not. If the user is logged in (i.e., session['user'] is set), they are greeted with a personalized message and given a quick overview of key statistics from their dashboard, such as total recipes, recipes they've added, and their favorited recipes.
 
 The statistics are displayed using card-panel components, and each card links to a different part of the site (e.g., viewing all recipes, managing the user's recipes, viewing favorited recipes).
@@ -673,8 +674,9 @@ This Flask route fetches the data needed to populate this homepage
 -  The form Method is POST, because data is being submitted to the server.
 -  enctype="multipart/form-data" is an attribute that was necessary to handle file uploads (the recipe image).
 
-
-A section for dynamically adding ingredients. Initially, one ingredient input field is shown. There’s an "Add Ingredient" button to add more fields using JavaScript.
+A section for dynamically adding ingredients. 
+Initially, one ingredient input field is shown. 
+There’s an "Add Ingredient" button to add more fields using JavaScript.
 Similar to the ingredients section, this area allows the user to add multiple preparation steps.
 This section is for listing the required tools. Like the others, it is dynamic and can add or remove fields as needed.
 A dropdown for selecting the cuisine type. It’s required and defaults to an empty value.
