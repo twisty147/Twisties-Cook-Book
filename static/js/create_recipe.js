@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const newStep = `
             <div class="input-field" id="step-${stepCount}" style="display: flex;">
                 <textarea id="preparation_step_${stepCount}" name="preparation_steps[]" class="materialize-textarea" required></textarea>
-                <label for="preparation_step_${stepCount}">Step ${stepCount}</label>
+                <label for="preparation_step_${stepCount}">Step </label>
                 <i class="material-icons red-text delete-step" style="cursor: pointer;">delete</i>
             </div>`;
         document.getElementById('preparation-steps-section').insertAdjacentHTML('beforeend', newStep);
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const newTool = `
     <div class="input-field" id="tool-${toolCount}" style="display: flex;">
         <input type="text" id="tool_input_${toolCount}" name="required_tools[]" required>
-        <label for="tool_input_${toolCount}">Tool ${toolCount}</label>
+        <label for="tool_input_${toolCount}">Tool </label>
         <i class="material-icons red-text delete-tool" style="cursor: pointer;">delete</i>
     </div>`;
         document.getElementById('tools-section').insertAdjacentHTML('beforeend', newTool);
