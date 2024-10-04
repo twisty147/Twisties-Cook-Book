@@ -663,7 +663,7 @@ This Flask route fetches the data needed to populate this homepage
 -  he Flask route passes the recipe data and statistics to the index.html template for rendering.
 
 **Manage Recipes**
-   -  **Add Recipe** 
+   -**Add Recipe** 
 
 ![Manage Recipes](./static/images/report_images/manageAdd.png)
 
@@ -684,7 +684,7 @@ This Flask route fetches the data needed to populate this homepage
    -  Other Input Fields include fields for preparation time, cook time, servings, and tags (comma-separated).
    -  Users can upload an image for the recipe. The onchange event triggers the previewImage(event) function to show a preview of the selected image.
 
--  **Handling Add Recipe Form Submission**
+**Handling Add Recipe Form Submission**
 
 ![Create Recipe Route](./static/images/report_images/createRecipeRoute.png)
    -  Extracts the data submitted by the user via the form.
