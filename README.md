@@ -667,37 +667,37 @@ This Flask route fetches the data needed to populate this homepage
 
 ![Manage Recipes](./static/images/report_images/manageAdd.png)
 
--  When users click this button it opens a recipe creation page where users can input recipe details and upload an image.
+   -  When users click this button it opens a recipe creation page where users can input recipe details and upload an image.
 
 ![Create Recipe Page](./static/images/report_images/createRecipeFM.png)
 
--  The form Method is POST, because data is being submitted to the server.
--  enctype="multipart/form-data" is an attribute that was necessary to handle file uploads (the recipe image).
+   -  The form Method is POST, because data is being submitted to the server.
+   -  enctype="multipart/form-data" is an attribute that was necessary to handle file uploads (the recipe image).
 
 ![Create Recipe Form](./static/images/report_images/CRFM.png)
 
--  There is section for dynamically adding ingredients. 
--  Initially, one ingredient input field is shown. 
--  There’s an "Add Ingredient" button to add more fields using JavaScript (create_recipe.js).
--  Similar to the ingredients section, the form also has the same implementation for multiple preparation Steps and Tools.
--  A dropdown for selecting the cuisine type. It’s required and defaults to an empty value.
--  Other Input Fields include fields for preparation time, cook time, servings, and tags (comma-separated).
--  Users can upload an image for the recipe. The onchange event triggers the previewImage(event) function to show a preview of the selected image.
+   -  There is section for dynamically adding ingredients. 
+   -  Initially, one ingredient input field is shown. 
+   -  There’s an "Add Ingredient" button to add more fields using JavaScript (create_recipe.js).
+   -  Similar to the ingredients section, the form also has the same implementation for multiple preparation Steps and Tools.
+   -  A dropdown for selecting the cuisine type. It’s required and defaults to an empty value.
+   -  Other Input Fields include fields for preparation time, cook time, servings, and tags (comma-separated).
+   -  Users can upload an image for the recipe. The onchange event triggers the previewImage(event) function to show a preview of the selected image.
 
 -  **Handling Add Recipe Form Submission**
 
 ![Create Recipe Route](./static/images/report_images/createRecipeRoute.png)
--  Extracts the data submitted by the user via the form.
--  Uses getlist to handle dynamic fields like ingredients, preparation steps, and tools.
+   -  Extracts the data submitted by the user via the form.
+   -  Uses getlist to handle dynamic fields like ingredients, preparation steps, and tools.
 
 ![Create Recipe Route](./static/images/report_images/handlesImageUpload.png)
 
--  This part handles the image file upload to Cloudinary. If the image is uploaded successfully, the image_url is stored.
+   -  This part handles the image file upload to Cloudinary. If the image is uploaded successfully, the image_url is stored.
 
 ![Create Recipe Route](./static/images/report_images/SNRDB.png)
 
--  The recipe data is inserted into MongoDB after being constructed from the form input. If successful, a success message is flashed to the user.
--  After the recipe is created, the user is redirected to the manage_recipes page.
+   -  The recipe data is inserted into MongoDB after being constructed from the form input. If successful, a success message is flashed to the user.
+   -  After the recipe is created, the user is redirected to the manage_recipes page.
 
 
    -  **Edit Recipe**
