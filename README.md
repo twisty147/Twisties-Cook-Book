@@ -559,7 +559,7 @@ Flask, a lightweight and flexible Python web framework, was the backbone of the 
 **flask_pymongo.PyMongo**: is a library that facilitates the connection between a Flask application and a MongoDB database. It simplifies CRUD (Create, Read, Update, Delete) operations and provides methods to interact with the MongoDB collections. PyMongo was used to connect to the MongoDB database and perform operations like inserting new user data, retrieving recipes, or updating cart information.
 
 ![PyMongo](./static/images/report_images/PyMongoSample.png)
-![PyMongo](./static/images/report_images/PYMongoSample2.png)
+![PyMongo](./static/images/report_images/retrieveRecipes.png)
 
 **Bson (Binary JSON) and Related Libraries**
 - **bson.objectid.ObjectId**: Part of the BSON (Binary JSON) library, ObjectId is a class used to create or handle MongoDB’s unique identifier type, ObjectId. This was used for querying and handling MongoDB documents by their _id fields, ensuring operations are performed on the correct data entries.
@@ -568,8 +568,7 @@ Flask, a lightweight and flexible Python web framework, was the backbone of the 
 ![bson.objectid](./static/images/report_images/bsonSample.png)
 
 
-**bson.errors.InvalidId**: An exception class from the BSON library, InvalidId is raised when attempting to convert a string into an ObjectId fails.
-This helps in validating and handling scenarios where the provided ID is not a valid MongoDB identifier.
+- **bson.errors.InvalidId**: An exception class from the BSON library, InvalidId is raised when attempting to convert a string into an ObjectId fails.This helps in validating and handling scenarios where the provided ID is not a valid MongoDB identifier.
 
 ![InvalidId](./static/images/report_images/InvalidIdSample.png)
 
