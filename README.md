@@ -597,7 +597,8 @@ This was used when a user attempts to log in, ensuring that the password entered
 
 
 ### **Features and Functionalities Implemented**
-This section contains a description of the features and functions implemented. The structure of the pages in **Twisties Cook Book** used Flask's templating system (Jinja2). All pages inherit their layout from base.html, that includes includes the common structure (header, footer, and Nav) for all pages. For styling the Materialize framework was used along with some custom CSS. 
+This section contains a description of the features and functions implemented. The structure of the pages in **Twisties Cook Book** used Flask's templating system (Jinja2). All pages inherit their layout from base.html, that includes includes the common structure (header, footer, and Nav) for all pages. For styling the Materialize framework was used along with some custom CSS. JavaScript was used to add the interactive behaviour on the web page.
+
 
 **Registration**
 
@@ -660,29 +661,39 @@ This Flask route fetches the data needed to populate this homepage
 -  If the user is logged in, the server fetches the count of recipes they have added, which is also displayed in their dashboard.
 -  he Flask route passes the recipe data and statistics to the index.html template for rendering.
 
-
-
-
-
-
-
-
-
-
 **Manage Recipes**
-   -  Add Recipe
-   -  Edit Recipe
-   -  Delete Reciepe
-   -  View all recipes
-   -  Search
-   -  Search By Tag
-   -  View recipe by ID
-   -  Add to Favorite
-   -  Click Tag to Search
-   -  Required tools
-   -  Equiptment Category
-   -  Category Items
-   -  Add to cart
-   -  Edit Cart Items
-   -  Delete Cart Item
+   -  **Add Recipe** 
+![Manage Recipes](./static/images/report_images/manageAdd.png)
+
+-  When users click this button it opens a recipe creation page where users can input recipe details and upload an image.
+
+![Create Recipe Page](./static/images/report_images/createRecipeFM.png)
+
+![Create Recipe Page](./static/images/report_images/createRecipeFM.png)
+-  The form Method is POST, because data is being submitted to the server.
+-  enctype="multipart/form-data" is an attribute that was necessary to handle file uploads (the recipe image).
+
+
+A section for dynamically adding ingredients. Initially, one ingredient input field is shown. There’s an "Add Ingredient" button to add more fields using JavaScript.
+Similar to the ingredients section, this area allows the user to add multiple preparation steps.
+This section is for listing the required tools. Like the others, it is dynamic and can add or remove fields as needed.
+A dropdown for selecting the cuisine type. It’s required and defaults to an empty value.
+Other Input Fields: These include fields for preparation time, cook time, servings, and tags (comma-separated).
+Users can upload an image for the recipe. The onchange event triggers the previewImage(event) function to show a preview of the selected image.
+This section shows a preview of the uploaded image once it’s selected.
+
+   -  **Edit Recipe**
+   -  **Delete Reciepe**
+   -  **View all recipes**
+   -  **Search**
+   -  **Search By Tag**
+   -  **View recipe by ID**
+   -  **Add to Favorite**
+   -  **Click Tag to Search**
+   -  **Required tools**
+   -  **Equiptment Category**
+   -  **Category Items**
+   -  **Add to cart**
+   -  **Edit Cart Items**
+   -  **Delete Cart Item**
 
