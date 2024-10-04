@@ -725,13 +725,22 @@ This Flask route fetches the data needed to populate this homepage
 
 **Manage Recipes**
    -**Delete Recipe**
-When the delete button is clicks it triggers a modal to confirming the action.
+-  When the delete button is clicks it triggers a modal to confirming the action.
 
 ![Delete Confirmation](./static/images/report_images/deleteconfirmation.png)
 
-If the user clicks yes the Route: /delete_recipe/<recipe_id> is trigered. It supports the POST method as it avoids the risk of accidental deletion through URL access (which could happen if it were a GET request).
+-  If the user clicks yes the Route: /delete_recipe/<recipe_id> is trigered. 
 
 ![Delete route](./static/images/report_images/deleteroute.png)
+
+-  It supports the POST method as it avoids the risk of accidental deletion through URL access (which could happen if it were a GET request).
+-  The function attempts to delete a recipe from the recipesCollection by matching the _id field using the provided recipe_id.
+-  It uses the ObjectId function from bson to convert the recipe ID from its string representation to an ObjectId, which is required for MongoDB queries.
+-  If the deletion is successful, the user receives a success message via flash().
+-  If an exception occurs during the deletion process, an error message is displayed.
+
+
+
 
 
 
