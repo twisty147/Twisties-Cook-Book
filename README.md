@@ -700,6 +700,35 @@ This Flask route fetches the data needed to populate this homepage
    -  After the recipe is created, the user is redirected to the manage_recipes page.
 
 **Manage Recipes**
+**View All Recipes**
+
+-  The view all recipes is trigered from the dashboard card view all recipes or from the link on the nav bar or quick links.
+-  When this link is clicked, it opens up a page that displays all recipes with a search field at the top of the page.
+
+![View All Recipes](./static/images/report_images/allRecipesRoute.png)
+
+-  The Route: /recipes, allows users to browse and search for recipes. 
+-  It also handles pagination, allowing users to view a limited number of recipes per page, with search functionality across multiple fields like title, ingredients, cuisine, tags, and required tools.
+-  It is set up to respond to GET requests, allowing users to explore recipes.
+-  It checks if the user is logged in. If not, they are redirected to the login page with an error message.
+-  Pagination is handled by fetching the current page from the URL query parameters (default is page 1).
+-  per_page is set to 6, meaning each page will show 6 recipes (typically arranged as 2 rows of 3 cards).
+-  The user can search for recipes using the search query parameter. If no search term is provided, the search will default to an empty string, returning all recipes.
+-  The query searches across multiple fields (title, ingredients, cuisine, tags, required_tools) using a case-insensitive regex ($regex with i option).
+-  The query ensures that any recipes matching the search term in these fields are returned.
+-  total_recipes counts how many recipes match the search query.
+-  total_pages calculates how many pages are required to display all the recipes, using the formula (total_recipes + per_page - 1) // per_page.
+-  The query returns a cursor containing the recipes that match the search term, paginated to the current page (skip((page - 1) * per_page)) and limited to 6 recipes per page (limit(per_page)).
+-  The cursor is converted into a list (list(recipes_cursor)) for easier rendering in the template.
+-  The recipes.html template is rendered, passing the following data:
+   -  recipes: the list of recipes to display on the current page.
+   -  page: the current page number.
+   -  total_pages: the total number of pages.
+   -  search_term: the search term used for filtering the recipes.
+
+![View All Recipes](./static/images/report_images/allrecipes.png)
+
+**Manage Recipes**
    -**Edit Recipe**
 
 ![Edit Recipe](./static/images/report_images/edit.html.png)
@@ -764,44 +793,32 @@ This Flask route fetches the data needed to populate this homepage
 
 ![view Recipe](./static/images/report_images/viewrecipe.png)
 
+**View Recipe**
+-  **Add to Favorite**
 
+**View Recipe**
+-  **Required tools**
 
-**Add to Favorite**
-**Click Tag to Search**
 **Required tools**
+-  **Equiptment Category**
+
 **Equiptment Category**
+-  **Category Items**
+
 **Category Items**
-**Add to cart**
-**Edit Cart Items**
-**Delete Cart Item**
+-  **Add to cart**
 
-**Manage Recipes**
-**View All Recipes**
--  The view all recipes is trigered from the dashboard card view all recipes or from the link on the nav bar or quick links.
--  When this link is clicked, it opens up a page that displays all recipes with a search field at the top of the page.
+**Cart**
+-  **Edit Cart Items**
 
-![View All Recipes](./static/images/report_images/allRecipesRoute.png)
+**Cart**
+-  **Delete Cart Item**
 
--  The Route: /recipes, allows users to browse and search for recipes. 
--  It also handles pagination, allowing users to view a limited number of recipes per page, with search functionality across multiple fields like title, ingredients, cuisine, tags, and required tools.
--  It is set up to respond to GET requests, allowing users to explore recipes.
--  It checks if the user is logged in. If not, they are redirected to the login page with an error message.
--  Pagination is handled by fetching the current page from the URL query parameters (default is page 1).
--  per_page is set to 6, meaning each page will show 6 recipes (typically arranged as 2 rows of 3 cards).
--  The user can search for recipes using the search query parameter. If no search term is provided, the search will default to an empty string, returning all recipes.
--  The query searches across multiple fields (title, ingredients, cuisine, tags, required_tools) using a case-insensitive regex ($regex with i option).
--  The query ensures that any recipes matching the search term in these fields are returned.
--  total_recipes counts how many recipes match the search query.
--  total_pages calculates how many pages are required to display all the recipes, using the formula (total_recipes + per_page - 1) // per_page.
--  The query returns a cursor containing the recipes that match the search term, paginated to the current page (skip((page - 1) * per_page)) and limited to 6 recipes per page (limit(per_page)).
--  The cursor is converted into a list (list(recipes_cursor)) for easier rendering in the template.
--  The recipes.html template is rendered, passing the following data:
-   -  recipes: the list of recipes to display on the current page.
-   -  page: the current page number.
-   -  total_pages: the total number of pages.
-   -  search_term: the search term used for filtering the recipes.
+**View Recipe**
+-  **Click Tag to Search**
 
-![View All Recipes](./static/images/report_images/allrecipes.png)
+
+
    
 
 
