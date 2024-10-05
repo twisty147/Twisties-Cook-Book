@@ -1256,7 +1256,7 @@ Check the functionality of the cart page.
 -  Set Up PyMongo in Flask
       -  mongo = PyMongo(app)
 
-**Deployment Steps for Flask Application on Heroku**
+## Deployment Steps for Flask Application on Heroku**
 
 -  **Set Up Necessary Files**
    -  Flask
