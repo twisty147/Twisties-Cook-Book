@@ -57,7 +57,8 @@ def get_index():
     """
     Route handler for the index page of the application.
     This function retrieves the most recent recipes from the database,
-    calculates statistics, and passes the data to the index.html template for rendering.
+    calculates statistics, and passes the data to 
+    the index.html template for rendering.
     """
     # Reference the collection from the database
     recipesCollection = mongo.db.recipesCollection
