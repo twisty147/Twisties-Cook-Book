@@ -838,16 +838,50 @@ This Flask route fetches the data needed to populate this homepage
 -  **Equiptment Category**
 
 -  Each of the equiptment category from the database is displayed on clickable cards on the front end. 
-- When this is clicked it shows the category items page
+- When this is clicked the show_category_items route fetches a specific equipment category and its associated items from the equipmentCollection in MongoDB. 
 
 ![Equiptment Category](./static/images/report_images/categoryItem.png)
 
+-  This route is dynamic, taking a category_id parameter from the URL.
+-  It uses the GET method to fetch the category and display its associated items.
+-  The route attempts to convert the category_id to a MongoDB ObjectId if the ID is in the correct format.
+-  If the conversion fails (e.g., the ID is not a valid ObjectId), it treats the category_id as a string and continues processing.
+-  The query uses either the ObjectId or a string-based ID to look up the category in the equipmentCollection.
+-  The query checks the _id field of the MongoDB document.
+-  If an error occurs during the database query, a 500 error is returned with a custom error message.
+-  If the category is found:
+    - The _id is converted to a string for rendering purposes.
+    - The items array (if any) is retrieved from the category document.
+    - The category and items are passed to the template for rendering.
+-  If the category is not found, a 404 error is returned.
 
-**Equiptment Category**
--  **Category Items**
+![Equiptment Category](./static/images/report_images/categoryItem.png)
 
 **Category Items**
--  **Add to cart**
+-  **Cart Functionality**
+
+![Context Processor](./static/images/report_images/contextProcessor.png)
+
+-  This context processor calculates the total number of items in the user's cart and makes this count globally available to all templates.
+-  It checks if a user is logged in by verifying if 'user' exists in the session.
+-  If the user is logged in, it looks up the user in the usersCollection and retrieves all cart items associated with the user from the cartsCollection.
+-  It sums up the quantity of each item in the user's cart and returns the total count.
+-  This allows the template to display the total number of items in the cart.
+
+![Cart Item Count](./static/images/report_images/cartItemCount.png)
+
+-  This route returns the total number of items in the cart as a JSON response. It was useful for updating cart counts dynamically in the frontend via AJAX.
+
+![Add to Cart](./static/images/report_images/Addtocart.png)
+
+-  This route handles adding an item to the cart. 
+-  It retrieves the logged-in user and inserts a new document into the cartsCollection with details about the item being added.
+-  It takes in the category ID, item name, item price, quantity, and total price via a JSON payload from the frontend.
+
+![Json Payload](./static/images/report_images/jsonAddtoCartPayload.png)
+
+-  The user is associated with the cart item using the user's MongoDB _id.
+
 
 **Cart**
 -  **Edit Cart Items**
