@@ -33,6 +33,9 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 
 
 # REQUIREMENTS
+feel free to Register on the site but if you want you can experience it with data for this user:
+p@gmail.com
+oliver
 
 ## Functional Requirements
 
