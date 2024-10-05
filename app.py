@@ -599,8 +599,6 @@ def view_cart():
                 "id": str(item['_id'])  # Cart item ID for updating/removing
             })
 
-
-
         # Render to a template (for web page)
         return render_template('view_cart.html', cart_items=cart_with_images)
 

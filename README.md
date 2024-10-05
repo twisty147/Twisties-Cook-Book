@@ -880,14 +880,85 @@ This Flask route fetches the data needed to populate this homepage
 
 ![Json Payload](./static/images/report_images/jsonAddtoCartPayload.png)
 
--  The user is associated with the cart item using the user's MongoDB _id.
+-  The user is associated with the cart item using the user's _id.
 
+![Cart](./static/images/report_images/cart.png)
 
-**Cart**
--  **Edit Cart Items**
+-  When the cart Item is called it opens a page with the list of Items in the users cart via the route (/view_cart). 
+-  it retrieves the logged-in user's username from the session.
+-  If no user is found in the session (username is None), the code will flash an error message, prompting the user to log in.
+-  The user is then redirected to the login page if not authenticated.
+-  Once the user is validated, their cart items are fetched from the cartsCollection using their _id as a reference.
+-  cart_items will hold all the items in the user's cart.
+-  An empty list cart_with_images is created to store the cart items with their associated images and other details.
+-  This loop iterates through each item in the cart.
+-  For each item, it finds the corresponding equipment in the equipmentCollection using the item_category_id field.
+-  If the equipment is found and it has an items field, it loops through the items array to find the specific item by matching the item_name.
+-  If a match is found, it extracts the image_url for that item. 
+-  If no URL is found, it defaults to '/static/images/default.png'.
+-  This dictionary contains the details of the cart item.
+-  Finally, the prepared cart_with_images list is passed to the view_cart.html template for rendering the shopping cart page.
 
-**Cart**
--  **Delete Cart Item**
+![Cart](./static/images/report_images/shoppingCart.png)
+
+-  When the edit button is clicked it turns the form to an editable form then displays an update button for the selectedItem.
+
+![Cart](./static/images/report_images/editInview.png)
+
+-  For editing the cart, the route /update_cart/<item_id>, is designed to handle updates to a specific item in a user's shopping cart. 
+-  It uses the POST method to receive data from the client, processes the data, and updates the item in the cart.
+
+![Cart](./static/images/report_images/updateCartRoute.png)
+
+The item_id parameter is a unique identifier for the item in the cart that needs to be updated.
+session['user'] gets the logged-in username from the session.
+The code then queries the usersCollection in MongoDB to find the user's details using the username.
+The user_id is stored to reference the user’s cart items in the cartsCollection.
+This line retrieves the JSON data sent in the POST request. 
+
+![Cart](./static/images/report_images/jasonUpdateCart.png)
+
+-  The quantity field is extracted from the request data.
+-  The code attempts to convert the new_quantity value to an integer.
+-  If the value cannot be converted (e.g., it's a non-numeric string), a ValueError is raised.
+-  If this happens, the function returns a JSON response indicating failure (success=False) with an error message "Invalid quantity value" and an HTTP 400 status code (Bad Request).
+-  It then queries the cartsCollection to find the specific cart item by its _id (item_id) and user ID (user_id).
+-  If the cart item is not found, the function returns:
+   -  jsonify(success=False, error="Cart item not found"), 404
+-  This sends a JSON response with an error message "Cart item not found" and an HTTP 404 status code (Not Found).
+-  It extracts the item_price from the cart item.
+-  It attempts to convert the price to a float to ensure it can be used in calculations.
+-  If the price cannot be converted (e.g., a non-numeric string), a ValueError is raised.
+-  In this case, the function returns a JSON response indicating failure with an error message "Invalid item price value" and a 400 status code.
+-  The update_one method is called to update the specific cart item.
+-  It sets the new quantity and calculates the total_price by multiplying the new_quantity by item_price.
+-  If the update is successful, a message is flashed to the user saying "Cart item updated successfully.".
+-  The function returns a JSON response with success=True.
+-  If any exception is raised during the process, it is caught and printed to the console.
+-  A JSON response is returned with success=False and the error message, along with a 500 status code (Internal Server Error).
+
+![Cart](./static/images/report_images/cartDelete1.png)
+
+-  This route, /remove_from_cart/<item_id>, is designed to remove a specific item from a user's shopping cart. It is a POST route that handles requests to delete an item from the cart. 
+
+![Cart](./static/images/report_images/cartdelete2.png)
+
+-  The item_id is a parameter in the URL that represents the ID of the item to be removed from the user's cart.
+-  It retrieves the username of the logged-in user from the session.
+-  If the username is not found in the session (indicating the user is not logged in), an error message is flashed: "Please log in to modify your cart".
+-  The user is redirected to the login page (url_for('login')) if they are not logged in.
+-  It attempts to remove the specified item from the cartsCollection.
+-  The delete_one operation uses the _id field of the item (converted to ObjectId) and the user field set to the user's _id.
+-  This ensures that only items belonging to the current user can be deleted.
+-  If the delete_one operation is successful and at least one document was deleted (result.deleted_count > 0)
+   -  Flashes a success message: "Item removed from cart".
+   -  Returns a JSON response indicating success with the message "Item removed successfully" and an HTTP 200 status code (OK).
+-  If no document was deleted (meaning the item wasn't found or the user doesn't have permission to delete it).
+   -  Flashes an error message: "Failed to remove item from cart".
+   -  Returns a JSON response indicating failure with the message "Item not found or unauthorized access" and an HTTP 404 status code (Not Found).
+   If an exception occurs at any point during the process, it is caught and printed to the console for debugging: print(f"Error removing item from cart: {e}").
+-  A flash message is displayed: "An error occurred while removing the item from the cart.".
+-  A JSON response is returned with success=False and the message "Internal server error", along with a 500 status code (Internal Server Error).
 
 **View Recipe**
 -  **Click Tag to Search**
