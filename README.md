@@ -1233,15 +1233,40 @@ Check the functionality of the cart page.
 
 
 # Deployment
+-  ** Asuming you Have created have your repo like i did on git hub**
 
-** Asuming you already have your repo like i did on git hub**
+## To connect MongoDB to a Flask application
+-  Install Necessary Libraries
+   Install Necessary Libraries
+      -  Install flask-pymongo to communicate between Flask and MongoDB.
+      -  Install dnspython for using the Mongo SRV connection string.
+      -  Update your requirements.txt to include the new dependencies.
 
-
+-  Set up the configurations for the database name, Mongo URI, and secret key using environment variables e.t.c.
+      -  os.environ.setdefault("MONGO_DBNAME", "")
+      -  os.environ.setdefault("MONGO_URI", "")
+      -  os.environ.setdefault("")
+      -  os.environ.setdefault("IP", "0.0.0.0")
+      -  os.environ.setdefault("PORT", "5000")
+-  Get MongoDB Connection String
+      -  Go to your MongoDB Cluster on the MongoDB website.
+      -  Click on Connect > Connect your Application.
+      -  Choose Python as the driver, then copy the connection string and modify it with your MongoDB username, password, and database name.
+      -  Store this connection string in the .env file, and also add it to Heroku’s Config Vars. I will indicate where 
+-  Set Up PyMongo in Flask
+      -  mongo = PyMongo(app)
 
 **Deployment Steps for Flask Application on Heroku**
 
 -  **Set Up Necessary Files**
-
+   -  Flask
+   -  Flask-PyMongo
+   -  pymongo
+   -  Werkzeug
+   -  bson
+   -  cloudinary
+   -  python-dotenv
+   
    -  **Create `requirements.txt`:**  
       - Use `pip` to generate the `requirements.txt` file, which lists all necessary dependencies for the application
 
@@ -1277,7 +1302,7 @@ Check the functionality of the cart page.
    -  IP: 0.0.0.0
    -  PORT: 5000
    -  SECRET_KEY: (copy from your env.py file)
-   -  MONGO_URI: (Copy from Mongodb as long as you edit username, password and dbname)
+   -  MONGO_URI: (this is where i mentioned i will indicate where from getting MongoDB connection String above)
    -  MONGO_DBNAME: task_manager
 
 -  **Deploy Application on Heroku**
