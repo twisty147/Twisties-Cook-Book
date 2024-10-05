@@ -855,7 +855,7 @@ This Flask route fetches the data needed to populate this homepage
     - The category and items are passed to the template for rendering.
 -  If the category is not found, a 404 error is returned.
 
-![Equiptment Category](./static/images/report_images/categoryItem.png)
+![Equiptment Category](./static/images/report_images/categoryItemsP.png)
 
 **Category Items**
 -  **Cart Functionality**
