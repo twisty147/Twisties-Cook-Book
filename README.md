@@ -1039,15 +1039,11 @@ The site demonstrates adherence to Norman and Nielsen's design principles of:
 **Aesthetic and Minimalist Design**:
 - A clean and minimalist design approach, evident in the consistent layout, typography, and white space, contributes to an aesthetically pleasing user interface.
 
-## Functional Testing
+## Functional Testing (Manual Test Result)
 
-# **Twisties Cookbook Functional Test Results**
 
-## **Functional Requirements**
 
-### **User Login Verification**
-
-**Requirement**:  
+**Home Page Requirement**:  
 The system must check if a user is logged in using session data. If the user is not logged in, a welcome message for guests should be displayed.
 
 | **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
