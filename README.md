@@ -1267,16 +1267,16 @@ Check the functionality of the cart page.
    -  cloudinary
    -  python-dotenv
    
-   -  **Create `requirements.txt`:**  
+-  **Create `requirements.txt`:**  
       - Use `pip` to generate the `requirements.txt` file, which lists all necessary dependencies for the application
 
-   -  **Create a Procfile**:
-      -  The Procfile specifies the command that Heroku uses to start the app
-      -  Make sure the Procfile is created with a capital "P" and has no file extension.
+-  **Create a Procfile**:
+   -  The Procfile specifies the command that Heroku uses to start the app
+   -  Make sure the Procfile is created with a capital "P" and has no file extension.
 
-   -  **Verify the files**:
-      -  requirements.txt should list all necessary packages (e.g., Flask, Werkzeug).
-      -  Procfile should contain the command to run the application (e.g., web: python app.py).
+-  **Verify the files**:
+   -  requirements.txt should list all necessary packages (e.g., Flask, Werkzeug).
+   -  Procfile should contain the command to run the application (e.g., web: python app.py).
    
 -  **Create a New Heroku Application**
 
