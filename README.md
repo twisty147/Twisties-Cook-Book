@@ -11,7 +11,7 @@ The **Twisties Cookbook** is built for home cooks, foodies, and anyone passionat
 With features like ingredient lists, step-by-step preparation instructions, personal favorite cuisine, and required tools, the application offers a comprehensive cooking experience that goes beyond simple recipes. Users can:
 
 - **Find Recipes Easily**: Our intuitive search and directory allow you to locate recipes by ingredient, cuisine, or required cooking tools.
-- **Add & Customize**: Upload your own recipes, edit them as needed, and share your unique culinary twists with the community.
+- **Add & Customize**: Upload your own recipes, edit them as needed, and share your unique culinary twists.
 - **Personal Cooking Library**: Store and manage your favorite recipes in one place, accessible from any device, any time.
 
 ## Purpose and Value for the Site Owner
@@ -886,7 +886,7 @@ This Flask route fetches the data needed to populate this homepage
 
 -  When the cart Item is called it opens a page with the list of Items in the users cart via the route (/view_cart). 
 -  it retrieves the logged-in user's username from the session.
--  If no user is found in the session (username is None), the code will flash an error message, prompting the user to log in.
+-  If no user is found in the session (username is None), it will flash an error message, prompting the user to log in.
 -  The user is then redirected to the login page if not authenticated.
 -  Once the user is validated, their cart items are fetched from the cartsCollection using their _id as a reference.
 -  cart_items will hold all the items in the user's cart.
@@ -912,14 +912,14 @@ This Flask route fetches the data needed to populate this homepage
 
 The item_id parameter is a unique identifier for the item in the cart that needs to be updated.
 session['user'] gets the logged-in username from the session.
-The code then queries the usersCollection in MongoDB to find the user's details using the username.
+It then queries the usersCollection in MongoDB to find the user's details using the username.
 The user_id is stored to reference the user’s cart items in the cartsCollection.
 This line retrieves the JSON data sent in the POST request. 
 
 ![Cart](./static/images/report_images/jasonUpdateCart.png)
 
 -  The quantity field is extracted from the request data.
--  The code attempts to convert the new_quantity value to an integer.
+-  It attempts to convert the new_quantity value to an integer.
 -  If the value cannot be converted (e.g., it's a non-numeric string), a ValueError is raised.
 -  If this happens, the function returns a JSON response indicating failure (success=False) with an error message "Invalid quantity value" and an HTTP 400 status code (Bad Request).
 -  It then queries the cartsCollection to find the specific cart item by its _id (item_id) and user ID (user_id).
@@ -961,7 +961,23 @@ This line retrieves the JSON data sent in the POST request.
 -  A JSON response is returned with success=False and the message "Internal server error", along with a 500 status code (Internal Server Error).
 
 **View Recipe**
--  **Click Tag to Search**
+-  **Click Button (Get Recipes by Tag))**
+
+![Click To search ](./static/images/report_images/cartdelete2.png)
+
+When this button is clicked it shows a page that displays recipies filtered by the clicked tag
+
+![Click To search ](./static/images/report_images/recipebyTag.png)
+
+-  This route, /recipes/tag/<tag>, is designed to display a list of recipes that have a specific tag
+-  The tag parameter is part of the URL path and represents a specific tag used to filter recipes.
+-  It establishes a reference to the recipesCollection in the MongoDB database.
+-  The find method queries the recipesCollection for all recipes that have the given tag in their tags field.
+-  If a recipe contains the tag value, it will be included in the query results.
+-  The result, recipes, is a cursor object that can be iterated over to access each recipe document that matches the query.
+-  It passes two variables to the template:
+   -  recipes: The list of recipes that have the specified tag.
+   -  tag: The tag value used to filter the recipes (for display or informational purposes).
 
 
 
