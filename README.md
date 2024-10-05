@@ -1233,7 +1233,7 @@ Check the functionality of the cart page.
 
 
 # Deployment
--  ** Asuming you Have created have your repo like i did on git hub**
+** Asuming you Have created have your repo like i did on git hub**
 
 ## To connect MongoDB to a Flask application
 -  Install Necessary Libraries
