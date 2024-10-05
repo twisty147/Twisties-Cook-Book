@@ -1,3 +1,31 @@
+"""
+ALL codes in this project are original codes however a lot of research went into bug fixes and Ideas fron several websites.
+However special recognition goes to the following:
+ **Code Institute**: Acknowledgement for the training and utilization of `Code-Institute-Org/ci-full-template`.
+Stack Overflow**: Recognized for providing invaluable assistance during troubleshooting sessions, offering insights on bug fixes.
+Materialize CSS**: For providing a user-friendly front-end framework that greatly simplified the design and styling of the Twisties Cookbook application.
+ Its responsive grid system, components, and rich documentation enabled the creation of a visually appealing and consistent user interface.
+**Flask setup and MongoDB integration**: Thanks to testdriven.io for aditional Flask tutorials. 
+**JavaScript Ideas**: Special thanks to Dev.to 
+
+
+   Copyright (c) 2024 Oliver Amah
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this website without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, copies of the website, 
+and to permit persons to whom the website is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the website.
+
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE Website.
+
+
+"""
 import os
 from flask import (
     Flask, flash, render_template,
@@ -26,6 +54,11 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def get_index():
+    """
+    Route handler for the index page of the application.
+    This function retrieves the most recent recipes from the database,
+    calculates statistics, and passes the data to the index.html template for rendering.
+    """
     # Reference the collection from the database
     recipesCollection = mongo.db.recipesCollection
     usersCollection = mongo.db.usersCollection
@@ -58,6 +91,12 @@ def get_index():
 
 @app.route('/recipe/<recipe_id>')
 def get_recipe(recipe_id):
+    """
+    Route handler for viewing a specific recipe's details.
+    This function retrieves the recipe by its ID, checks user login status,
+    determines if the recipe is favorited by the user, and passes relevant
+    information to the 'recipe_detail.html' template.
+    """
     # Reference the collection from the database
     recipesCollection = mongo.db.recipesCollection
     # Get the "from_page" query parameter
@@ -91,6 +130,14 @@ def get_recipe(recipe_id):
 
 @app.route('/recipes/tag/<tag>')
 def get_recipes_by_tag(tag):
+    """
+    Route handler for displaying recipes associated with a specific tag.
+    This function queries the database for recipes that contain the given tag
+    and renders them on a 'recipes_by_tag.html' template.
+    
+    :param tag: The tag used to filter recipes.
+    :return: Rendered HTML page showing recipes with the specified tag.
+    """
     # Reference the collection from the database
     recipesCollection = mongo.db.recipesCollection
     # Query to find recipes with the selected tag
@@ -100,6 +147,14 @@ def get_recipes_by_tag(tag):
 
 @app.route('/recipes', methods=['GET'])
 def get_recipes():
+    """
+    Route handler for displaying a paginated list of recipes.
+    Allows users to search for recipes based on a search term and provides pagination functionality.
+    
+    If the user is not logged in, they are redirected to the login page.
+    
+    :return: Rendered HTML page showing a list of recipes that match the search term.
+    """
     # Check if the user is logged in
     if not session.get('user'):
         flash('You need to log in to explore recipes.', 'error')
@@ -136,6 +191,13 @@ def get_recipes():
 
 @app.route('/contact', methods=['GET', 'POST'])
 def get_contact():
+    """
+    Handles the contact page functionality:
+    - GET: Renders the contact form for the user to fill out.
+    - POST: Processes the form data, validates the inputs, and stores the message in MongoDB.
+    
+    :return: Renders the contact page template on GET, or redirects on form submission (POST).
+    """
     if request.method == 'POST':
         name = request.form.get('name')
         email = request.form.get('email')
@@ -164,6 +226,13 @@ def get_contact():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    """
+    Handles the user registration process:
+    - GET: Renders the registration form.
+    - POST: Processes the registration form data, hashes the password, and stores the user in MongoDB.
+    
+    :return: Renders the registration page or redirects to login upon successful registration.
+    """
     if request.method == 'POST':
         # Get form data
         username = request.form.get('username')
@@ -191,6 +260,13 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    """
+    Handles user login functionality:
+    - GET: Renders the login form.
+    - POST: Validates user credentials and logs in the user.
+
+    :return: Renders the login page or redirects to the index upon successful login.
+    """
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -212,17 +288,37 @@ def login():
 
 @app.route('/keep_alive')
 def keep_alive():
+    """
+    Endpoint to refresh the user session and prevent it from expiring.
+    This is typically used to keep the session active while the user is still interacting with the application.
+
+    :return: An empty response with HTTP status code 204 (No Content).
+    """
     session.modified = True
     return '', 204
 
 @app.route('/logout')
 def logout():
+    """
+    Endpoint to log out the user by clearing the session data.
+    After logging out, the user is redirected to the login page with a success message.
+
+    :return: Redirect to the login page.
+    """
     session.clear()  # Clears all session data
     flash('You have been logged out successfully', 'success')
     return redirect(url_for('login'))
 
 @app.route('/toggle_favorite/<recipe_id>', methods=['POST'])
 def toggle_favorite(recipe_id):
+    """
+    Toggle the favorite status of a recipe for the logged-in user.
+    If the recipe is already in the user's favorites, it is removed; 
+    if not, it is added to their favorites.
+
+    :param recipe_id: The ID of the recipe to toggle as favorite.
+    :return: Redirects to the recipe detail page.
+    """
 
     usersCollection = mongo.db.usersCollection
     user = usersCollection.find_one({"username": session['user']})
@@ -249,6 +345,12 @@ def toggle_favorite(recipe_id):
 
 @app.route('/favorites')
 def get_favorites():
+    """
+    Retrieve and display the user's favorite recipes.
+
+    :return: Renders the favorites page with the user's favorite recipes.
+    """
+    
     # Check if the user is logged in
     if not session.get('user'):
         flash('You need to log in to view your favorite recipes.', 'error')
@@ -274,6 +376,14 @@ def get_favorites():
 
 @app.route('/update_profile', methods=['GET', 'POST'])
 def update_profile():
+    """
+    Endpoint to allow users to update their profile details (username, email, password).
+    The user must be logged in to access this route. The form allows users to change
+    their username, email, and optionally update their password.
+    
+    :return: Renders the profile update page (GET) or redirects after successful update (POST).
+    """
+
     # Check if the user is logged in
     if 'user' not in session:
         flash('You need to log in to update your profile.', 'error')
@@ -320,6 +430,13 @@ def update_profile():
 
 @app.route('/manage_recipes')
 def manage_recipes():
+    """
+    Route to manage the user's own recipes. 
+    Only accessible by logged-in users. Displays all recipes created by the current user.
+    
+    :return: Renders the manage_recipes.html template with the user's recipes.
+    """
+
     if 'user' not in session:
         flash('You need to log in to manage your recipes.', 'error')
         return redirect(url_for('login'))
@@ -337,6 +454,12 @@ cloudinary.config(
 
 @app.route('/create_recipe', methods=['POST'])
 def create_recipe():
+    """
+    Route to handle the creation of a new recipe. The form data is extracted from the POST request
+    and the recipe is saved in the MongoDB database. Optionally, an image can be uploaded using Cloudinary.
+    
+    :return: Redirects to the 'manage_recipes' page upon successful creation, or renders the create form.
+    """
     username = session.get('user')
     
     if request.method == 'POST':
@@ -393,6 +516,13 @@ def create_recipe():
 
 @app.route('/recipe/edit/<recipe_id>', methods=['GET', 'POST'])
 def edit_recipe(recipe_id):
+    """
+    Route to handle the editing of a recipe. Users can modify their own recipes,
+    and optionally update the recipe image by uploading a new one.
+
+    :param recipe_id: The ID of the recipe to be edited.
+    :return: Renders the edit form on GET or updates the recipe and redirects on POST.
+    """
     if 'user' not in session:
         flash('You need to log in to edit a recipe.', 'error')
         return redirect(url_for('login'))
@@ -439,6 +569,12 @@ def edit_recipe(recipe_id):
 
 @app.route('/delete_recipe/<recipe_id>', methods=['POST'])
 def delete_recipe(recipe_id):
+    """
+    Endpoint to handle the deletion of a recipe from the database.
+    
+    :param recipe_id: The ID of the recipe to be deleted.
+    :return: Redirects to the 'manage_recipes' page after successful or failed deletion.
+    """
     try:
         mongo.db.recipesCollection.delete_one({'_id': ObjectId(recipe_id)})
         flash('Recipe deleted successfully', 'success')
@@ -459,6 +595,11 @@ def show_equipment_categories():
 
 @app.route('/category/<category_id>')
 def show_category_items(category_id):
+    """
+    Endpoint to display all equipment categories available in the equipmentCollection.
+    
+    :return: Renders the 'equipment_categories.html' template and passes the categories to the template.
+    """
     try:
         # Convert the category_id to ObjectId if it is a valid ObjectId
         try:
@@ -487,6 +628,13 @@ def show_category_items(category_id):
 
 @app.context_processor
 def cart_count_processor():
+    """
+    This function calculates the total number of items in the user's cart and makes 
+    the count available globally in all templates. It's a context processor function, 
+    meaning the result is injected into all templates automatically.
+    
+    :return: A dictionary containing the cart_item_count, which will be available globally.
+    """
     cart_item_count = 0  # Default cart count
 
     if 'user' in session:
@@ -515,11 +663,28 @@ def cart_count_processor():
 
 @app.route('/cart_item_count', methods=['GET'])
 def get_cart_item_count():
+    """
+    This endpoint returns the current number of items in the user's cart.
+    It relies on the cart_count_processor function to calculate the total item count.
+    
+    :return: A JSON response containing the cart item count.
+    """
     cart_item_count = cart_count_processor()['cart_item_count']
     return jsonify({'cart_item_count': cart_item_count})
 
 @app.route('/add_to_cart', methods=['POST'])
 def add_to_cart():
+    """
+    Route to handle adding items to a user's cart.
+    
+    Retrieves the current user from the session, finds the user record in the database,
+    and then inserts the item details into the 'cartsCollection' with reference to 
+    the user who added it. On success, a success message is flashed, and JSON response 
+    is sent back. If there is any error (like missing data or database issues), an error message
+    is flashed and a failure response is sent.
+    
+    :return: JSON response with success status (True/False) based on the insertion outcome.
+    """
     username = session['user']
     user = mongo.db.usersCollection.find_one({"username": username})
     user_id = user['_id']
@@ -553,6 +718,17 @@ def add_to_cart():
 
 @app.route('/view_cart', methods=['GET'])
 def view_cart():
+    """
+    Route to handle the display of the current user's cart.
+    
+    The function retrieves the logged-in user's details from the session,
+    fetches the corresponding cart items from the database, and enriches
+    the data with related images and stock info from the 'equipmentCollection'.
+    If the user is not logged in or not found, appropriate error messages are flashed.
+    
+    :return: Renders the 'view_cart.html' template with the user's cart items, or
+             redirects to login if the user is not authenticated.
+    """
     # Get the logged-in user from the session
     username = session.get('user')
 
@@ -610,6 +786,17 @@ def view_cart():
 
 @app.route('/remove_from_cart/<item_id>', methods=['POST'])
 def remove_from_cart(item_id):
+    """
+    Route to handle removing an item from the user's cart.
+
+    The function retrieves the logged-in user's details from the session,
+    checks if the user is authenticated, and attempts to remove the specified
+    cart item from the 'cartsCollection'. If the user or item is not found, or 
+    if the user is unauthorized to remove the item, appropriate messages are flashed.
+    
+    :param item_id: The ID of the cart item to be removed.
+    :return: JSON response indicating success or failure with appropriate HTTP status codes.
+    """
     # Get the logged-in user from the session
     username = session.get('user')
 
@@ -646,6 +833,17 @@ def remove_from_cart(item_id):
 
 @app.route('/update_cart/<item_id>', methods=['POST'])
 def update_cart(item_id):
+    """
+    Route to handle updating the quantity of an item in the user's cart.
+
+    The function retrieves the current user from the session, checks the validity of 
+    the new quantity provided by the client, fetches the cart item from the database, 
+    and updates the item's quantity and total price. If the cart item is not found 
+    or if any issues arise (e.g., invalid data), appropriate error responses are returned.
+
+    :param item_id: The ID of the cart item to be updated.
+    :return: JSON response indicating success or failure.
+    """
     username = session['user']
     user = mongo.db.usersCollection.find_one({"username": username})
     user_id = user['_id']

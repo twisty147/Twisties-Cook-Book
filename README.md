@@ -1314,17 +1314,16 @@ Check the functionality of the cart page.
    -  Click View to launch your application.
 
 
-
-
 #  Credits
+- All codes in this project are original codes however a lot of research went into bug fixes and Ideas fron several websites but no code was lifted.
+-  However special recognition goes to the following:
+
 
 - **Code Institute**: Acknowledgement for the training and utilization of `Code-Institute-Org/ci-full-template`.
 - **Stack Overflow**: Recognized for providing invaluable assistance during troubleshooting sessions, offering insights on bug fixes.
 - **Materialize CSS**: For providing a user-friendly front-end framework that greatly simplified the design and styling of the Twisties Cookbook application. Its responsive grid system, components, and rich documentation enabled the creation of a visually appealing and consistent user interface.
-
-
-
-
+- **Flask setup and MongoDB integration**: Thanks to [testdriven.io](https://testdriven.io/tips/topics/flask#:~:text=Serving%20Static%20Files%20with%20Flask.%20Flask%20Tip%20-%20Static%20Files.) for aditional Flask tutorials.
+- **JavaScript Ideas**: Special thanks to the [Dev.to](https://dev.to/vidova/33-javascript-concepts-every-beginner-should-know-with-tutorials-4kao#:~:text=How%20much%20of%20JavaScript%20do%20you%20really%20think%20you%20know?).
 
 
 **IMage Credits**
