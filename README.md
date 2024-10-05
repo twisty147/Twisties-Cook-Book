@@ -1019,7 +1019,7 @@ In practice, a combination of both automated and manual testing is often employe
    -  String Formatting for Template Rendering: You are passing variables to the template, and that's fine, but it's good practice to ensure all variable names are descriptive and follow PEP 8 guidelines.
    -  Magic Numbers: The number 9 used in .limit(9) could be defined as a constant or passed as a parameter to avoid magic numbers.
    - These issues have not been addressed.
-
+   -The admin Pannel for managing the Website was not also designed.
 
 ### Usability Testing
 The site demonstrates adherence to Norman and Nielsen's design principles of:
