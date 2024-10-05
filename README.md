@@ -986,3 +986,20 @@ When this button is clicked it shows a page that displays recipies filtered by t
 
 [BACK TO TOP](#REQUIREMENTS)
 
+# TESTING
+
+Automated testing and manual testing are two distinct approaches to ensuring the quality and functionality of a product.
+
+## **Automated Testing**
+
+Automated tests are scripted to run automatically, allowing quick execution without human intervention. They produce consistent results each time they are run, making it easier to detect and reproduce bugs. They can be run on multiple configurations and environments, making them suitable for large-scale testing. They are particularly useful for regression testing, where changes in code are checked against existing functionalities to ensure nothing is broken. Additionally, automated tests can execute repetitive tasks much faster than manual testing, saving time and effort.
+
+Automated testing is best deployed in scenarios such as regression testing, especially when there are frequent updates or changes to the codebase. It's also ideal for highly repetitive tasks like performance testing or load testing, where numerous iterations are required. In large-scale projects, where manual testing would be too time-consuming and impractical, automated testing becomes indispensable. Moreover, automated testing is suitable for testing stable features that are not likely to change frequently.
+
+## **Manual Testing**
+
+Manual testing allows testers to explore the product, trying different scenarios and inputs to uncover unexpected behavior. It offers adaptability, as human testers can adjust to changing requirements and situations more easily than automated tests. Manual testers can also evaluate the user experience, including usability, accessibility, and aesthetics. They can think outside the box and perform ad-hoc tests that automated tests might miss. Manual testing is particularly useful in the early stages of development when features are not yet stable or well-defined.
+
+Manual testing is deployed in scenarios such as user interface testing, especially for subjective elements like aesthetics and usability. It's also crucial for exploratory testing when the software is in a state of flux and requires flexible approaches to identify potential issues. Usability testing, to evaluate how easily users can interact with the software, is another area where manual testing shines. Additionally, manual testing is ideal for testing new features, especially when the requirements are still evolving or the feature is in its early stages of development.
+
+In practice, a combination of both automated and manual testing is often employed to leverage the strengths of each approach and ensure comprehensive test coverage. For the purpose of this project Manual testing was deployed, testing the systems Usability and functionality to verify and validate that the website is fit for use and purpose.
