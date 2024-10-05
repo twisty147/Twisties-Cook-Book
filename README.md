@@ -1003,3 +1003,178 @@ Manual testing allows testers to explore the product, trying different scenarios
 Manual testing is deployed in scenarios such as user interface testing, especially for subjective elements like aesthetics and usability. It's also crucial for exploratory testing when the software is in a state of flux and requires flexible approaches to identify potential issues. Usability testing, to evaluate how easily users can interact with the software, is another area where manual testing shines. Additionally, manual testing is ideal for testing new features, especially when the requirements are still evolving or the feature is in its early stages of development.
 
 In practice, a combination of both automated and manual testing is often employed to leverage the strengths of each approach and ensure comprehensive test coverage. For the purpose of this project Manual testing was deployed, testing the systems Usability and functionality to verify and validate that the website is fit for use and purpose.
+
+### Usability Testing
+The site demonstrates adherence to Norman and Nielsen's design principles of:
+
+**Visibility**:
+- The navigation bar at the top of the page is visible and provides immediate access to essential sections.
+- Using contrasting colours for buttons and links makes them easily distinguishable from other page elements, enhancing their visibility.
+   ![Visibility](static/images/report_images/allrecipes.png)
+
+**Feedback**:
+- Interactive elements, such as buttons, modals, flash messages and links, provide immediate visual feedback upon interaction, such as changing colour or appearance.
+- The use of hover effects on cards provides feedback to users when they hover over them, indicating that they are clickable.
+- The mouse pointer changes when you hover a clickable element on the website.
+![Feedback](static/images/report_images/flashMessage2.png)
+
+**Affordance**:
+- Buttons and links are styled to look clickable, indicating their function and encouraging user interaction.
+- The search input field and button in the search recipe afford the action of searching for recipe by tag, ingridient, cusine or tool, clearly indicating its purpose.
+![Affordance](static/images/report_images/search.png)
+
+
+**Consistency**:
+- The layout and design elements, such as typography, colours, and spacing, are consistent throughout the website, providing a cohesive user experience.
+- Navigation elements, like the navbar and buttons, maintain consistent styling across different sections of the website.
+
+**Error Prevention and Recovery**:
+- Form inputs are validated before submission to prevent user errors and provide clear error messages and guidance for users in case of input mistakes.
+![Sample Quiz](static/images/report_images/cartdelete2.png)
+
+**Flexibility and Efficiency of Use**:
+- The layout is designed to be responsive, ensuring that the website is usable across various devices and screen sizes, thus accommodating a wide range of users efficiently.
+![Sample Quiz](static/images/report_images/Responsive1.png)
+
+**Aesthetic and Minimalist Design**:
+- A clean and minimalist design approach, evident in the consistent layout, typography, and white space, contributes to an aesthetically pleasing user interface.
+
+## Functional Testing
+
+# **Twisties Cookbook Functional Test Results**
+
+## **Functional Requirements**
+
+### **User Login Verification**
+
+**Requirement**:  
+The system must check if a user is logged in using session data. If the user is not logged in, a welcome message for guests should be displayed.
+
+| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
+| **Logged-in User Check**                  | Verify that the system checks if a user is logged in using session data.                          | The system correctly identifies logged-in users using session data.                                          | As expected      | Pass         |
+| **Guest Welcome Message**                  | Verify that a welcome message for guests is displayed when a user is not logged in.               | A welcome message for guests is displayed (e.g., "Welcome, Guest! Please log in to explore recipes.").      | As expected      | Pass         |
+
+### **Personalized Welcome Message**
+
+**Requirement**:  
+Display a welcome message that includes the username of the logged-in user. Display a general welcome message for users who are not logged in.
+
+| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
+| **Personalized Message for Logged-in User** | Verify that a personalized welcome message is displayed for logged-in users.                       | The message displays "Welcome, [Username]!" where [Username] is the logged-in user's username.                | As expected      | Pass         |
+| **General Message for Guests**            | Verify that a general welcome message is displayed for non-logged-in users.                       | The message displays "Welcome, Guest!" or similar wording.                                                    | As expected      | Pass         |
+
+### **Dashboard Statistics (Nice to Have)**
+
+**Requirement**:  
+Show statistics:  
+- Total number of recipes available in the application.  
+- Number of recipes added by the logged-in user.  
+- Number of favorited recipes by the logged-in user.
+
+| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
+| **Total Recipes Count**                   | Verify that the total number of recipes is correctly displayed on the dashboard.                  | The total number of recipes available in the application is displayed correctly.                               | As expected      | Pass         |
+| **User's Recipes Count**                  | Verify that the number of recipes added by the logged-in user is correctly displayed.              | The dashboard shows the number of recipes added by the logged-in user.                                        | As expected      | Pass         |
+| **Favorited Recipes Count**               | Verify that the number of favorited recipes by the logged-in user is correctly displayed.          | The dashboard shows the number of recipes the user has marked as favorites.                                   | As expected      | Pass         |
+
+### **Quick Links Section**
+
+**Requirement**:  
+Provide links for:  
+- Home.  
+- Viewing all recipes.  
+- Contact.  
+- Managing user recipes with CRUD functionalities.  
+- Updating user account information.
+
+| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
+| **Presence of Quick Links**               | Verify that all required quick links are present and functioning correctly.                       | All quick links are visible, clickable, and navigate to the correct sections/pages.                           | As expected      | Pass         |
+
+### **Call to Action Button**
+
+**Requirement**:  
+Include a prominent button that allows guests to log in to explore recipes.
+
+| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
+| **Login Call-to-Action Button**           | Verify that a prominent call-to-action button is visible for guests and directs to the login page. | The button is clearly visible, labeled "Log in to Explore Recipes," and redirects to the login page.          | As expected      | Pass         |
+
+### **Featured Recipes Display**
+
+**Requirement**:  
+Display a section for "Featured Recipes."
+
+| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
+| **Featured Recipes Section**              | Verify that the featured recipes section is present and displays correctly on the home page.       | Featured recipes are displayed prominently on the home page, with images, titles, and brief descriptions.     | As expected      | Pass         |
+
+### **Responsive Design**
+
+**Requirement**:  
+Ensure that the design is adaptable across different types of devices.
+
+| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
+| **Mobile View Compatibility**             | Verify that the layout adapts correctly on mobile devices (e.g., phones and tablets).            | The interface, including all elements, scales down appropriately and maintains usability.                     | As expected      | Pass         |
+| **Desktop View Compatibility**            | Verify that the layout adapts correctly on larger screens (e.g., desktops and laptops).          | The interface maintains its structure and does not break when viewed on larger screens.                       | As expected      | Pass         |
+
+### **Feedback Notifications**
+
+**Requirement**:  
+Implement messages to provide feedback for various user actions.
+
+| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
+| **Success Feedback Notifications**        | Verify that success messages are displayed for successful actions like adding or editing recipes. | The system shows a success message (e.g., “Recipe added successfully”).                                       | As expected      | Pass         |
+| **Error Feedback Notifications**          | Verify that error messages are displayed for invalid or failed actions.                           | The system shows an error message (e.g., “Error adding recipe, please try again”).                            | As expected      | Pass         |
+
+## **Non-Functional Requirements**
+
+### **User Interface Design**
+
+**Requirement**:  
+The interface should be intuitive and easy to navigate. Use consistent design elements (colors, fonts) throughout the page.
+
+| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
+| **Intuitive Navigation**                  | Verify that the user interface is intuitive and easy to navigate.                                 | Users can navigate the interface without confusion, and menus/buttons are clearly labeled.                     | As expected      | Pass         |
+| **Consistency in Design Elements**       | Verify that consistent design elements (colors, fonts) are used throughout the page.              | Design elements maintain a consistent look and feel across the application.                                    | As expected      | Pass         |
+
+### **Accessibility**
+
+**Requirement**:  
+The page must comply with WCAG 2.1 Level AA accessibility standards.
+
+| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
+| **WCAG Compliance Check**                 | Verify that the page complies with WCAG 2.1 Level AA accessibility standards.                     | The page passes accessibility checks, ensuring usability for people with disabilities.                         | As expected      | Pass         |
+
+### **Session Management**
+
+**Requirement**:  
+Ensure that session data is securely managed and sensitive information is protected.
+
+| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
+| **Secure Session Management**             | Verify that session data is managed securely and sensitive information is protected.              | Session data is stored securely, and sensitive information is not exposed to unauthorized users.                | As expected      | Pass         |
+
+### **Input Validation**
+
+**Requirement**:  
+Validate all user inputs.
+
+| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
+| **Input Validation Checks**               | Verify that all user inputs are validated before processing.                                       | The system properly validates inputs and provides feedback for invalid entries.                               | As expected      | Pass         |
+
+### **Cross-Browser Support**
+
+**Requirement**:  
+The website should be compatible with the latest versions of major browsers.
+
+| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
+| **Cross-Browser Compatibility Test**      | Verify that the website works correctly across major browsers (e.g., Chrome, Firefox, Safari).    | The website functions as expected and displays correctly on all tested browsers.                             | As expected      | Pass         |
