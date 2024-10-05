@@ -282,7 +282,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
       -  If the username has been changed, the system updates the session with the new username.
       -  The user is redirected to the index page where they can continue using the application with their updated profile.
 
-[Back to Top](#requirements)
+[BACK TO TOP](#REQUIREMENTS)
 
 
 # DESIGN
@@ -314,7 +314,7 @@ This is the foundational blueprint for Twisties' Cook Book Design and layout. It
 
    - The combination of teal, white, and dark grey creates a visually appealing contrast that enhances readability. 
 
-[Back to Top](#requirements)
+[BACK TO TOP](#REQUIREMENTS)
 
 # DEVELOPMENT
 
@@ -514,7 +514,7 @@ The data collections created were used to categorize and manage data efficiently
                -  Type: String
                -  Description: The message or inquiry sent by the user through the contact form. It could be a general inquiry, feedback, or a request for support.
 
-[Back to Top](#requirements)
+[BACK TO TOP](#REQUIREMENTS)
 
 ### **Backend Development with Flask**
 
@@ -593,7 +593,7 @@ This was used when a user attempts to log in, ensuring that the password entered
 
 ![Cloudinary uploader](./static/images/report_images/cloudinary%20uploader.png)
 
-[Back to Top](#requirements)
+[BACK TO TOP](#REQUIREMENTS)
 
 
 ### **Features and Functionalities Implemented**
@@ -772,6 +772,9 @@ This Flask route fetches the data needed to populate this homepage
 -  If an exception occurs during the deletion process, an error message is displayed.
 -  After attempting to delete the recipe, the user is redirected to the recipe management page, whether the deletion was successful or not. The flash messages will notify them of the result.
 -  The try-except block ensures that any issues during the deletion process (e.g., database connection errors) are caught, and a corresponding error message is displayed to the user.
+
+[BACK TO TOP](#REQUIREMENTS)
+
 
 **Manage Recipes**
    -  **View Recipe**
@@ -981,5 +984,5 @@ When this button is clicked it shows a page that displays recipies filtered by t
 
 
 
-[Back to Top](#requirements) 
+[BACK TO TOP](#REQUIREMENTS)
 
