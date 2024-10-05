@@ -1238,64 +1238,66 @@ Check the functionality of the cart page.
 
 **IMage Credits**
 Food Preparation Equipment
--Chef’s knife https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.walmart.ca%2Fen%2Fip%2Fht-8-inch-chef-knife-silver%2F6000196138477&psig=AOvVaw02YOk3vsrR19F68Wd2WxDn&ust=1727231740314000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLjf--TF2ogDFQAAAAAdAAAAABAI
--Paring knife https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FVictorinox-182254-Paring-Knife-Silver%2Fdp%2FB000WLDOXM&psig=AOvVaw0y8gHoDMGnBD9-fdtEeFND&ust=1727231770296000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJikgfTF2ogDFQAAAAAdAAAAABAE
--Knife sharpening/honing rod https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FHoning-Sharpening-Premium-Sharpener-Sharpeners%2Fdp%2FB094JFRW48&psig=AOvVaw0mS7W3zPIvB73qfq1d6fon&ust=1727231804463000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKDpx4PG2ogDFQAAAAAdAAAAABAE
--Bread knife
+-  Chef’s knife https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.walmart.ca%2Fen%2Fip%2Fht-8-inch-chef-knife-silver%2F6000196138477&psig=AOvVaw02YOk3vsrR19F68Wd2WxDn&ust=1727231740314000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLjf--TF2ogDFQAAAAAdAAAAABAI
+-  Paring knife https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FVictorinox-182254-Paring-Knife-Silver%2Fdp%2FB000WLDOXM&psig=AOvVaw0y8gHoDMGnBD9-fdtEeFND&ust=1727231770296000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJikgfTF2ogDFQAAAAAdAAAAABAE
+-  Knife sharpening/honing rod https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FHoning-Sharpening-Premium-Sharpener-Sharpeners%2Fdp%2FB094JFRW48&psig=AOvVaw0mS7W3zPIvB73qfq1d6fon&ust=1727231804463000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKDpx4PG2ogDFQAAAAAdAAAAABAE
+-  Bread knife
 https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FMercer-Culinary-Millennia-Stainless-10-Inch%2Fdp%2FB000PS1HS6&psig=AOvVaw3jKNYsLD1x0m5AUWis0F94&ust=1727231838174000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPDmkZfG2ogDFQAAAAAdAAAAABAE
--Chopping/cutting board(s) https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FFolding-Cutting-Taste-plus-Chopping%2Fdp%2FB09B373K8S&psig=AOvVaw3H8Z5AgxIPsSS-KdrMgYbw&ust=1727231876374000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLiYo6XG2ogDFQAAAAAdAAAAABAE
--Kitchen shears/scissors
+-  Chopping/cutting board(s) https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FFolding-Cutting-Taste-plus-Chopping%2Fdp%2FB09B373K8S&psig=AOvVaw3H8Z5AgxIPsSS-KdrMgYbw&ust=1727231876374000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLiYo6XG2ogDFQAAAAAdAAAAABAE
+-  Kitchen shears/scissors
 https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FProfessional-Stainless-Household-Necessity-All-purpose%2Fdp%2FB072KRHJ67&psig=AOvVaw11GDMS4Yps-fvWA1WOKCxL&ust=1727231899668000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJjl27DG2ogDFQAAAAAdAAAAABAE
 -Vegetable peeler https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FUniversal-Peeler-Peelers-Vegetables-Stainless%2Fdp%2FB0BVLV6HFM&psig=AOvVaw2EKLWpzdtyH8CrgKCOs_PQ&ust=1727231933484000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPi_qsHG2ogDFQAAAAAdAAAAABAE
--Garlic press https://m.media-amazon.com/images/I/71qFPxqohLS._AC_UF894,1000_QL80_.jpg
--Grater https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FAmazon-Basics-Heavy-Duty-Rectangular-AmazonCommercial%2Fdp%2FB0D8PP8NNC&psig=AOvVaw2phOFVef16Ro-RBfLctGJa&ust=1727231975113000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMDvg9TG2ogDFQAAAAAdAAAAABAE
--Kitchen scales https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FAmazonBasics-Stainless-Digital-Batteries-Included%2Fdp%2FB06X9NQ8GX&psig=AOvVaw02HMfIsqkFi3hQCvKF0Cux&ust=1727231998525000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNDxpd_G2ogDFQAAAAAdAAAAABAE
--Measuring jug https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FSCSpecial-Measuring-Glass-Multi-Purpose-Liquid%2Fdp%2FB07RN3JRGJ&psig=AOvVaw1-272spEIAVOBkxlT_J8_w&ust=1727232022911000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCLjc4erG2ogDFQAAAAAdAAAAABAE
--Measuring spoons https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FSimplife-Stainless-Measuring-Spoons-Ingredients%2Fdp%2FB077BXGY2Q&psig=AOvVaw1i27ZzCaTCZGPAE0v0DE3Y&ust=1727232046348000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPDNoPbG2ogDFQAAAAAdAAAAABAE
--Measuring cups https://m.media-amazon.com/images/I/615i9tGoUWS._AC_UF894,1000_QL80_.jpg
--Mixing bowl https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FHerogo-Stainless-Non-Slip-Rustproof-Dishwasher%2Fdp%2FB0BF8YZ6N5&psig=AOvVaw1f8hkdtVfcnOgW-KYpvyfd&ust=1727232096959000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJjyio_H2ogDFQAAAAAdAAAAABAE
--Colander/pasta strainer https://m.media-amazon.com/images/I/61vpSbglAjL._AC_UF894,1000_QL80_.jpg
--Sieve https://m.media-amazon.com/images/I/81Si3A7d7oL._AC_UF894,1000_QL80_.jpg
--Rolling pin https://m.media-amazon.com/images/I/61FPqc29L4L._AC_UF1000,1000_QL80_.jpg
--Can opener https://m.media-amazon.com/images/I/71uY9vsx+dL.jpg
--Blender  https://m.media-amazon.com/images/I/71tw3D0TxpL._AC_UF894,1000_QL80_.jpg
+-  Garlic press https://m.media-amazon.com/images/I/71qFPxqohLS._AC_UF894,1000_QL80_.jpg
+-  Grater https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FAmazon-Basics-Heavy-Duty-Rectangular-AmazonCommercial%2Fdp%2FB0D8PP8NNC&psig=AOvVaw2phOFVef16Ro-RBfLctGJa&ust=1727231975113000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMDvg9TG2ogDFQAAAAAdAAAAABAE
+-  Kitchen scales https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FAmazonBasics-Stainless-Digital-Batteries-Included%2Fdp%2FB06X9NQ8GX&psig=AOvVaw02HMfIsqkFi3hQCvKF0Cux&ust=1727231998525000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNDxpd_G2ogDFQAAAAAdAAAAABAE
+-  Measuring jug https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FSCSpecial-Measuring-Glass-Multi-Purpose-Liquid%2Fdp%2FB07RN3JRGJ&psig=AOvVaw1-272spEIAVOBkxlT_J8_w&ust=1727232022911000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCLjc4erG2ogDFQAAAAAdAAAAABAE
+-  Measuring spoons https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FSimplife-Stainless-Measuring-Spoons-Ingredients%2Fdp%2FB077BXGY2Q&psig=AOvVaw1i27ZzCaTCZGPAE0v0DE3Y&ust=1727232046348000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPDNoPbG2ogDFQAAAAAdAAAAABAE
+-  Measuring cups https://m.media-amazon.com/images/I/615i9tGoUWS._AC_UF894,1000_QL80_.jpg
+-  Mixing bowl https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FHerogo-Stainless-Non-Slip-Rustproof-Dishwasher%2Fdp%2FB0BF8YZ6N5&psig=AOvVaw1f8hkdtVfcnOgW-KYpvyfd&ust=1727232096959000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJjyio_H2ogDFQAAAAAdAAAAABAE
+-  Colander/pasta strainer https://m.media-amazon.com/images/I/61vpSbglAjL._AC_UF894,1000_QL80_.jpg
+-  Sieve https://m.media-amazon.com/images/I/81Si3A7d7oL._AC_UF894,1000_QL80_.jpg
+-  Rolling pin https://m.media-amazon.com/images/I/61FPqc29L4L._AC_UF1000,1000_QL80_.jpg
+-  Can opener https://m.media-amazon.com/images/I/71uY9vsx+dL.jpg
+-  Blender  https://m.media-amazon.com/images/I/71tw3D0TxpL._AC_UF894,1000_QL80_.jpg
 
 
-Cooking Equipment
--Frying pan/skillet https://m.media-amazon.com/images/I/81ShqibFCxL._AC_UF894,1000_QL80_.jpg
--Saucepans https://m.media-amazon.com/images/I/71-YmastH6L.jpg
--Ovenproof dish https://m.media-amazon.com/images/I/51JDL9r5sGL.jpg
--Roasting tin https://m.media-amazon.com/images/I/717PCBAjLSL.jpg
--Baking sheet https://m.media-amazon.com/images/I/61SZMzVfWyL._AC_UF894,1000_QL80_.jpg
--Stirring spoon https://m.media-amazon.com/images/I/61zd75SFlrL._AC_UF894,1000_QL80_.jpg
--Slotted spoon https://m.media-amazon.com/images/I/51AxSTFdR-L._AC_UF1000,1000_QL80_.jpg
--Spatula https://m.media-amazon.com/images/I/61YAQe2spML._AC_UF1000,1000_QL80_.jpg
--Tongs https://m.media-amazon.com/images/I/414umWI+-XL._AC_UF1000,1000_QL80_.jpg
--Masher https://m.media-amazon.com/images/I/51I1YfqodLL._AC_UF894,1000_QL80_.jpg
--Balloon whisk https://m.media-amazon.com/images/I/71OOLKdFraL._AC_UF894,1000_QL80_.jpg
--Oven gloves https://m.media-amazon.com/images/I/71sg4xRfysL.jpg
--Pot holders https://m.media-amazon.com/images/I/71EZecxNydL._AC_UF894,1000_QL80_.jpg
--Food/meat thermometer https://m.media-amazon.com/images/I/61Aru6iuy+L.jpg
--Large Pot https://m.media-amazon.com/images/I/61NszT+BBnL._AC_UF894,1000_QL80_.jpg
+-**Cooking Equipment**
 
-Storage Equipment
+-  Frying pan/skillet https://m.media-amazon.com/images/I/81ShqibFCxL._AC_UF894,1000_QL80_.jpg
+-  Saucepans https://m.media-amazon.com/images/I/71-YmastH6L.jpg
+-  Ovenproof dish https://m.media-amazon.com/images/I/51JDL9r5sGL.jpg
+-  Roasting tin https://m.media-amazon.com/images/I/717PCBAjLSL.jpg
+-  Baking sheet https://m.media-amazon.com/images/I/61SZMzVfWyL._AC_UF894,1000_QL80_.jpg
+-  Stirring spoon https://m.media-amazon.com/images/I/61zd75SFlrL._AC_UF894,1000_QL80_.jpg
+-  Slotted spoon https://m.media-amazon.com/images/I/51AxSTFdR-L._AC_UF1000,1000_QL80_.jpg
+-  Spatula https://m.media-amazon.com/images/I/61YAQe2spML._AC_UF1000,1000_QL80_.jpg
+-  Tongs https://m.media-amazon.com/images/I/414umWI+-XL._AC_UF1000,1000_QL80_.jpg
+-  Masher https://m.media-amazon.com/images/I/51I1YfqodLL._AC_UF894,1000_QL80_.jpg
+-  Balloon whisk https://m.media-amazon.com/images/I/71OOLKdFraL._AC_UF894,1000_QL80_.jpg
+-  Oven gloves https://m.media-amazon.com/images/I/71sg4xRfysL.jpg
+-  Pot holders https://m.media-amazon.com/images/I/71EZecxNydL._AC_UF894,1000_QL80_.jpg
+-  Food/meat thermometer https://m.media-amazon.com/images/I/61Aru6iuy+L.jpg
+-  Large Pot https://m.media-amazon.com/images/I/61NszT+BBnL._AC_UF894,1000_QL80_.jpg
 
--Plastic containers https://m.media-amazon.com/images/I/71AvdHAEyZL.jpg
--Plastic zipper bags https://m.media-amazon.com/images/I/61wx41zj5PL._AC_UF1000,1000_QL80_.jpg
--Bread bin https://m.media-amazon.com/images/I/61VAQL5-1pL._AC_UF894,1000_QL80_.jpg
+**Storage Equipment**
+
+-  Plastic containers https://m.media-amazon.com/images/I/71AvdHAEyZL.jpg
+-  Plastic zipper bags https://m.media-amazon.com/images/I/61wx41zj5PL._AC_UF1000,1000_QL80_.jpg
+-  Bread bin https://m.media-amazon.com/images/I/61VAQL5-1pL._AC_UF894,1000_QL80_.jpg
 
 
-Serving Equipment
--Ladle https://m.media-amazon.com/images/I/41JicsAj9qL.jpg
--Pasta fork https://m.media-amazon.com/images/I/41kt8-A4xBL._AC_UF894,1000_QL80_.jpg
--Pizza cutter https://m.media-amazon.com/images/I/51G4s8fnxkL._AC_UF894,1000_QL80_.jpg
--Corkscrew https://m.media-amazon.com/images/I/71L6XUschaL._AC_UF894,1000_QL80_.jpg
--Bottle opener https://m.media-amazon.com/images/I/51sNmUeNxdL._AC_UF894,1000_QL80_.jpg
+**Serving Equipment**
 
-Miscellaneous Equipment
+-  Ladle https://m.media-amazon.com/images/I/41JicsAj9qL.jpg
+-  Pasta fork https://m.media-amazon.com/images/I/41kt8-A4xBL._AC_UF894,1000_QL80_.jpg
+-  Pizza cutter https://m.media-amazon.com/images/I/51G4s8fnxkL._AC_UF894,1000_QL80_.jpg
+-  Corkscrew https://m.media-amazon.com/images/I/71L6XUschaL._AC_UF894,1000_QL80_.jpg
+-  Bottle opener https://m.media-amazon.com/images/I/51sNmUeNxdL._AC_UF894,1000_QL80_.jpg
 
--Plastic wrap/clingfilm https://m.media-amazon.com/images/I/618GBoWC-DL._AC_UF1000,1000_QL80_.jpg
--Kitchen foil https://m.media-amazon.com/images/I/71nxDKydCMS._AC_UF894,1000_QL80_.jpg
--Baking parchment https://m.media-amazon.com/images/I/71NOjhwO7WL._AC_UF1000,1000_QL80_.jpg
--Tea towels https://m.media-amazon.com/images/I/81sq9F4+ACL._AC_UF894,1000_QL80_.jpg
--Kitchen tool organizer https://m.media-amazon.com/images/I/71+gYV2YZJL._AC_UF1000,1000_QL80_.jpg 
+**Miscellaneous Equipment**
+
+-  Plastic wrap/clingfilm https://m.media-amazon.com/images/I/618GBoWC-DL._AC_UF1000,1000_QL80_.jpg
+-  Kitchen foil https://m.media-amazon.com/images/I/71nxDKydCMS._AC_UF894,1000_QL80_.jpg
+-  Baking parchment https://m.media-amazon.com/images/I/71NOjhwO7WL._AC_UF1000,1000_QL80_.jpg
+-  Tea towels https://m.media-amazon.com/images/I/81sq9F4+ACL._AC_UF894,1000_QL80_.jpg
+-  Kitchen tool organizer https://m.media-amazon.com/images/I/71+gYV2YZJL._AC_UF1000,1000_QL80_.jpg 
