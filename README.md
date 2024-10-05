@@ -832,12 +832,12 @@ This Flask route fetches the data needed to populate this homepage
 -  The retrieved categories are passed to the equipment_categories.html template for rendering.
 -  The categories object will be available in the template, allowing for iteration and display of category data.
 
-
-   
-
+![Equiptment Category](./static/images/report_images/equipmentCategory.png)
 
 **Required tools**
 -  **Equiptment Category**
+
+
 
 **Equiptment Category**
 -  **Category Items**
