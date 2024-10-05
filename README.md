@@ -32,7 +32,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 8. [License](#license)
 
 
-# REQUIREMENTS
+# REQUIREMENTS ENGINEERING
 
 ## Functional Requirements
 
@@ -89,7 +89,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
    - The website should be compatible with the latest versions of major browsers.
 
 
-## Requirements Engineering
+## Requirements Analysis
 **Base Template**
    - Include CSS Frameworks
    - Include javaScript Libraries/files
