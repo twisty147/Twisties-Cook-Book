@@ -1039,6 +1039,8 @@ The site demonstrates adherence to Norman and Nielsen's design principles of:
 **Aesthetic and Minimalist Design**:
 - A clean and minimalist design approach, evident in the consistent layout, typography, and white space, contributes to an aesthetically pleasing user interface.
 
+[BACK TO TOP](#REQUIREMENTS)
+
 ## Functional Testing (Manual Test Result)
 
 The system was tested against the stipulated requirements for the website.
@@ -1187,6 +1189,10 @@ Check the functionality of the cart page.
 | **Delete Item Confirmation**              | Check if users are prompted before deleting an item from the cart.                 | Confirmation prompt is displayed before deletion.              | As expected      | Pass         |
 | **Edit Cart Items**                      | Verify that users can edit items in their cart.                                     | Users can successfully edit quantities or details of items.   | As expected      | Pass         |
 
+
+[BACK TO TOP](#REQUIREMENTS)
+
+
 ##**Evaluation of Bugs Found and Fixes**
 
 -  Bug: werkzeug.routing.BuildError: Could not build URL for endpoint
@@ -1223,6 +1229,65 @@ Check the functionality of the cart page.
 
 -  Bug: In the registration process, I stored the hashed password as password_hash, but in the login route, I was retrieving user['password'] instead of user['password_hash'].
 -  Fix: I changed if check_password_hash(user['password'], password): to: if check_password_hash(user['password_hash'], password):
+
+
+
+# Deployment
+
+** Asuming you already have your repo like i did on git hub**
+
+
+
+**Deployment Steps for Flask Application on Heroku**
+
+-  **Set Up Necessary Files**
+
+   -  **Create `requirements.txt`:**  
+      - Use `pip` to generate the `requirements.txt` file, which lists all necessary dependencies for the application
+
+   -  **Create a Procfile**:
+      -  The Procfile specifies the command that Heroku uses to start the app
+      -  Make sure the Procfile is created with a capital "P" and has no file extension.
+
+   -  **Verify the files**:
+      -  requirements.txt should list all necessary packages (e.g., Flask, Werkzeug).
+      -  Procfile should contain the command to run the application (e.g., web: python app.py).
+   
+-  **Create a New Heroku Application**
+
+   -  Go to Heroku.com and log in.
+   -  Click on Create a New App.
+   -  Choose a unique app name (e.g., flask-task-manager-project).
+   -  Select the appropriate region (e.g., Europe if you are in Ireland).
+   -  Click Create App.
+
+-  **Set Up GitHub Integration**
+
+   -  Navigate to the Deploy tab in Heroku.
+   -  Under Deployment method, select GitHub.
+   -  Make sure your GitHub profile is connected.
+   -  Search for the repository name and click Connect.
+   -  Enable Automatic Deployment for continuous integration.
+
+-  **Configure Environment Variables on Heroku**
+
+   -  Go to the Settings tab in your Heroku app.
+   -  Click on Reveal Config Vars to add environment variables.
+   -  Add the following variables:
+   -  IP: 0.0.0.0
+   -  PORT: 5000
+   -  SECRET_KEY: (copy from your env.py file)
+   -  MONGO_URI: (Copy from Mongodb as long as you edit username, password and dbname)
+   -  MONGO_DBNAME: task_manager
+
+-  **Deploy Application on Heroku**
+
+   -  Go back to the Deploy tab in Heroku.
+   -  Click on Deploy Branch.
+   -  Heroku will start building the application based on the requirements and the Procfile.
+   -  Once the deployment is complete, you should see a message: "Your app was successfully deployed."
+   -  Click View to launch your application.
+
 
 
 
@@ -1302,3 +1367,22 @@ https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.co.uk%2FProfessiona
 -  Baking parchment https://m.media-amazon.com/images/I/71NOjhwO7WL._AC_UF1000,1000_QL80_.jpg
 -  Tea towels https://m.media-amazon.com/images/I/81sq9F4+ACL._AC_UF894,1000_QL80_.jpg
 -  Kitchen tool organizer https://m.media-amazon.com/images/I/71+gYV2YZJL._AC_UF1000,1000_QL80_.jpg 
+
+# License
+
+Copyright (c) 2024 Oliver Amah
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this website without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, copies of the website, 
+and to permit persons to whom the website is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the website.
+
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE Website.
+
+[BACK TO TOP](#REQUIREMENTS)
