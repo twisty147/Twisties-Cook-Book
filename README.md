@@ -1041,136 +1041,149 @@ The site demonstrates adherence to Norman and Nielsen's design principles of:
 
 ## Functional Testing (Manual Test Result)
 
+The system was tested against the stipulated requirements for the website.
 
+# **Test Cases for Twisties Cookbook Requirements**
 
-**Home Page Requirement**:  
-The system must check if a user is logged in using session data. If the user is not logged in, a welcome message for guests should be displayed.
+## **Base Template Requirements**
 
-| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
-|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
-| **Logged-in User Check**                  | Verify that the system checks if a user is logged in using session data.                          | The system correctly identifies logged-in users using session data.                                          | As expected      | Pass         |
-| **Guest Welcome Message**                  | Verify that a welcome message for guests is displayed when a user is not logged in.               | A welcome message for guests is displayed (e.g., "Welcome, Guest! Please log in to explore recipes.").      | As expected      | Pass         |
-
-### **Personalized Welcome Message**
+### **Test Case 1: Base Template Elements**
 
 **Requirement**:  
-Display a welcome message that includes the username of the logged-in user. Display a general welcome message for users who are not logged in.
+All pages should extend from the base template, which includes essential components.
 
-| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
-|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
-| **Personalized Message for Logged-in User** | Verify that a personalized welcome message is displayed for logged-in users.                       | The message displays "Welcome, [Username]!" where [Username] is the logged-in user's username.                | As expected      | Pass         |
-| **General Message for Guests**            | Verify that a general welcome message is displayed for non-logged-in users.                       | The message displays "Welcome, Guest!" or similar wording.                                                    | As expected      | Pass         |
+| **Test Case**                             | **Description**                                                                      | **Expected Result**                                              | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|--------------------------------------------------------------------------------------|----------------------------------------------------------------|------------------|--------------|
+| **Base Template Components**               | Verify that CSS frameworks and JavaScript libraries/files are included in the base template. | The base template includes the necessary CSS and JavaScript files. | As expected      | Pass         |
+| **Header Section**                         | Ensure the header section contains the brand logo linking to the home page.        | The brand logo in the header links correctly to the home page.  | As expected      | Pass         |
+| **Dynamic Links Based on User Status**    | Verify that links in the header change based on the user's login status.           | Links change correctly for logged-in and guest users.           | As expected      | Pass         |
+| **Mobile-Friendly Sidebar**                | Check if the sidebar menu is mobile-friendly.                                      | The sidebar menu adapts properly on mobile devices.             | As expected      | Pass         |
+| **Main Content Section**                   | Confirm that a main content section exists in the base template.                    | Main content section is present and functional.                 | As expected      | Pass         |
+| **Footer Section**                         | Verify that the footer section is included in the base template.                   | The footer section is present with appropriate information.      | As expected      | Pass         |
 
-### **Dashboard Statistics (Nice to Have)**
+## **Index Page Requirements**
 
-**Requirement**:  
-Show statistics:  
-- Total number of recipes available in the application.  
-- Number of recipes added by the logged-in user.  
-- Number of favorited recipes by the logged-in user.
-
-| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
-|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
-| **Total Recipes Count**                   | Verify that the total number of recipes is correctly displayed on the dashboard.                  | The total number of recipes available in the application is displayed correctly.                               | As expected      | Pass         |
-| **User's Recipes Count**                  | Verify that the number of recipes added by the logged-in user is correctly displayed.              | The dashboard shows the number of recipes added by the logged-in user.                                        | As expected      | Pass         |
-| **Favorited Recipes Count**               | Verify that the number of favorited recipes by the logged-in user is correctly displayed.          | The dashboard shows the number of recipes the user has marked as favorites.                                   | As expected      | Pass         |
-
-### **Quick Links Section**
+### **Test Case 2: Personalized Welcome Message**
 
 **Requirement**:  
-Provide links for:  
-- Home.  
-- Viewing all recipes.  
-- Contact.  
-- Managing user recipes with CRUD functionalities.  
-- Updating user account information.
+Display a personalized welcome message for logged-in users.
 
-| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
-|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
-| **Presence of Quick Links**               | Verify that all required quick links are present and functioning correctly.                       | All quick links are visible, clickable, and navigate to the correct sections/pages.                           | As expected      | Pass         |
+| **Test Case**                             | **Description**                                                                      | **Expected Result**                                              | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|--------------------------------------------------------------------------------------|----------------------------------------------------------------|------------------|--------------|
+| **Logged-in User Welcome Message**        | Verify that the page displays "Welcome, {username}!" for logged-in users.         | The welcome message is personalized with the user's username.  | As expected      | Pass         |
 
-### **Call to Action Button**
+### **Test Case 3: Dashboard Summary for Logged-in Users**
 
 **Requirement**:  
-Include a prominent button that allows guests to log in to explore recipes.
+Show a dashboard summary for logged-in users.
 
-| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
-|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
-| **Login Call-to-Action Button**           | Verify that a prominent call-to-action button is visible for guests and directs to the login page. | The button is clearly visible, labeled "Log in to Explore Recipes," and redirects to the login page.          | As expected      | Pass         |
+| **Test Case**                             | **Description**                                                                      | **Expected Result**                                              | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|--------------------------------------------------------------------------------------|----------------------------------------------------------------|------------------|--------------|
+| **Dashboard Summary**                     | Verify that the dashboard summary shows total recipes, recipes added, and favorited recipes. | All counts are displayed accurately for the logged-in user.     | As expected      | Pass         |
 
-### **Featured Recipes Display**
+### **Test Case 4: Index Page for Guests**
+
+**Requirement**:  
+Display a welcoming message and a call-to-action button for guests.
+
+| **Test Case**                             | **Description**                                                                      | **Expected Result**                                              | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|--------------------------------------------------------------------------------------|----------------------------------------------------------------|------------------|--------------|
+| **Guest User Welcome Message**            | Verify that the page displays "Welcome to Twisties Cookbook" for guests.          | The guest welcome message is displayed.                        | As expected      | Pass         |
+| **Guest Call-to-Action Button**           | Check that a "Log In to Explore Recipes" button is present for guests.            | The call-to-action button is displayed and functional.          | As expected      | Pass         |
+
+### **Test Case 5: Featured Recipes Section**
 
 **Requirement**:  
 Display a section for "Featured Recipes."
 
-| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
-|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
-| **Featured Recipes Section**              | Verify that the featured recipes section is present and displays correctly on the home page.       | Featured recipes are displayed prominently on the home page, with images, titles, and brief descriptions.     | As expected      | Pass         |
+| **Test Case**                             | **Description**                                                                      | **Expected Result**                                              | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|--------------------------------------------------------------------------------------|----------------------------------------------------------------|------------------|--------------|
+| **Featured Recipes Header**                | Verify that the header for featured recipes is centered on the page.               | The "Featured Recipes" header is centered correctly.           | As expected      | Pass         |
+| **Recipe Cards Display**                  | Ensure recipe cards are displayed with image, title, cooking time, and serving info. | Recipe cards show all required details correctly.               | As expected      | Pass         |
 
-### **Responsive Design**
+## **Contact Page Requirements**
 
-**Requirement**:  
-Ensure that the design is adaptable across different types of devices.
-
-| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
-|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
-| **Mobile View Compatibility**             | Verify that the layout adapts correctly on mobile devices (e.g., phones and tablets).            | The interface, including all elements, scales down appropriately and maintains usability.                     | As expected      | Pass         |
-| **Desktop View Compatibility**            | Verify that the layout adapts correctly on larger screens (e.g., desktops and laptops).          | The interface maintains its structure and does not break when viewed on larger screens.                       | As expected      | Pass         |
-
-### **Feedback Notifications**
+### **Test Case 6: Contact Page Elements**
 
 **Requirement**:  
-Implement messages to provide feedback for various user actions.
+Check the elements present on the contact page.
 
-| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
-|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
-| **Success Feedback Notifications**        | Verify that success messages are displayed for successful actions like adding or editing recipes. | The system shows a success message (e.g., “Recipe added successfully”).                                       | As expected      | Pass         |
-| **Error Feedback Notifications**          | Verify that error messages are displayed for invalid or failed actions.                           | The system shows an error message (e.g., “Error adding recipe, please try again”).                            | As expected      | Pass         |
+| **Test Case**                             | **Description**                                                                      | **Expected Result**                                              | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|--------------------------------------------------------------------------------------|----------------------------------------------------------------|------------------|--------------|
+| **Back Button**                           | Verify the presence of a back button with an arrow icon.                            | Back button is present and functional.                         | As expected      | Pass         |
+| **Contact Us Header**                    | Ensure a header with "Contact Us" is centered on the page.                         | The header is correctly centered and displays the right text.  | As expected      | Pass         |
+| **Contact Form Fields**                   | Verify the contact form includes name, email, and message fields.                  | All required fields are present and functional.                | As expected      | Pass         |
+| **Contact Information Section**           | Check if contact information is displayed correctly.                                | Contact information section is present and accurate.           | As expected      | Pass         |
+| **Find Us Section**                       | Verify the presence of a "Find Us" header and Google Map.                          | Section header and embedded Google Map are displayed correctly. | As expected      | Pass         |
 
-## **Non-Functional Requirements**
+## **Login Page Requirements**
 
-### **User Interface Design**
-
-**Requirement**:  
-The interface should be intuitive and easy to navigate. Use consistent design elements (colors, fonts) throughout the page.
-
-| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
-|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
-| **Intuitive Navigation**                  | Verify that the user interface is intuitive and easy to navigate.                                 | Users can navigate the interface without confusion, and menus/buttons are clearly labeled.                     | As expected      | Pass         |
-| **Consistency in Design Elements**       | Verify that consistent design elements (colors, fonts) are used throughout the page.              | Design elements maintain a consistent look and feel across the application.                                    | As expected      | Pass         |
-
-### **Accessibility**
+### **Test Case 7: Login Page Elements**
 
 **Requirement**:  
-The page must comply with WCAG 2.1 Level AA accessibility standards.
+Check elements on the login page.
 
-| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
-|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
-| **WCAG Compliance Check**                 | Verify that the page complies with WCAG 2.1 Level AA accessibility standards.                     | The page passes accessibility checks, ensuring usability for people with disabilities.                         | As expected      | Pass         |
+| **Test Case**                             | **Description**                                                                      | **Expected Result**                                              | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|--------------------------------------------------------------------------------------|----------------------------------------------------------------|------------------|--------------|
+| **Login Form Fields**                     | Verify that the login form includes email and password fields.                      | Both fields are present and functional.                        | As expected      | Pass         |
+| **Registration Prompt**                   | Ensure a message links to the registration page.                                   | The prompt with a link to the registration page is present.    | As expected      | Pass         |
 
-### **Session Management**
+## **Registration Page Requirements**
 
-**Requirement**:  
-Ensure that session data is securely managed and sensitive information is protected.
-
-| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
-|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
-| **Secure Session Management**             | Verify that session data is managed securely and sensitive information is protected.              | Session data is stored securely, and sensitive information is not exposed to unauthorized users.                | As expected      | Pass         |
-
-### **Input Validation**
+### **Test Case 8: Registration Page Elements**
 
 **Requirement**:  
-Validate all user inputs.
+Check elements on the registration page.
 
-| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
-|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
-| **Input Validation Checks**               | Verify that all user inputs are validated before processing.                                       | The system properly validates inputs and provides feedback for invalid entries.                               | As expected      | Pass         |
+| **Test Case**                             | **Description**                                                                      | **Expected Result**                                              | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|--------------------------------------------------------------------------------------|----------------------------------------------------------------|------------------|--------------|
+| **Registration Form Fields**              | Verify that the registration form includes name, email, and password fields.       | All required fields are present and functional.                | As expected      | Pass         |
+| **Login Prompt**                          | Ensure a message links to the login page.                                         | The prompt with a link to the login page is present.           | As expected      | Pass         |
 
-### **Cross-Browser Support**
+## **Recipes Page Requirements**
+
+### **Test Case 9: Recipes Page Functionality**
 
 **Requirement**:  
-The website should be compatible with the latest versions of major browsers.
+Check the functionality of the recipes page.
 
-| **Test Case**                             | **Description**                                                                                   | **Expected Result**                                                                                           | **Actual Result** | **Pass/Fail** |
-|-------------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------|--------------|
-| **Cross-Browser Compatibility Test**      | Verify that the website works correctly across major browsers (e.g., Chrome, Firefox, Safari).    | The website functions as expected and displays correctly on all tested browsers.                             | As expected      | Pass         |
+| **Test Case**                             | **Description**                                                                      | **Expected Result**                                              | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|--------------------------------------------------------------------------------------|----------------------------------------------------------------|------------------|--------------|
+| **Page Title**                            | Verify that the page title is displayed correctly.                                  | The title matches the expected page title.                     | As expected      | Pass         |
+| **Search Form**                          | Check that the search form is implemented correctly.                                | The search form is functional and displays expected results.    | As expected      | Pass         |
+| **Recipe Display Section**                | Ensure that recipes are displayed properly in the designated section.               | Recipes are listed correctly with relevant details.             | As expected      | Pass         |
+| **Pagination Controls**                   | Verify that pagination controls are functional.                                     | Pagination controls allow navigation through multiple pages.    | As expected      | Pass         |
+| **Favorites Feature**                     | Check that users can add recipes to their favorites.                                | Users can successfully favorite recipes.                       | As expected      | Pass         |
+| **Social Media Sharing**                  | Verify that users can share recipes on social media.                                | Sharing functionality works as intended.                       | As expected      | Pass         |
+| **Promotional Tools Section**            | Ensure the tools section promotes Twisties brand kitchen tools.                     | Tools section is displayed and functional.                     | As expected      | Pass         |
+
+## **Manage Recipe Requirements**
+
+### **Test Case 10: Manage Recipe Functionality**
+
+**Requirement**:  
+Check CRUD functionalities for recipes.
+
+| **Test Case**                             | **Description**                                                                      | **Expected Result**                                              | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|--------------------------------------------------------------------------------------|----------------------------------------------------------------|------------------|--------------|
+| **Create Recipe**                         | Verify that users can create a new recipe.                                         | New recipe is created and displayed correctly.                 | As expected      | Pass         |
+| **Read Recipe**                           | Ensure that users can view the details of a recipe.                                | Recipe details are displayed accurately.                       | As expected      | Pass         |
+| **Update Recipe**                         | Check that users can update their recipes.                                         | Recipe updates are saved and displayed correctly.              | As expected      | Pass         |
+| **Delete Recipe**                         | Verify that users can delete their recipes.                                         | Deleted recipes are removed from the list.                    | As expected      | Pass         |
+
+## **Cart Requirements (Nice to Have)**
+
+### **Test Case 11: Cart Page Functionality**
+
+**Requirement**:  
+Check the functionality of the cart page.
+
+| **Test Case**                             | **Description**                                                                      | **Expected Result**                                              | **Actual Result** | **Pass/Fail** |
+|-------------------------------------------|--------------------------------------------------------------------------------------|----------------------------------------------------------------|------------------|--------------|
+| **Cart Title**                           | Verify that the cart title is displayed correctly.                                   | The cart title matches the expected page title.                | As expected      | Pass         |
+| **Empty Cart Message**                   | Check if the empty cart message is displayed when there are no items.              | The empty cart message is shown correctly.                     | As expected      | Pass         |
+| **Cart Items List**                      | Verify that items in the cart are displayed correctly.                              | Cart items are listed accurately with relevant details.        | As expected      | Pass         |
+| **Cart Summary**                         | Ensure that the cart summary displays total cost and items correctly.               | Summary is accurate and reflects current cart contents.        | As expected      | Pass         |
+| **Delete Item Confirmation**              | Check if users are prompted before deleting an item from the cart.                 | Confirmation prompt is displayed before deletion.              | As expected      | Pass         |
+| **Edit Cart Items**                      | Verify that users can edit items in their cart.                                     | Users can successfully edit quantities or details of items.   | As expected      | Pass         |
+
