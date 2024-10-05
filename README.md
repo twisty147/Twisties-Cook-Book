@@ -1230,7 +1230,8 @@ Check the functionality of the cart page.
 
 - **Code Institute**: Acknowledgement for the training and utilization of `Code-Institute-Org/ci-full-template`.
 - **Stack Overflow**: Recognized for providing invaluable assistance during troubleshooting sessions, offering insights on bug fixes.
-- **Materialize**: 
+- **Materialize CSS**: For providing a user-friendly front-end framework that greatly simplified the design and styling of the Twisties Cookbook application. Its responsive grid system, components, and rich documentation enabled the creation of a visually appealing and consistent user interface.
+
 
 
 
