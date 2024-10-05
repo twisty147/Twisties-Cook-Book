@@ -32,7 +32,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 8. [License](#license)
 
 
-# REQUIREMENTS ENGINEERING
+# REQUIREMENTS
 
 ## Functional Requirements
 
@@ -170,7 +170,7 @@ With **Twisties Cookbook**, cooking becomes more than just a task—it’s an in
 - Confirm before deleting an item in cart
 - Users should be able to edit items in their cart
 
-[TOP](#requirements)
+[BACK TO TOP](#REQUIREMENTS)
 
 # USECASE
 
