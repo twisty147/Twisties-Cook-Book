@@ -452,8 +452,7 @@ cloudinary.config(
     api_secret='zCM1OE5iDvdDUOy3-twKpygTerU',
     secure=True
 )
-
-@app.route('/create_recipe', methods=['POST'])
+@app.route('/recipe/create', methods=['GET', 'POST'])
 def create_recipe():
     """
     Route to handle the creation of a new recipe. The form data is extracted from the POST request
@@ -462,9 +461,9 @@ def create_recipe():
     :return: Redirects to the 'manage_recipes' page upon successful creation, or renders the create form.
     """
     username = session.get('user')
-    
+
     if request.method == 'POST':
-        # Extract form data
+        # Handle form submission
         title = request.form.get('title')
         ingredients = request.form.getlist('ingredients[]')
         preparation_steps = request.form.getlist('preparation_steps[]')
@@ -476,18 +475,14 @@ def create_recipe():
         required_tools = request.form.getlist('required_tools[]') or []
 
         # Handle image upload
-        image_url = None  # Initialize image URL as None
+        image_url = None
         if 'image_file' in request.files:
             image_file = request.files['image_file']
-            
-            # Check if the user selected a file
             if image_file and image_file.filename != '':
-                # Upload the file to Cloudinary
                 upload_result = cloudinary.uploader.upload(image_file)
-                # Get the URL of the uploaded image
                 image_url = upload_result.get('url')
-        
-        # Create a recipe dictionary with the image URL if available
+
+        # Create recipe dictionary
         recipe = {
             'title': title,
             'ingredients': ingredients,
@@ -496,14 +491,13 @@ def create_recipe():
             'prep_time': prep_time,
             'cook_time': cook_time,
             'servings': servings,
-            'image_url': image_url, 
+            'image_url': image_url,
             'required_tools': required_tools,
             'tags': tags.split(',') if tags else [],
             'added_by': username,
             'date_time_added': datetime.now()
         }
 
-        # Insert the recipe into the MongoDB collection
         try:
             mongo.db.recipesCollection.insert_one(recipe)
             flash('Recipe created successfully!', 'success')
@@ -512,7 +506,9 @@ def create_recipe():
 
         return redirect(url_for('manage_recipes'))
 
+    # Render the form when accessed via GET
     return render_template('create_recipe.html')
+
 
 
 @app.route('/recipe/edit/<recipe_id>', methods=['GET', 'POST'])
