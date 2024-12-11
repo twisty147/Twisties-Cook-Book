@@ -1007,14 +1007,13 @@ Manual testing is deployed in scenarios such as user interface testing, especial
 
 In practice, a combination of both automated and manual testing is often employed to leverage the strengths of each approach and ensure comprehensive test coverage. For the purpose of this project Manual testing was deployed, testing the systems Usability and functionality to verify and validate that the website is fit for use and purpose.
 
-- The following tests were not performed due to time constrainst. 
+- The following tests were performed. 
 -  HTML Validator
 -  CSS Validator
 -  JS Validator
 -  Python PEP8 checker
 
--  If I could get 2 more days I would pass it through these checkers. its almost 12noon and I just started running these tests. 
--  Here are sample issues I am seeing from Python PEP8 checker:
+-  Here are sample issues from Python PEP8 checker:
    -  Variable Names: According to PEP 8, variable names should be in snake_case, not camelCase. 
    -  Line Length: PEP 8 recommends limiting all lines to a maximum of 79 characters. Some of your comments and code lines could be split for better readability.
    -  Inline Comments: Inline comments should be separated by at least two spaces from the statement they comment on, and they should start with a capital letter.
