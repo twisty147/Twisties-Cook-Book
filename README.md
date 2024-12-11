@@ -517,6 +517,10 @@ The data collections created were used to categorize and manage data efficiently
                -  Type: String
                -  Description: The message or inquiry sent by the user through the contact form. It could be a general inquiry, feedback, or a request for support.
 
+**Entity Relationship Diagram**
+   - An entity-relationship diagram (ERD) graphically illustrates the system’s entities and the relationships between those entities
+   ![ERD](./static/images/report_images/ERD.png)
+
 [BACK TO TOP](#REQUIREMENTS)
 
 ### **Backend Development with Flask**
